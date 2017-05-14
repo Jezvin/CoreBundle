@@ -1,0 +1,32 @@
+<div class="modal fade js-umbrella-modal{{ class | default('') }}">
+    <div class="modal-dialog {{ class_dialog | default('modal-lg') }}">
+        <div class="modal-content">
+
+            {% block modal_header %}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                    {% block modal_title %}
+                        <h4 class="modal-title"></h4>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+
+            {% block modal_body %}
+                <div class="modal-body">
+                    {% block modal_content %}
+                    {% endblock %}
+                </div>
+
+                <div class="modal-footer">
+                    {% block modal_footer %}
+                        <button type="button" class="btn btn-default btn-flat pull-right" data-dismiss="modal">Close</button>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    </div>
+
+    {% block js %}
+    {% endblock %}
+</div>

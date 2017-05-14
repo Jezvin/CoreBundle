@@ -1,0 +1,35 @@
+{% extends "UmbrellaAdminBundle:Modal:default.html.twig" %}
+
+{% block modal_body %}
+    <form class="js-umbrella-form form-horizontal"
+          encrypt="multipart/form-data"
+          method="POST"
+          action="{{ action | default('#') }}"
+          data-method="xhr">
+
+        <div class="modal-body">
+            {% block modal_content %}
+                {{ form_rest(form) }}
+            {% endblock %}
+        </div>
+
+        <div class="modal-footer">
+            {% block modal_footer %}
+                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="btn btn-primary btn-flat">
+                    <i class="fa fa-check"></i> Save
+                </button>
+            {% endblock %}
+        </div>
+
+    </form>
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript">
+        new Form('.js-umbrella-modal .js-umbrella-form');
+    </script>
+{% endblock %}

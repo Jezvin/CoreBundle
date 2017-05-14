@@ -1,0 +1,21 @@
+<ol class="breadcrumb">
+    {% for item in breadcrumb %}
+        {% if loop.last %}
+            <li class="active">
+                {% if loop.first %}
+                    <i class="fa fa-dashboard"></i>&nbsp;
+                {% endif %}
+                {{ item.text }}
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ item.url }}">
+                    {% if loop.first %}
+                        <i class="fa fa-dashboard"></i>
+                    {% endif %}
+                    {{ item.text }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ol>

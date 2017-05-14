@@ -1,0 +1,33 @@
+imports:
+    - { resource: widgets.yml }
+
+services:
+
+    # Menu
+    umbrella.menu_provider:
+        class: Umbrella\CoreBundle\Menu\Provider\MenuProvider
+        arguments: ["@service_container", "@umbrella.menu_factory", []]
+
+    umbrella.menu_renderer_provider:
+        class: Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider
+        arguments: ["@service_container", []]
+
+    umbrella.menu_factory:
+        class: Umbrella\CoreBundle\Menu\Factory\MenuFactory
+        arguments: ["@service_container"]
+
+    umbrella.menu_twig:
+        class: Umbrella\CoreBundle\Menu\Twig\MenuExtension
+        arguments: ["@service_container"]
+        tags:
+            - {name: twig.extension}
+
+    # Breadcrumb
+    umbrella.breadcrumb:
+        class: Umbrella\CoreBundle\Breadcrumb\Breadcrumb
+        arguments: ["@service_container"]
+
+    # App proxy
+    umbrella.app_proxy_service:
+        class: Umbrella\CoreBundle\AppProxy\AppProxyService
+        arguments: ["@service_container"]

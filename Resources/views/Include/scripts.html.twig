@@ -1,0 +1,15 @@
+{% javascripts
+'bundles/umbrellacore/js/components/Form.js'
+
+'bundles/umbrellacore/js/MessageHandler.js'
+'bundles/umbrellacore/js/Api.js'
+'bundles/umbrellacore/js/App.js'
+%}
+<script src="{{ asset_url }}" type="text/javascript"></script>
+{% endjavascripts %}
+
+<script type="text/javascript">
+    $(function() {
+        App.bind();
+    });
+</script>
