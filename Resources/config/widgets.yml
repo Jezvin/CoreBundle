@@ -1,10 +1,10 @@
 services:
-    umbrella_admin.datepicker_widget:
+    umbrella.datepicker_widget:
         class: Umbrella\CoreBundle\Form\DatepickerType
         tags:
             - {name: form.type}
 
-    umbrella_admin.wysiwyg_widget:
+    umbrella.wysiwyg_widget:
         class: Umbrella\CoreBundle\Form\WysiwygType
         tags:
             - {name: form.type}
