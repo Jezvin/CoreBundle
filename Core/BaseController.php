@@ -10,6 +10,7 @@ namespace Umbrella\CoreBundle\Core;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Umbrella\CoreBundle\AppProxy\AppProxyService;
+use Umbrella\CoreBundle\DataTable\DataTable;
 
 /**
  * Class BaseController
@@ -57,6 +58,17 @@ class BaseController extends Controller
     protected function appProxy()
     {
         return $this->get('umbrella.app_proxy_service');
+    }
+
+    /**
+     * TODO : use builder (like form)
+     *
+     * @param $id
+     * @return DataTable
+     */
+    public function createDataTable($id)
+    {
+        return new DataTable($id, $this->container);
     }
 
 }

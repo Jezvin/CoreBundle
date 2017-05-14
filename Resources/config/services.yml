@@ -27,6 +27,12 @@ services:
         class: Umbrella\CoreBundle\Breadcrumb\Breadcrumb
         arguments: ["@service_container"]
 
+    umbrella.breadcrumb_twig:
+        class: Umbrella\CoreBundle\Breadcrumb\Twig\BreadcrumbExtension
+        arguments: ["@service_container"]
+        tags:
+            - {name: twig.extension}
+
     # App proxy
     umbrella.app_proxy_service:
         class: Umbrella\CoreBundle\AppProxy\AppProxyService

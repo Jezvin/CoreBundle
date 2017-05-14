@@ -9,13 +9,14 @@
 namespace Umbrella\CoreBundle\Breadcrumb;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Traversable;
 use Umbrella\CoreBundle\Menu\MenuNode;
 
 /**
  * Class Breadcrumb
  * @package Umbrella\CoreBundle\Breadcrumb
  */
-class Breadcrumb implements \Traversable, \ArrayAccess, \Countable
+class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
 {
     /**
      * @var array
@@ -110,5 +111,13 @@ class Breadcrumb implements \Traversable, \ArrayAccess, \Countable
     public function count()
     {
         return count($this->items);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->items);
     }
 }

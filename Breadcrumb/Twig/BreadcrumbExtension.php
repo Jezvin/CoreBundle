@@ -77,7 +77,6 @@ class BreadcrumbExtension extends \Twig_Extension
     {
         $node = $this->container->get('umbrella.menu_provider')->get($name);
         $bc = Breadcrumb::constructFromMenu($node->findCurrent($this->requestStack->getMasterRequest()));
-        
         return $this->container->get('twig')->render('UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig', array(
             'breadcrumb' => $bc
         ));
