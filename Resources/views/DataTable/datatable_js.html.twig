@@ -1,0 +1,7 @@
+{% spaceless %}
+    <script type="text/javascript">
+        $(function() {
+            $('#{{ id }}').DataTable({{ js|json_encode() | raw }});
+        });
+    </script>
+{% endspaceless %}

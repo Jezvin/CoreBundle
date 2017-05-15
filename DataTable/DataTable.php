@@ -8,6 +8,7 @@
 
 namespace Umbrella\CoreBundle\DataTable;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTable
@@ -19,6 +20,26 @@ class DataTable
      * @var integer
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * @var string
+     */
+    protected $template = 'UmbrellaCoreBundle:DataTable:datatable.html.twig' ;
+
+    /**
+     * @var string
+     */
+    protected $ajaxUrl;
+
+    /**
+     * @var string
+     */
+    protected $ajaxType = 'POST';
 
     /**
      * @var array
@@ -52,14 +73,27 @@ class DataTable
 
     /**
      * DataTable constructor.
-     * @param $id
      * @param ContainerInterface $container
+     * @param $id
+     * @param array $options
      */
-    public function __construct($id, ContainerInterface $container)
+    public function __construct(ContainerInterface $container, $id, array $options = array())
     {
         $this->id = $id;
         $this->queryBuilder = new DataTableQueryBuilder($container->get('doctrine.orm.entity_manager'));
         $this->pager = new Pager();
+        
+        $this->class = ArrayUtils::get($options, 'class');
+        $this->template = ArrayUtils::get($options, 'template', $this->template);
+
+        if (isset($options['ajax'])) {
+            if (is_array($options['ajax'])) {
+                $this->ajaxUrl = ArrayUtils::get($options['ajax'], 'url');
+                $this->ajaxType = ArrayUtils::get($options['ajax'], 'type', $this->ajaxType);
+            } else {
+                $this->ajaxUrl = $options['ajax'];
+            }
+        }
     }
 
     /**
@@ -151,6 +185,46 @@ class DataTable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAjaxUrl()
+    {
+        return $this->ajaxUrl;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAjaxType()
+    {
+        return $this->ajaxType;
+    }
+
+    /**
+     * @return Pager
+     */
+    public function getPager()
+    {
+        return $this->pager;
     }
 
     /**

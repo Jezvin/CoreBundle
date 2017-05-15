@@ -65,7 +65,7 @@ class Column
     public function __construct($id, array $options = array())
     {
         $this->id = $id;
-        $this->name = ArrayUtils::get($options, 'name', '');
+        $this->name = ArrayUtils::get($options, 'name', $id);
         $this->sortable = ArrayUtils::get($options, 'sortable', true);
         $this->defaultSorting = ArrayUtils::get($options, 'default_sorting');
         $this->class = ArrayUtils::get($options, 'class');

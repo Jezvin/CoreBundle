@@ -64,11 +64,12 @@ class BaseController extends Controller
      * TODO : use builder (like form)
      *
      * @param $id
+     * @param array $options
      * @return DataTable
      */
-    public function createDataTable($id)
+    public function createDataTable($id, array $options = array())
     {
-        return new DataTable($id, $this->container);
+        return new DataTable($this->container, $id, $options);
     }
 
 }

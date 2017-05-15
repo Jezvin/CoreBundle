@@ -1,0 +1,13 @@
+<table id="{{ id }}" class="{{ class | default('table table-bordered') }}">
+    <thead>
+        <tr>
+            {% for column in columns %}
+                <th class="{{ column.class }}" {% if column.width %}width="{{ column.width }}"{% endif %}>
+                    {{ column.name }}
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>

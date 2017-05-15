@@ -37,3 +37,10 @@ services:
     umbrella.app_proxy_service:
         class: Umbrella\CoreBundle\AppProxy\AppProxyService
         arguments: ["@service_container"]
+
+    # DataTable
+    umbrella.datatable_twig:
+        class: Umbrella\CoreBundle\DataTable\Twig\DataTableExtension
+        arguments: ["@service_container"]
+        tags:
+            - {name: twig.extension}

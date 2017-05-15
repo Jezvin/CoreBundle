@@ -7,6 +7,7 @@
  */
 
 namespace Umbrella\CoreBundle\DataTable;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class ActionsColumn
@@ -27,5 +28,6 @@ class ActionsColumn extends EntityColumn
     public function __construct($id, array $options)
     {
         parent::__construct($id, $options);
+        $this->sortable = ArrayUtils::get($options, 'sortable', false);
     }
 }
