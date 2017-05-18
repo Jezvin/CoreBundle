@@ -6,26 +6,26 @@
  * Time: 19:09
  */
 
-namespace Umbrella\CoreBundle\DataTable;
+namespace Umbrella\CoreBundle\DataTable\Model\Column;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class EntityColumn
- * @package Umbrella\CoreBundle\Model\Table
+ * @package Umbrella\CoreBundle\DataTable\Model\Column
  */
 class EntityColumn extends Column
 {
     /**
      * @var string
      */
-    protected $propertyPath;
+    public $propertyPath;
 
     /**
      * @var string
      */
-    protected $dqlPart;
+    public $dqlPart;
 
     /**
      * @var PropertyAccess
@@ -35,13 +35,29 @@ class EntityColumn extends Column
     /**
      * EntityColumn constructor.
      * @param $id
+     */
+    public function __construct($id)
+    {
+        parent::__construct($id);
+        $this->accessor = PropertyAccess::createPropertyAccessor();
+    }
+
+    /**
      * @param array $options
      */
-    public function __construct($id, array $options = array())
+    public function resolveOptions(array $options = array())
     {
-        parent::__construct($id, $options);
-        $this->propertyPath = ArrayUtils::get($options, 'property_path', $id);
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        parent::resolveOptions($options);
+        $this->propertyPath = ArrayUtils::get($options, 'property_path', $this->id);
+    }
+
+    /**
+     * @param $result
+     * @return string
+     */
+    public function render($result)
+    {
+        return $this->getValue($result);
     }
 
     /**

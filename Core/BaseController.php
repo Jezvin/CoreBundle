@@ -10,7 +10,8 @@ namespace Umbrella\CoreBundle\Core;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Umbrella\CoreBundle\AppProxy\AppProxyService;
-use Umbrella\CoreBundle\DataTable\DataTable;
+use Umbrella\CoreBundle\DataTable\Builder\DataTableBuilder;
+use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
  * Class BaseController
@@ -61,15 +62,23 @@ class BaseController extends Controller
     }
 
     /**
-     * TODO : use builder (like form)
-     *
-     * @param $id
+     * @param $type
      * @param array $options
      * @return DataTable
      */
-    public function createDataTable($id, array $options = array())
+    public function createTable($type, array $options = array())
     {
-        return new DataTable($this->container, $id, $options);
+        return $this->get('umbrella.datatable_factory')->create($type, $options);
+    }
+
+    /**
+     * @param array $options
+     * @param string $type
+     * @return DataTableBuilder
+     */
+    public function createTableBuilder(array $options = array(), $type = 'Umbrella\CoreBundle\DataTable\DataTableType')
+    {
+        return $this->get('umbrella.datatable_factory')->createBuilder($type, $options);
     }
 
 }

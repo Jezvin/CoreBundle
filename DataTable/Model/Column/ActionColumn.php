@@ -6,8 +6,7 @@
  * Time: 19:10
  */
 
-namespace Umbrella\CoreBundle\DataTable;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+namespace Umbrella\CoreBundle\DataTable\Model\Column;
 
 /**
  * Class ActionsColumn
@@ -23,11 +22,18 @@ class ActionsColumn extends EntityColumn
     /**
      * ActionsColumn constructor.
      * @param $id
-     * @param array $options
      */
-    public function __construct($id, array $options)
+    public function __construct($id)
     {
-        parent::__construct($id, $options);
-        $this->sortable = ArrayUtils::get($options, 'sortable', false);
+        parent::__construct($id);
+    }
+
+    /**
+     * @param $result
+     * @return string
+     */
+    public function render($result)
+    {
+        return 'TODO';
     }
 }

@@ -39,6 +39,10 @@ services:
         arguments: ["@service_container"]
 
     # DataTable
+    umbrella.datatable_factory:
+        class: Umbrella\CoreBundle\DataTable\Factory\DataTableFactory
+        arguments: ["@service_container"]
+
     umbrella.datatable_twig:
         class: Umbrella\CoreBundle\DataTable\Twig\DataTableExtension
         arguments: ["@service_container"]

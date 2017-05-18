@@ -9,7 +9,7 @@
 namespace Umbrella\CoreBundle\DataTable\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\DataTable\DataTable;
+use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
  * Class DataTableExtension
@@ -58,11 +58,11 @@ class DataTableExtension extends \Twig_Extension
     {
         $options = array();
         $options['datatable'] = $dataTable;
-        $options['id'] = $dataTable->getId();
-        $options['columns'] = $dataTable->getColumns();
-        $options['class'] = $dataTable->getClass();
+        $options['id'] = $dataTable->id;
+        $options['columns'] = $dataTable->columns;
+        $options['class'] = $dataTable->class;
 
-        return $twig->render($dataTable->getTemplate(), $options);
+        return $twig->render($dataTable->template, $options);
     }
 
     /**
@@ -74,14 +74,15 @@ class DataTableExtension extends \Twig_Extension
     {
         $js_options = array();
         $js_options['serverSide'] = true;
+        $js_options['bFilter'] = false;
         $js_options['ajax'] = array(
-            'url' => $dataTable->getAjaxUrl(),
-            'type' => $dataTable->getAjaxType()
+            'url' => $dataTable->ajaxUrl,
+            'type' => $dataTable->ajaxType
         );
 
         $options = array();
         $options['datatable'] = $dataTable;
-        $options['id'] = $dataTable->getId();
+        $options['id'] = $dataTable->id;
         $options['js'] = $js_options;
 
         return $twig->render("UmbrellaCoreBundle:DataTable:datatable_js.html.twig", $options);
