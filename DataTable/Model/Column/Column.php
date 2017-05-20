@@ -7,14 +7,18 @@
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
-use Umbrella\CoreBundle\DataTable\Model\OptionResolverInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Umbrella\CoreBundle\DataTable\Model\OptionsAwareInterface;
+use Umbrella\CoreBundle\DataTable\Renderer\ColumnRendererInterface;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Column
  * @package Umbrella\CoreBundle\DataTable\Model\Column
  */
-abstract class Column implements OptionResolverInterface
+class Column implements OptionsAwareInterface, ContainerAwareInterface
 {
 
     /**
@@ -25,7 +29,7 @@ abstract class Column implements OptionResolverInterface
     /**
      * @var string
      */
-    public $name;
+    public $label;
 
     /**
      * @var boolean
@@ -51,6 +55,9 @@ abstract class Column implements OptionResolverInterface
      * @var mixed
      */
     public $renderer;
+    
+    
+    use ContainerAwareTrait;
 
     /**
      * Column constructor.
@@ -62,20 +69,64 @@ abstract class Column implements OptionResolverInterface
     }
 
     /**
+     * @param $entity
+     * @return string
+     */
+    public function render($entity) {
+        if ($this->renderer instanceof \Closure) {
+            return call_user_func($this->renderer, $this, $entity);
+        }
+
+        if ($this->renderer instanceof ColumnRendererInterface) {
+            if ($this->renderer instanceof ContainerAwareInterface) {
+                $this->renderer->setContainer($this->container);
+            }
+            return $this->renderer->render($this, $entity);
+        }
+        
+        return $this->defaultRender($entity);
+    }
+
+    /**
+     * @param $entity
+     * @return string
+     */
+    public function defaultRender($entity)
+    {
+        return (string) $entity;
+    }
+
+    /**
      * @param array $options
      */
-    public function resolveOptions(array $options = array())
+    public function setOptions(array $options = array())
     {
-        $this->name = ArrayUtils::get($options, 'name', $this->id);
+        $this->label = ArrayUtils::get($options, 'label', $this->id);
         $this->sortable = ArrayUtils::get($options, 'sortable', true);
         $this->defaultSorting = ArrayUtils::get($options, 'default_sorting');
         $this->class = ArrayUtils::get($options, 'class');
         $this->width = ArrayUtils::get($options, 'width');
-        $this->width = ArrayUtils::get($options, 'property');
+        $this->renderer = ArrayUtils::get($options, 'renderer');
     }
-
+    
     /**
-     * @param $result
+     * @param OptionsResolver $resolver
      */
-    abstract public function render($result);
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefined(array(
+            'label',
+            'sortable',
+            'default_sorting',
+            'class',
+            'width',
+            'renderer'
+        ));
+
+        $resolver->setAllowedTypes('renderer', array(
+            'null',
+            'Umbrella\CoreBundle\DataTable\Renderer\ColumnRendererInterface',
+            'callable'
+        ));
+    }
 }

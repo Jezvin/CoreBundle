@@ -11,7 +11,7 @@ namespace Umbrella\CoreBundle\DataTable\Model;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\CoreBundle\DataTable\Model\Column\EntityColumn;
+use Umbrella\CoreBundle\DataTable\Model\Column\PropertyColumn;
 
 /**
  * Class DataTableQuery
@@ -95,10 +95,10 @@ class DataTableQuery
                 continue; // column exist ?
             }
 
-            /** @var EntityColumn $column */
+            /** @var PropertyColumn $column */
             $column = $table->columns[$idx];
 
-            if (!is_a($column, EntityColumn::class)) {
+            if (!is_a($column, PropertyColumn::class)) {
                 continue; // is entity column ?
             }
 

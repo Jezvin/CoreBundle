@@ -8,14 +8,15 @@
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class EntityColumn
+ * Class PropertyColumn
  * @package Umbrella\CoreBundle\DataTable\Model\Column
  */
-class EntityColumn extends Column
+class PropertyColumn extends Column
 {
     /**
      * @var string
@@ -43,33 +44,44 @@ class EntityColumn extends Column
     }
 
     /**
-     * @param array $options
-     */
-    public function resolveOptions(array $options = array())
-    {
-        parent::resolveOptions($options);
-        $this->propertyPath = ArrayUtils::get($options, 'property_path', $this->id);
-    }
-
-    /**
-     * @param $result
+     * @param $entity
      * @return string
      */
-    public function render($result)
+    public function defaultRender($entity)
     {
-        return $this->getValue($result);
+        return (string)$this->getPropertyValue($entity);
     }
 
     /**
      * @param $entity
      * @return mixed
      */
-    public function getValue($entity)
+    public function getPropertyValue($entity)
     {
         if ($this->propertyPath === null) {
             return $entity;
         } else {
             return $this->accessor->getValue($entity, $this->propertyPath);
         }
+    }
+
+    /**
+     * @param array $options
+     */
+    public function setOptions(array $options = array())
+    {
+        parent::setOptions($options);
+        $this->propertyPath = ArrayUtils::get($options, 'property_path', $this->id);
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+        $resolver->setDefined(array(
+            'property_path'
+        ));
     }
 }

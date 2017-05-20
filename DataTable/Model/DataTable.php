@@ -10,14 +10,14 @@ namespace Umbrella\CoreBundle\DataTable\Model;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\CoreBundle\DataTable\Model\Column\Column;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTable
  * @package Umbrella\CoreBundle\Model\Table
  */
-class DataTable implements OptionResolverInterface, ContainerAwareInterface
+class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 {
     /**
      * @var string
@@ -132,9 +132,26 @@ class DataTable implements OptionResolverInterface, ContainerAwareInterface
     }
 
     /**
-     * @param array $options
+     * @inheritdoc
      */
-    public function resolveOptions(array $options = array())
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired(array(
+            'entity'
+        ));
+
+        $resolver->setDefined(array(
+            'ajax_url',
+            'ajax_type',
+            'class',
+            'template'
+        ));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setOptions(array $options = array())
     {
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template', $this->template);
@@ -143,6 +160,5 @@ class DataTable implements OptionResolverInterface, ContainerAwareInterface
         $this->ajaxType = ArrayUtils::get($options, 'ajax_type', $this->ajaxType);
 
         $this->entityName = ArrayUtils::get($options, 'entity');
-        
     }
 }

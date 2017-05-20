@@ -3,7 +3,7 @@
         <tr>
             {% for column in columns %}
                 <th class="{{ column.class }}" {% if column.width %}width="{{ column.width }}"{% endif %}>
-                    {{ column.name }}
+                    {{ column.label }}
                 </th>
             {% endfor %}
         </tr>

@@ -41,25 +41,9 @@ class DataTableType
     /**
      * @param OptionsResolver $resolver
      */
-    public final function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array(
-            'entity'
-        ));
 
-        $resolver->setDefined(array(
-            'ajax_url',
-            'ajax_type',
-        ));
-        $resolver->setDefaults($this->configureDefaults());
-    }
-
-    /**
-     * @return array
-     */
-    public function configureDefaults()
-    {
-        return array();
     }
 
     /**

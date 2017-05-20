@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\DataTable\Builder;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 use Umbrella\CoreBundle\DataTable\Model\DataTableQuery;
@@ -81,14 +82,10 @@ class DataTableBuilder
      */
     public function add($id, $columnClass, array $options = array())
     {
-        if (!is_subclass_of($columnClass, Column::class)) {
-            throw new \InvalidArgumentException("Class '$columnClass' must extends Column class.");
-        }
-
-        /** @var Column $column */
-        $column = new $columnClass($id);
-        $column->resolveOptions($options);
-        $this->columns[$id] = $column;
+        $this->columns[$id] = array(
+            'class' => $columnClass,
+            'options' => $options
+        );
         return $this;
     }
 
@@ -119,10 +116,50 @@ class DataTableBuilder
             $this->resolvedTable = new DataTable();
             $this->resolvedTable->query = new DataTableQuery($this->qb);
             $this->resolvedTable->id = $this->id;
-            $this->resolvedTable->resolveOptions($this->options);
-            $this->resolvedTable->columns = array_values($this->columns);
             $this->resolvedTable->setContainer($this->container);
+            $this->resolvedTable->columns = $this->resolveColumns();
+
+            $resolver = new OptionsResolver();
+            $this->resolvedTable->configureOptions($resolver);
+            $options = $resolver->resolve($this->options);
+            $this->resolvedTable->setOptions($options);
+
         }
         return $this->resolvedTable;
+    }
+
+    /**
+     * @return array
+     */
+    protected function resolveColumns()
+    {
+        $resolvedColumns = array();
+        foreach ($this->columns as $id => $column) {
+
+            $resolvedColumn = $this->createColumn($id, $column['class']);
+            $resolver = new OptionsResolver();
+            $resolvedColumn->configureOptions($resolver);
+            $options = $resolver->resolve($column['options']);
+            $resolvedColumn->setOptions($options);
+            $resolvedColumns[] = $resolvedColumn;
+        }
+        return $resolvedColumns;
+    }
+
+    /**
+     * @param $id
+     * @param $class
+     * @return Column
+     */
+    protected function createColumn($id, $class)
+    {
+        if (!is_subclass_of($class, Column::class)) {
+            throw new \InvalidArgumentException("Class '$class' must extends Column class.");
+        }
+
+        $column = new $class($id);
+        $column->setContainer($this->container);
+
+        return $column;
     }
 }

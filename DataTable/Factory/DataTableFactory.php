@@ -8,7 +8,6 @@
  */
 namespace Umbrella\CoreBundle\DataTable\Factory;
 
-use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
