@@ -34,12 +34,12 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var boolean
      */
-    public $sortable = true;
+    public $orderable = true;
 
     /**
      * @var string|null
      */
-    public $defaultSorting = null;
+    public $order = null;
 
     /**
      * @var string
@@ -102,8 +102,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     public function setOptions(array $options = array())
     {
         $this->label = ArrayUtils::get($options, 'label', $this->id);
-        $this->sortable = ArrayUtils::get($options, 'sortable', true);
-        $this->defaultSorting = ArrayUtils::get($options, 'default_sorting');
+        $this->orderable = ArrayUtils::get($options, 'orderable', true);
+        $this->order = ArrayUtils::get($options, 'order');
         $this->class = ArrayUtils::get($options, 'class');
         $this->width = ArrayUtils::get($options, 'width');
         $this->renderer = ArrayUtils::get($options, 'renderer');
@@ -116,17 +116,20 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     {
         $resolver->setDefined(array(
             'label',
-            'sortable',
-            'default_sorting',
+            'orderable',
+            'order',
             'class',
             'width',
             'renderer'
         ));
 
+        $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('renderer', array(
             'null',
             'Umbrella\CoreBundle\DataTable\Renderer\ColumnRendererInterface',
             'callable'
         ));
+
+        $resolver->setAllowedValues('order', ['ASC', 'DESC']);
     }
 }

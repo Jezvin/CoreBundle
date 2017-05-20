@@ -26,12 +26,6 @@ class DataTableBuilder
     protected $container;
 
     /**
-     * Table id
-     * @var string
-     */
-    protected $id;
-
-    /**
      * @var array
      */
     protected $options = array();
@@ -55,14 +49,12 @@ class DataTableBuilder
     /**
      * DataTableBuilder constructor.
      * @param ContainerInterface $container
-     * @param $id
      * @param array $options
      */
-    public function __construct(ContainerInterface $container, $id, array $options = array())
+    public function __construct(ContainerInterface $container, array $options = array())
     {
         $this->container = $container;
         $this->qb = $this->container->get('doctrine.orm.entity_manager')->createQueryBuilder();
-        $this->id = $id;
         $this->options = $options;
     }
 
@@ -115,7 +107,6 @@ class DataTableBuilder
         if ($this->resolvedTable === null) {
             $this->resolvedTable = new DataTable();
             $this->resolvedTable->query = new DataTableQuery($this->qb);
-            $this->resolvedTable->id = $this->id;
             $this->resolvedTable->setContainer($this->container);
             $this->resolvedTable->columns = $this->resolveColumns();
 

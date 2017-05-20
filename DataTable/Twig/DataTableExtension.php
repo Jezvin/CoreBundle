@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\DataTable\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
@@ -72,20 +73,60 @@ class DataTableExtension extends \Twig_Extension
      */
     public function renderJs(\Twig_Environment $twig, DataTable $dataTable)
     {
-        $js_options = array();
-        $js_options['serverSide'] = true;
-        $js_options['bFilter'] = false;
-        $js_options['ajax'] = array(
-            'url' => $dataTable->ajaxUrl,
-            'type' => $dataTable->ajaxType
-        );
-
         $options = array();
         $options['datatable'] = $dataTable;
         $options['id'] = $dataTable->id;
-        $options['js'] = $js_options;
+        $options['js'] = $this->buildJsOptions($dataTable);
 
         return $twig->render("UmbrellaCoreBundle:DataTable:datatable_js.html.twig", $options);
+    }
+
+    /**
+     * @param DataTable $dataTable
+     * @return array
+     */
+    protected function buildJsOptions(DataTable $dataTable)
+    {
+        $options = array();
+        $options['serverSide'] = true;
+        $options['bFilter'] = false;
+        $options['ajax'] = array(
+            'url' => $dataTable->ajaxUrl,
+            'type' => $dataTable->ajaxType
+        );
+        $options['lengthChange'] = $dataTable->lengthChange;
+        $options['pageLength'] = $dataTable->pageLength;
+        $options['lengthMenu'] = $dataTable->lengthMenu;
+        $options['fixedHeader'] = $dataTable->fixedHeader;
+
+        $columnDefs = array();
+
+        $order = array();
+        $noSort = array();
+
+        /** @var Column $column */
+        foreach ($dataTable->columns as $idx => $column) {
+            if ($column->order) {
+                $order[] = array($idx, strtolower($column->order));
+            }
+
+            if (!$column->orderable) {
+                $noSort[] = $idx;
+            }
+        }
+
+        // order option
+        if (!empty($order)) {
+            $options['order'] = $order;
+        }
+
+        // no order option
+        if (!empty($noSort)) {
+            $columnDefs[] = array('targets' => $noSort, 'orderable' => false);
+        }
+        $options['columnDefs'] = $columnDefs;
+
+        return $options;
     }
     
 }

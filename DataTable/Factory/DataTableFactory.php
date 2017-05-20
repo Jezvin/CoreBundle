@@ -53,27 +53,15 @@ class DataTableFactory
     public function createBuilder($typeClass = 'Umbrella\CoreBundle\DataTable\DataTableType', array $options = array())
     {
         $type = $this->createType($typeClass);
-        return $this->createNamedBuilder($type->getId(), $typeClass, $options);
-    }
-
-    /**
-     * @param $id
-     * @param string $typeClass
-     * @param array $options
-     * @return DataTableBuilder
-     */
-    public function createNamedBuilder($id, $typeClass = 'Umbrella\CoreBundle\DataTable\DataTableType', array $options = array())
-    {
-        $type = $this->createType($typeClass);
 
         $resolver = new OptionsResolver();
         $type->configureOptions($resolver);
         $options = $resolver->resolve($options);
 
-        $builder = new DataTableBuilder($this->container, $id, $options);
+        $builder = new DataTableBuilder($this->container, $options);
         $type->buildDataTable($builder, $options);
         $type->buildQuery($builder->getQueryBuilder(), $options);
-        
+
         return $builder;
     }
 

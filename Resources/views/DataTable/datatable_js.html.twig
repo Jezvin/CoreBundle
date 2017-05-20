@@ -1,7 +1,8 @@
 {% spaceless %}
+    {% set table_selector = '#' ~ id %}
     <script type="text/javascript">
         $(function() {
-            $('#{{ id }}').DataTable({{ js|json_encode() | raw }});
+             $('{{ table_selector }}').DataTable({{ js|json_encode() | raw }});
         });
     </script>
 {% endspaceless %}

@@ -24,10 +24,32 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     public $id;
 
+    // Options
+
     /**
      * @var string
      */
     public $class;
+
+    /**
+     * @var array
+     */
+    public $lengthMenu = array(25, 50, 100);
+
+    /**
+     * @var int
+     */
+    public $pageLength = 25;
+
+    /**
+     * @var bool
+     */
+    public $lengthChange = false;
+
+    /**
+     * @var bool
+     */
+    public $fixedHeader = false;
 
     /**
      * @var string
@@ -45,14 +67,16 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public $ajaxType = 'POST';
 
     /**
-     * @var array
-     */
-    public $columns = array();
-
-    /**
      * @var string
      */
     public $entityName;
+
+    // Model
+
+    /**
+     * @var array
+     */
+    public $columns = array();
 
     /**
      * @var DataTableQuery
@@ -74,6 +98,14 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     protected $draw;
     
     use ContainerAwareTrait;
+
+    /**
+     * DataTable constructor
+     */
+    public function __construct()
+    {
+        $this->id = substr(uniqid('table_', true), 0 , 15);
+    }
 
     /**
      * @param Request $request
@@ -144,8 +176,17 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'ajax_url',
             'ajax_type',
             'class',
-            'template'
+            'template',
+            'length_change',
+            'length_menu',
+            'page_length',
+            'fixed_header'
         ));
+
+        $resolver->setAllowedTypes('length_change', 'bool');
+        $resolver->setAllowedTypes('length_menu', 'array');
+        $resolver->setAllowedTypes('page_length', 'int');
+        $resolver->setAllowedTypes('fixed_header', 'bool');
     }
 
     /**
@@ -160,5 +201,11 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         $this->ajaxType = ArrayUtils::get($options, 'ajax_type', $this->ajaxType);
 
         $this->entityName = ArrayUtils::get($options, 'entity');
+
+        $this->lengthChange = ArrayUtils::get($options, 'length_change', $this->lengthChange);
+        $this->lengthMenu = ArrayUtils::get($options, 'length_menu', $this->lengthMenu);
+        $this->pageLength = ArrayUtils::get($options, 'page_length', $this->pageLength);
+
+        $this->fixedHeader = ArrayUtils::get($options, 'fixed_header', $this->fixedHeader);
     }
 }
