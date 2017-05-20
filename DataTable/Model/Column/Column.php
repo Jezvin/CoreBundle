@@ -102,7 +102,7 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     public function setOptions(array $options = array())
     {
         $this->label = ArrayUtils::get($options, 'label', $this->id);
-        $this->orderable = ArrayUtils::get($options, 'orderable', true);
+        $this->orderable = ArrayUtils::get($options, 'orderable', $this->orderable);
         $this->order = ArrayUtils::get($options, 'order');
         $this->class = ArrayUtils::get($options, 'class');
         $this->width = ArrayUtils::get($options, 'width');

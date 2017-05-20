@@ -4,12 +4,12 @@ App.bind = function() {
     var $body = $('body');
 
     // bind xhr link
-    $body.on('click', 'a[data-method="xhr"]', function(e) {
+    $body.on('click', 'a[data-xhr-href]', function(e) {
         e.stopPropagation();
         e.preventDefault();
         
-        var url = $(this).attr('href');
-        var confirm = $(this).attr('data-confirm');
+        var url = $(this).data('xhr-href');
+        var confirm = $(this).data('confirm');
 
         if (confirm) {
             swal({
@@ -32,13 +32,12 @@ App.bind = function() {
 
         return false;
     });
-    $body.find('a[data-method="xhr"]').css('pointer-events', 'auto');
-    
+
     // bind xhr form
-    $body.on('submit', 'form[data-method="xhr"]', function (e) {
+    $body.on('submit', 'form[data-xhr-action]', function (e) {
         e.preventDefault();
         var $form = $(this);
-        Api.ajax($form.attr('method'), $form.attr('action'), $form.serialize());
+        Api.ajax($form.attr('method'), $form.data('xhr-action'), $form.serialize());
     });
 
     $body.find('.js-umbrella-form').each(function() {

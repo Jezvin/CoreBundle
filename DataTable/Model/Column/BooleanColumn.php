@@ -28,7 +28,6 @@ class BooleanColumn extends  PropertyColumn
             default:
                 return '';
         }
-
     }
 
 }
