@@ -1,5 +1,10 @@
 App = function() {};
 
+App.init = function() {
+    $.fn.dataTable.ext.errMode = 'throw';
+    App.bind();
+};
+
 App.bind = function() {
     var $body = $('body');
 

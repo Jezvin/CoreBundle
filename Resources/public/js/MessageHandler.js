@@ -32,6 +32,15 @@ MessageHandler.handlers = {
         if ($opened_modal.length) {
             $opened_modal.modal('hide');
         }
+    },
+
+    reload_table: function(params) {
+        var id = params.id;
+        var $elem = $('#' + id);
+
+        if ($elem.length) {
+            $elem.DataTable().ajax.reload();
+        }
     }
 };
 

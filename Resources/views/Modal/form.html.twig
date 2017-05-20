@@ -4,7 +4,7 @@
     <form class="js-umbrella-form form-horizontal"
           encrypt="multipart/form-data"
           method="POST"
-          data-xhr-action="{{ action | default('#') }}">
+          data-xhr-action="{{ action | default(app.request.uri) }}">
 
         <div class="modal-body">
             {% block modal_content %}

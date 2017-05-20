@@ -27,6 +27,8 @@ class AppMessage implements \JsonSerializable
     const OPEN_MODAL = 'open_modal';
     const CLOSE_MODAL = 'close_modal';
 
+    const RELOAD_TABLE = 'reload_table';
+
     /**
      * @var string
      */

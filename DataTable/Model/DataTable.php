@@ -174,6 +174,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         ));
 
         $resolver->setDefined(array(
+            'id',
             'ajax_type',
             'class',
             'template',
@@ -194,6 +195,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
+        $this->id = ArrayUtils::get($options, 'id', $this->id);
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template', $this->template);
 

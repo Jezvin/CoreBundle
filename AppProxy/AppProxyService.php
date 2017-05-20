@@ -122,6 +122,15 @@ class AppProxyService extends BaseService
         return $this->addHtmlMessage(AppMessage::CLOSE_MODAL);
     }
 
+    // DataTable actions
+
+    public function reloadTable($id)
+    {
+        return $this->add(AppMessage::RELOAD_TABLE, array(
+            'id' => $id
+        ));
+    }
+
     // Utils
 
     /**
