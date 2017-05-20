@@ -54,11 +54,12 @@ class DataTableFactory
     {
         $type = $this->createType($typeClass);
 
+        $dt = new DataTable();
         $resolver = new OptionsResolver();
+        $dt->configureOptions($resolver);
         $type->configureOptions($resolver);
-        $options = $resolver->resolve($options);
 
-        $builder = new DataTableBuilder($this->container, $options);
+        $builder = new DataTableBuilder($this->container, $resolver, $options);
         $type->buildDataTable($builder, $options);
         $type->buildQuery($builder->getQueryBuilder(), $options);
 

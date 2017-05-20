@@ -104,7 +104,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function __construct()
     {
-        $this->id = substr(uniqid('table_', true), 0 , 15);
+        $this->id = 'table_' . substr(md5(uniqid('', true)), 0, 12);
     }
 
     /**
@@ -169,11 +169,11 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
-            'entity'
+            'entity',
+            'ajax_url'
         ));
 
         $resolver->setDefined(array(
-            'ajax_url',
             'ajax_type',
             'class',
             'template',

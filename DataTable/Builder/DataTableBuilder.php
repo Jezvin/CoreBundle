@@ -45,16 +45,22 @@ class DataTableBuilder
      */
     protected $resolvedTable = null;
 
+    /**
+     * @var OptionsResolver
+     */
+    protected $dtResolver;
 
     /**
      * DataTableBuilder constructor.
      * @param ContainerInterface $container
+     * @param OptionsResolver $dtResolver
      * @param array $options
      */
-    public function __construct(ContainerInterface $container, array $options = array())
+    public function __construct(ContainerInterface $container, OptionsResolver $dtResolver, array $options = array())
     {
         $this->container = $container;
         $this->qb = $this->container->get('doctrine.orm.entity_manager')->createQueryBuilder();
+        $this->dtResolver = $dtResolver;
         $this->options = $options;
     }
 
@@ -110,9 +116,7 @@ class DataTableBuilder
             $this->resolvedTable->setContainer($this->container);
             $this->resolvedTable->columns = $this->resolveColumns();
 
-            $resolver = new OptionsResolver();
-            $this->resolvedTable->configureOptions($resolver);
-            $options = $resolver->resolve($this->options);
+            $options = $this->dtResolver->resolve($this->options);
             $this->resolvedTable->setOptions($options);
 
         }
