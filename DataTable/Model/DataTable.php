@@ -122,7 +122,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function getResults()
     {
         if ($this->results === null) {
-            $this->query->init($this->entityName);
+            $this->query->build($this);
             $this->results = $this->query->getResults();
         }
         return $this->results;

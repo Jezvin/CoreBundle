@@ -24,11 +24,6 @@ class PropertyColumn extends Column
     public $propertyPath;
 
     /**
-     * @var string
-     */
-    public $dqlPart;
-
-    /**
      * @var PropertyAccess
      */
     protected $accessor;
@@ -58,11 +53,7 @@ class PropertyColumn extends Column
      */
     public function getPropertyValue($entity)
     {
-        if ($this->propertyPath === null) {
-            return $entity;
-        } else {
-            return $this->accessor->getValue($entity, $this->propertyPath);
-        }
+        return $this->accessor->getValue($entity, $this->propertyPath);
     }
 
     /**

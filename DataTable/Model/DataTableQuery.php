@@ -8,9 +8,12 @@
 
 namespace Umbrella\CoreBundle\DataTable\Model;
 
+use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\HttpFoundation\Request;
+use Umbrella\CoreBundle\DataTable\Model\Column\Column;
+use Umbrella\CoreBundle\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\DataTable\Model\Column\PropertyColumn;
 
 /**
@@ -54,15 +57,45 @@ class DataTableQuery
     }
 
     /**
-     * @param $entityName
+     * Build query
+     *
+     * @param DataTable $table
      */
-    public function init($entityName)
+    public function build(DataTable $table)
     {
         $this->qb->select($this->entityAlias);
-        $this->qb->from($entityName, $this->entityAlias);
+        $this->qb->from($table->entityName, $this->entityAlias);
+        $this->buildJoin($table->columns);
 
         $this->qbCount->select("COUNT($this->entityAlias.id)");
-        $this->qbCount->from($entityName, $this->entityAlias);
+        $this->qbCount->from($table->entityName, $this->entityAlias);
+    }
+
+    /**
+     * @param array $columns
+     */
+    protected function buildJoin(array $columns)
+    {
+        /** @var Column $column */
+        foreach ($columns as $column) {
+            if (!is_a($column, JoinColumn::class)) {
+                continue;
+            }
+
+            /** @var JoinColumn $column */
+            switch ($column->queryJoin) {
+                case Join::LEFT_JOIN:
+                    $this->qb->leftJoin($this->entityAlias . '.' . $column->join, $column->join);
+                    $this->qb->addSelect($column->join);
+                    break;
+
+                case Join::INNER_JOIN:
+                    $this->qb->innerJoin($this->entityAlias . '.' . $column->join, $column->join);
+                    $this->qb->addSelect($column->join);
+                    break;
+
+            }
+        }
     }
 
     /**
@@ -104,7 +137,6 @@ class DataTableQuery
 
             $this->qb->addOrderBy($this->entityAlias . '.' . $column->propertyPath, $dir == 'asc' ? 'ASC' : 'DESC');
         }
-        
     }
 
     /**
