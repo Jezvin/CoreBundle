@@ -7,6 +7,7 @@
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,7 +85,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public $query;
 
     /**
-     * @var array
+     * @var Paginator
      */
     protected $results = null;
 
@@ -117,7 +118,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     }
 
     /**
-     * @return array
+     * @return Paginator
      */
     public function getResults()
     {
@@ -134,9 +135,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     protected function fetchAll()
     {
         if ($this->fetchedResults === null) {
-            $results = $this->getResults();
 
-            foreach ($results as $result) {
+            foreach ($this->getResults() as $result) {
                 $row = array();
 
                 foreach ($this->columns as $column) {

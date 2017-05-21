@@ -11,6 +11,7 @@ namespace Umbrella\CoreBundle\DataTable\Model;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\Column\JoinColumn;
@@ -140,11 +141,11 @@ class DataTableQuery
     }
 
     /**
-     * @return array
+     * @return Paginator
      */
     public function getResults()
     {
-        return $this->qb->getQuery()->getResult();
+        return new Paginator($this->qb);
     }
 
     /**
