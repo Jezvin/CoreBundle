@@ -2,7 +2,7 @@
 
 {% block modal_body %}
     <form class="js-umbrella-form form-horizontal"
-          encrypt="multipart/form-data"
+          enctype="multipart/form-data"
           method="POST"
           data-xhr-action="{{ action | default(app.request.uri) }}">
 
