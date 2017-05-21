@@ -169,13 +169,14 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
-            'entity',
-            'ajax_url'
+            'entity'
         ));
 
         $resolver->setDefined(array(
             'id',
             'ajax_type',
+            'ajax_url',
+            'ajax_route',
             'class',
             'template',
             'length_change',
@@ -201,6 +202,10 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 
         $this->ajaxUrl = ArrayUtils::get($options, 'ajax_url');
         $this->ajaxType = ArrayUtils::get($options, 'ajax_type', $this->ajaxType);
+
+        if (isset($options['ajax_route'])) {
+            $this->ajaxUrl = $this->container->get('router')->generate($options['ajax_route']);
+        }
 
         $this->entityName = ArrayUtils::get($options, 'entity');
 
