@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\DataTable\Model\Column\PropertyColumn;
+use Umbrella\CoreBundle\Toolbar\AbstractToolbar;
 
 /**
  * Class DataTableQuery
@@ -100,11 +101,10 @@ class DataTableQuery
     }
 
     /**
-     * @param DataTable $table
      * @param Request $request
-     * @throws \Exception
+     * @param DataTable $table
      */
-    public function handleRequest(DataTable $table, Request $request)
+    public function handleRequest(Request $request, DataTable $table)
     {
         // pagination
         $start = $request->get('start', 0);
@@ -113,6 +113,11 @@ class DataTableQuery
         $this->qb->setFirstResult($start);
         if ($length !== null) {
             $this->qb->setMaxResults($length);
+        }
+
+        // toolbar
+        if ($table->toolbar !== null) {
+            $table->toolbar->handleRequest($request, $this->qb);
         }
 
         // order by
@@ -138,6 +143,7 @@ class DataTableQuery
 
             $this->qb->addOrderBy($this->entityAlias . '.' . $column->propertyPath, $dir == 'asc' ? 'ASC' : 'DESC');
         }
+
     }
 
     /**
@@ -145,7 +151,10 @@ class DataTableQuery
      */
     public function getResults()
     {
-        return new Paginator($this->qb);
+        // hack to keep order : see https://github.com/doctrine/doctrine2/issues/3426
+        $result = new Paginator($this->qb);
+        $result->getIterator();
+        return $result;
     }
 
     /**

@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Umbrella\CoreBundle\Toolbar\Model\AbstractToolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -85,6 +86,11 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public $query;
 
     /**
+     * @var AbstractToolbar
+     */
+    public $toolbar;
+
+    /**
      * @var Paginator
      */
     protected $results = null;
@@ -114,7 +120,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function handleRequest(Request $request)
     {
         $this->draw = $request->get('draw');
-        $this->query->handleRequest($this, $request);
+        $this->query->handleRequest($request, $this);
+
     }
 
     /**
@@ -182,13 +189,15 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'length_change',
             'length_menu',
             'page_length',
-            'fixed_header'
+            'fixed_header',
+            'toolbar'
         ));
 
         $resolver->setAllowedTypes('length_change', 'bool');
         $resolver->setAllowedTypes('length_menu', 'array');
         $resolver->setAllowedTypes('page_length', 'int');
         $resolver->setAllowedTypes('fixed_header', 'bool');
+        $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Toolbar\AbstractToolbar', 'string']);
     }
 
     /**
@@ -214,5 +223,11 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         $this->pageLength = ArrayUtils::get($options, 'page_length', $this->pageLength);
 
         $this->fixedHeader = ArrayUtils::get($options, 'fixed_header', $this->fixedHeader);
+
+        if (isset($options['toolbar'])) {
+            $this->toolbar = is_string($options['toolbar'])
+                ? $this->container->get('umbrella.toolbar_factory')->create($options['toolbar'])
+                : $options['toolbar'];
+        }
     }
 }

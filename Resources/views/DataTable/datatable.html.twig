@@ -1,5 +1,13 @@
-<table id="{{ id }}" class="{{ class | default('table table-bordered') }}">
-    <thead>
+<div class="umbrella-datatable-container" id="{{ id }}">
+
+    {% block toolbar %}
+        {% if datatable.toolbar %}
+            {{ include('UmbrellaCoreBundle:DataTable:toolbar.html.twig', { toolbar : datatable.toolbar }) }}
+        {% endif %}
+    {% endblock %}
+
+    <table class="{{ class | default('table table-bordered') }} js-umbrella-datatable">
+        <thead>
         <tr>
             {% for column in columns %}
                 <th class="{{ column.class }}" {% if column.width %}width="{{ column.width }}"{% endif %}>
@@ -7,7 +15,9 @@
                 </th>
             {% endfor %}
         </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</div>

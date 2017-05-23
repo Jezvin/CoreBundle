@@ -1,0 +1,14 @@
+{% block addontext_widget %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    <div class="input-group">
+        {% if prefix %}
+            <span class="input-group-addon">{{ prefix | raw }}</span>
+        {% endif %}
+        {{ block('form_widget_simple') }}
+        {% if suffix %}
+            <span class="input-group-addon">{{ suffix | raw }}</span>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock %}

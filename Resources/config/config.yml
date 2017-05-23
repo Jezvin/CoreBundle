@@ -1,0 +1,4 @@
+twig:
+    form_themes:
+        - 'UmbrellaCoreBundle:Form:layout.html.twig'
+        - 'UmbrellaCoreBundle:Form:addontext.html.twig'

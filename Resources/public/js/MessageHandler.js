@@ -36,7 +36,7 @@ MessageHandler.handlers = {
 
     reload_table: function(params) {
         var id = params.id;
-        var $elem = $('#' + id);
+        var $elem = $('#' + id).find('.js-umbrella-datatable');
 
         if ($elem.length) {
             $elem.DataTable().ajax.reload();

@@ -49,6 +49,11 @@ services:
         tags:
             - {name: twig.extension}
 
+    # Toolbar
+    umbrella.toolbar_factory:
+        class: Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory
+        arguments: ["@service_container"]
+
     # File
     umbrella.file_manager:
         class: Umbrella\CoreBundle\FileUpload\FileManager
