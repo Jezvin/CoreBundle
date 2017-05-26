@@ -160,12 +160,10 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function getApiResults()
     {
         $this->fetchAll();
-        $count = $this->query->count();
-
         return array(
             'draw' => $this->draw,
-            'recordsTotal' => $count,
-            'recordsFiltered' => $count,
+            'recordsTotal' => count($this->results),
+            'recordsFiltered' => count($this->results),
             'data' => $this->fetchedResults
         );
     }

@@ -18,7 +18,6 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Toolbar
@@ -47,7 +46,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
      * @param FormFactory $factory
      * @return FormInterface
      */
-    public abstract function getForm(FormFactory $factory);
+    public abstract function createForm(FormFactory $factory);
 
     /**
      *
@@ -57,18 +56,12 @@ abstract class AbstractToolbar implements ContainerAwareInterface
      */
     public abstract function buildQuery(QueryBuilder $qb, array $data);
 
-
     /**
-     * @param Request $request
-     * @param QueryBuilder $qb
+     * @return FormInterface
      */
-    public function handleRequest(Request $request, QueryBuilder $qb)
+    public function getForm()
     {
-        $form = $this->getForm($this->container->get('form.factory'));
-        $form->handleRequest($request);
-
-        $data = $form->getData();
-        $this->buildQuery($qb, ArrayUtils::to_array($data));
+        return $this->createForm($this->container->get('form.factory'));
     }
 
     /**
@@ -76,7 +69,18 @@ abstract class AbstractToolbar implements ContainerAwareInterface
      */
     public function getFormView()
     {
-        return $this->getForm($this->container->get('form.factory'))->createView();
+        return $this->getForm()->createView();
+    }
+
+    /**
+     * @param QueryBuilder $qb
+     * @param Request $request
+     */
+    public function handleRequest(QueryBuilder $qb, Request $request)
+    {
+        $form = $this->getForm();
+        $form->handleRequest($request);
+        $this->buildQuery($qb, $form->getData());
     }
 
     /* Helper */
@@ -87,7 +91,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
      */
     protected function createFormBuilder(FormFactory $factory)
     {
-        return $factory->createBuilder(FormType::class, null, array(
+        return $factory->createNamedBuilder('toolbar', FormType::class, null, array(
             'validation_groups' => false
         ));
     }

@@ -23,6 +23,10 @@ DataTable.prototype = {
             this.$toolbar.on('change', 'select', function(e) {
                 self.reload();
             });
+
+            this.$toolbar.on('keyup', 'input[type=text]', function(e) {
+                self.reload();
+            })
         }
     },
 
@@ -30,8 +34,7 @@ DataTable.prototype = {
         var self = this;
 
         this.options['ajax']['data'] = function (d) {
-            d['toolbar'] = self.toolbarData();
-            return d;
+            return $.extend({}, d, self.toolbarData());
         };
     },
 

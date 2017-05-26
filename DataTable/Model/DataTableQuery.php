@@ -17,6 +17,7 @@ use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\DataTable\Model\Column\PropertyColumn;
 use Umbrella\CoreBundle\Toolbar\AbstractToolbar;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTableQuery
@@ -29,11 +30,6 @@ class DataTableQuery
      * @var QueryBuilder
      */
     protected $qb;
-
-    /**
-     * @var QueryBuilder
-     */
-    protected $qbCount;
 
     /**
      * @var EntityManager
@@ -53,7 +49,6 @@ class DataTableQuery
     public function __construct(QueryBuilder $qb, $entityAlias = 'e')
     {
         $this->qb = $qb;
-        $this->qbCount = clone $qb;
         $this->em = $qb->getEntityManager();
         $this->entityAlias = $entityAlias;
     }
@@ -68,9 +63,6 @@ class DataTableQuery
         $this->qb->select($this->entityAlias);
         $this->qb->from($table->entityName, $this->entityAlias);
         $this->buildJoin($table->columns);
-
-        $this->qbCount->select("COUNT($this->entityAlias.id)");
-        $this->qbCount->from($table->entityName, $this->entityAlias);
     }
 
     /**
@@ -117,7 +109,7 @@ class DataTableQuery
 
         // toolbar
         if ($table->toolbar !== null) {
-            $table->toolbar->handleRequest($request, $this->qb);
+            $table->toolbar->handleRequest($this->qb, $request);
         }
 
         // order by
@@ -156,13 +148,4 @@ class DataTableQuery
         $result->getIterator();
         return $result;
     }
-
-    /**
-     * @return integer
-     */
-    public function count()
-    {
-        return $this->qbCount->getQuery()->getSingleScalarResult();
-    }
-
 }

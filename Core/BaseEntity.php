@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\Core;
 
 use Doctrine\ORM\Mapping as ORM;
+use Umbrella\CoreBundle\Traits\SearchableTraits;
 
 /**
  * Class BaseEntity
