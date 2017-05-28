@@ -58,3 +58,10 @@ services:
     umbrella.file_manager:
         class: Umbrella\CoreBundle\FileUpload\FileManager
         arguments: ["@service_container"]
+
+    # Subscriber
+    umbrella.entity_subscriber:
+        class: Umbrella\CoreBundle\Listener\EntitySubscriber
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine.event_subscriber }

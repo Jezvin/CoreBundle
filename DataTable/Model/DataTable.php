@@ -143,6 +143,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     {
         if ($this->fetchedResults === null) {
 
+            $this->fetchedResults = array();
             foreach ($this->getResults() as $result) {
                 $row = array();
 

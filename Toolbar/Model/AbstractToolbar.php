@@ -59,7 +59,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
     /**
      * @return FormInterface
      */
-    public function getForm()
+    public final function getForm()
     {
         return $this->createForm($this->container->get('form.factory'));
     }
@@ -67,7 +67,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
     /**
      * @return FormView
      */
-    public function getFormView()
+    public final function getFormView()
     {
         return $this->getForm()->createView();
     }

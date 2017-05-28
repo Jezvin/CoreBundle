@@ -9,7 +9,7 @@
 namespace Umbrella\CoreBundle\Core;
 
 use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Traits\SearchableTraits;
+use Umbrella\CoreBundle\Extension\SearchableInterface;
 
 /**
  * Class BaseEntity
@@ -18,7 +18,7 @@ use Umbrella\CoreBundle\Traits\SearchableTraits;
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
-class BaseEntity
+class BaseEntity implements SearchableInterface
 {
 
     /**
@@ -39,6 +39,11 @@ class BaseEntity
     public $updatedAt;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    public $searchable;
+
+    /**
      * @ORM\PrePersist
      */
     public function prePersist()
@@ -57,4 +62,19 @@ class BaseEntity
         $this->updatedAt = $now;
     }
 
+    /**
+     * @param $searchable
+     */
+    public function setSearchable($searchable)
+    {
+        $this->searchable = $searchable;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSearchableFields()
+    {
+        return array();
+    }
 }
