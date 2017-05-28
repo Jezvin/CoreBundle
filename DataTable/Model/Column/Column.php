@@ -34,12 +34,12 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var boolean
      */
-    public $orderable = true;
+    public $orderable;
 
     /**
      * @var string|null
      */
-    public $order = null;
+    public $order;
 
     /**
      * @var string
@@ -101,8 +101,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
-        $this->label = ArrayUtils::get($options, 'label', $this->id);
-        $this->orderable = ArrayUtils::get($options, 'orderable', $this->orderable);
+        $this->label = ArrayUtils::get($options, 'label');
+        $this->orderable = ArrayUtils::get($options, 'orderable');
         $this->order = ArrayUtils::get($options, 'order');
         $this->class = ArrayUtils::get($options, 'class');
         $this->width = ArrayUtils::get($options, 'width');
@@ -131,5 +131,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
         ));
 
         $resolver->setAllowedValues('order', ['ASC', 'DESC']);
+
+        $resolver->setDefault('label', $this->id);
+        $resolver->setDefault('orderable', true);
     }
 }

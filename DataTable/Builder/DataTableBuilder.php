@@ -11,6 +11,7 @@ use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
+use Umbrella\CoreBundle\DataTable\Model\Column\SequenceColumn;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 use Umbrella\CoreBundle\DataTable\Model\DataTableQuery;
 
@@ -129,6 +130,8 @@ class DataTableBuilder
     protected function resolveColumns()
     {
         $resolvedColumns = array();
+        $hasSequenceColumn = false;
+
         foreach ($this->columns as $id => $column) {
 
             $resolvedColumn = $this->createColumn($id, $column['class']);
@@ -136,7 +139,16 @@ class DataTableBuilder
             $resolvedColumn->configureOptions($resolver);
             $options = $resolver->resolve($column['options']);
             $resolvedColumn->setOptions($options);
-            $resolvedColumns[] = $resolvedColumn;
+
+            // always put sequence column at first position and avoid multiple add
+            if (is_a($resolvedColumn, SequenceColumn::class)) {
+                if (!$hasSequenceColumn) {
+                    array_unshift($resolvedColumns, $resolvedColumn);
+                }
+                $hasSequenceColumn = true;
+            } else {
+                $resolvedColumns[] = $resolvedColumn;
+            }
         }
         return $resolvedColumns;
     }

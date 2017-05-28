@@ -34,7 +34,7 @@ class JoinColumn extends Column
     /**
      * @var string
      */
-    public $queryJoin = Join::LEFT_JOIN;
+    public $queryJoin;
 
     /**
      * @var PropertyAccess
@@ -49,7 +49,6 @@ class JoinColumn extends Column
     {
         parent::__construct($id);
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->orderable = false;
     }
 
     /**
@@ -100,8 +99,8 @@ class JoinColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->join = ArrayUtils::get($options, 'join', $this->id);
-        $this->queryJoin = ArrayUtils::get($options, 'query_join', $this->queryJoin);
+        $this->join = ArrayUtils::get($options, 'join');
+        $this->queryJoin = ArrayUtils::get($options, 'query_join');
         $this->joinPropertyPath = ArrayUtils::get($options, 'property_path');
     }
 
@@ -120,6 +119,10 @@ class JoinColumn extends Column
             'join',
             'query_join'
         ));
+
+        $resolver->setDefault('orderable', false);
+        $resolver->setDefault('join', $this->id);
+        $resolver->setDefault('query_join', Join::LEFT_JOIN);
 
     }
 

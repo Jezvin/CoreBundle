@@ -98,6 +98,7 @@ class DataTableExtension extends \Twig_Extension
         $options['pageLength'] = $dataTable->pageLength;
         $options['lengthMenu'] = $dataTable->lengthMenu;
         $options['fixedHeader'] = $dataTable->fixedHeader;
+        $options['rowReorder'] = $dataTable->sortable;
 
         $columnDefs = array();
 

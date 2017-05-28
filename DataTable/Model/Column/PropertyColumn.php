@@ -62,7 +62,7 @@ class PropertyColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->propertyPath = ArrayUtils::get($options, 'property_path', $this->id);
+        $this->propertyPath = ArrayUtils::get($options, 'property_path');
     }
 
     /**
@@ -71,8 +71,11 @@ class PropertyColumn extends Column
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
+
         $resolver->setDefined(array(
             'property_path'
         ));
+
+        $resolver->setDefault('property_path', $this->id);
     }
 }

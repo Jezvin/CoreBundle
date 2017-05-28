@@ -28,7 +28,7 @@ class ActionColumn extends Column
     /**
      * @var array
      */
-    public $actions = array();
+    public $actions;
 
     /**
      * @var array
@@ -47,7 +47,6 @@ class ActionColumn extends Column
     public function __construct($id)
     {
         parent::__construct($id);
-        $this->orderable = false;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -145,7 +144,7 @@ class ActionColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->actions = ArrayUtils::get($options, 'actions', $this->actions);
+        $this->actions = ArrayUtils::get($options, 'actions');
 
         $this->resolveActions();
     }
@@ -161,6 +160,9 @@ class ActionColumn extends Column
             'actions'
         ));
         $resolver->setAllowedTypes('actions', 'array');
+
+        $resolver->setDefault('actions', array());
+        $resolver->setDefault('orderable', false);
     }
 
 }

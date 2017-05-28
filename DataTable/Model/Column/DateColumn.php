@@ -20,7 +20,7 @@ class DateColumn extends PropertyColumn
     /**
      * @var string
      */
-    public $format = 'd/m/Y H:i';
+    public $format;
 
     /**
      * @param $entity
@@ -42,7 +42,7 @@ class DateColumn extends PropertyColumn
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->format = ArrayUtils::get($options, 'format', $this->format);
+        $this->format = ArrayUtils::get($options, 'format');
     }
 
     /**
@@ -51,8 +51,11 @@ class DateColumn extends PropertyColumn
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
+
         $resolver->setDefined(array(
             'format',
         ));
+
+        $resolver->setDefault('format', 'd/m/Y H:i');
     }
 }

@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Toolbar\Model\AbstractToolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
@@ -36,27 +37,32 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var array
      */
-    public $lengthMenu = array(25, 50, 100);
+    public $lengthMenu;
 
     /**
      * @var int
      */
-    public $pageLength = 25;
+    public $pageLength;
 
     /**
      * @var bool
      */
-    public $lengthChange = false;
+    public $lengthChange;
 
     /**
      * @var bool
      */
-    public $fixedHeader = false;
+    public $fixedHeader;
+
+    /**
+     * @var bool
+     */
+    public $sortable;
 
     /**
      * @var string
      */
-    public $template = 'UmbrellaCoreBundle:DataTable:datatable.html.twig' ;
+    public $template;
 
     /**
      * @var string
@@ -66,7 +72,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var string
      */
-    public $ajaxType = 'POST';
+    public $ajaxType;
 
     /**
      * @var string
@@ -147,9 +153,13 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             foreach ($this->getResults() as $result) {
                 $row = array();
 
+                // Add row id data
+                $row['DT_RowId'] = PropertyAccess::createPropertyAccessor()->getValue($result, 'id');
+
                 foreach ($this->columns as $column) {
                     $row[] = $column->render($result);
                 }
+
                 $this->fetchedResults[] = $row;
             }
         }
@@ -189,7 +199,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'length_menu',
             'page_length',
             'fixed_header',
-            'toolbar'
+            'toolbar',
+            'sortable'
         ));
 
         $resolver->setAllowedTypes('length_change', 'bool');
@@ -197,6 +208,16 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         $resolver->setAllowedTypes('page_length', 'int');
         $resolver->setAllowedTypes('fixed_header', 'bool');
         $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Toolbar\AbstractToolbar', 'string']);
+        $resolver->setAllowedTypes('sortable', 'bool');
+
+        $resolver->setDefault('id', $this->id);
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
+        $resolver->setDefault('ajax_type', 'POST');
+        $resolver->setDefault('length_change', false);
+        $resolver->setDefault('length_menu', array(25, 50, 100));
+        $resolver->setDefault('page_length', 25);
+        $resolver->setDefault('fixed_header', false);
+        $resolver->setDefault('sortable', false);
     }
 
     /**
@@ -204,12 +225,12 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
-        $this->id = ArrayUtils::get($options, 'id', $this->id);
+        $this->id = ArrayUtils::get($options, 'id');
         $this->class = ArrayUtils::get($options, 'class');
-        $this->template = ArrayUtils::get($options, 'template', $this->template);
+        $this->template = ArrayUtils::get($options, 'template');
 
         $this->ajaxUrl = ArrayUtils::get($options, 'ajax_url');
-        $this->ajaxType = ArrayUtils::get($options, 'ajax_type', $this->ajaxType);
+        $this->ajaxType = ArrayUtils::get($options, 'ajax_type');
 
         if (isset($options['ajax_route'])) {
             $this->ajaxUrl = $this->container->get('router')->generate($options['ajax_route']);
@@ -217,11 +238,12 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 
         $this->entityName = ArrayUtils::get($options, 'entity');
 
-        $this->lengthChange = ArrayUtils::get($options, 'length_change', $this->lengthChange);
-        $this->lengthMenu = ArrayUtils::get($options, 'length_menu', $this->lengthMenu);
-        $this->pageLength = ArrayUtils::get($options, 'page_length', $this->pageLength);
+        $this->lengthChange = ArrayUtils::get($options, 'length_change');
+        $this->lengthMenu = ArrayUtils::get($options, 'length_menu');
+        $this->pageLength = ArrayUtils::get($options, 'page_length');
 
-        $this->fixedHeader = ArrayUtils::get($options, 'fixed_header', $this->fixedHeader);
+        $this->fixedHeader = ArrayUtils::get($options, 'fixed_header');
+        $this->sortable = ArrayUtils::get($options, 'sortable');
 
         if (isset($options['toolbar'])) {
             $this->toolbar = is_string($options['toolbar'])

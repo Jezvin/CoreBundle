@@ -3,6 +3,8 @@ function DataTable(view_selector, options) {
     this.$table = this.$view.find('.js-umbrella-datatable');
     this.$toolbar = this.$view.find('.js-umbrella-toolbar');
 
+    this.table = null;
+
     this.options = options;
 
     this.init();
@@ -13,7 +15,7 @@ DataTable.prototype = {
 
     init: function () {
         this.configureOptions();
-        this.$table.DataTable(this.options);
+        this.table = this.$table.DataTable(this.options);
     },
 
     bind: function () {
@@ -27,6 +29,15 @@ DataTable.prototype = {
             this.$toolbar.on('keyup', 'input[type=text]', function(e) {
                 self.reload();
             })
+        }
+
+        if (this.options['rowReorder']) {
+            this.table.on('row-reorder', function (e, diff, edit) {
+                for (var i = 0, ien = diff.length; i < ien; i++) {
+                    var id = self.table.row(diff[i].node).id();
+                    console.log(id + ' updated to be in position ' + diff[i].newData + ' (was ' + diff[i].oldData + ')');
+                }
+            });
         }
     },
 
