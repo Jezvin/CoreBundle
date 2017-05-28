@@ -22,7 +22,7 @@ DataTable.prototype = {
         var self = this;
 
         if (this.$toolbar.length) {
-            this.$toolbar.on('change', 'select', function(e) {
+            this.$toolbar.on('change', 'select, input[type=checkbox], input[type=radio]', function(e) {
                 self.reload();
             });
 
