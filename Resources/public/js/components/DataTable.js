@@ -33,9 +33,21 @@ DataTable.prototype = {
 
         if (this.options['rowReorder']) {
             this.table.on('row-reorder', function (e, diff, edit) {
+                var changeSet = [];
                 for (var i = 0, ien = diff.length; i < ien; i++) {
                     var id = self.table.row(diff[i].node).id();
-                    console.log(id + ' updated to be in position ' + diff[i].newData + ' (was ' + diff[i].oldData + ')');
+                    changeSet.push({
+                        'id' : id,
+                        'old_sequence' : diff[i].oldData,
+                        'new_sequence' : diff[i].newData
+                    });
+                }
+
+                var ajax_url = self.options['rowReorder']['url'];
+                var ajax_method = self.options['rowReorder']['type'];
+
+                if (ajax_url) {
+                    Api.ajax(ajax_method, ajax_url, {'change_set' : changeSet});
                 }
             });
         }

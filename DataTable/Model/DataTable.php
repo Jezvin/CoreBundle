@@ -67,12 +67,22 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var string
      */
-    public $ajaxUrl;
+    public $loadUrl;
 
     /**
      * @var string
      */
-    public $ajaxType;
+    public $loadType;
+
+    /**
+     * @var string
+     */
+    public $sequenceUrl;
+
+    /**
+     * @var string
+     */
+    public $sequenceType;
 
     /**
      * @var string
@@ -185,14 +195,19 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
-            'entity'
+            'entity',
+            'ajax_load_route'
         ));
 
         $resolver->setDefined(array(
             'id',
-            'ajax_type',
-            'ajax_url',
-            'ajax_route',
+
+            'ajax_load_type',
+            'ajax_load_route',
+
+            'ajax_sequence_type',
+            'ajax_sequence_route',
+
             'class',
             'template',
             'length_change',
@@ -200,7 +215,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'page_length',
             'fixed_header',
             'toolbar',
-            'sortable'
+            'sortable',
         ));
 
         $resolver->setAllowedTypes('length_change', 'bool');
@@ -212,7 +227,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 
         $resolver->setDefault('id', $this->id);
         $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
-        $resolver->setDefault('ajax_type', 'POST');
+        $resolver->setDefault('ajax_load_type', 'POST');
+        $resolver->setDefault('ajax_sequence_type', 'POST');
         $resolver->setDefault('length_change', false);
         $resolver->setDefault('length_menu', array(25, 50, 100));
         $resolver->setDefault('page_length', 25);
@@ -229,12 +245,13 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template');
 
-        $this->ajaxUrl = ArrayUtils::get($options, 'ajax_url');
-        $this->ajaxType = ArrayUtils::get($options, 'ajax_type');
+        $this->loadUrl = $this->container->get('router')->generate($options['ajax_load_route']);
+        $this->loadType = ArrayUtils::get($options, 'ajax_load_type');
 
-        if (isset($options['ajax_route'])) {
-            $this->ajaxUrl = $this->container->get('router')->generate($options['ajax_route']);
+        if (isset($options['ajax_sequence_route'])) {
+            $this->sequenceUrl = $this->container->get('router')->generate($options['ajax_sequence_route']);
         }
+        $this->sequenceType = ArrayUtils::get($options, 'ajax_sequence_type');
 
         $this->entityName = ArrayUtils::get($options, 'entity');
 

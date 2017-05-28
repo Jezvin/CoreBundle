@@ -8,6 +8,7 @@
  */
 namespace Umbrella\CoreBundle\Core;
 
+use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Umbrella\CoreBundle\AppProxy\AppProxyService;
 use Umbrella\CoreBundle\DataTable\Builder\DataTableBuilder;
@@ -79,6 +80,14 @@ class BaseController extends Controller
     public function createTableBuilder(array $options = array(), $type = 'Umbrella\CoreBundle\DataTable\DataTableType')
     {
         return $this->get('umbrella.datatable_factory')->createBuilder($type, $options);
+    }
+
+    /**
+     * @return Logger
+     */
+    public function logger()
+    {
+        return $this->get('logger');
     }
 
 }

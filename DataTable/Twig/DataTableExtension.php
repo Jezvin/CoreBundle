@@ -91,14 +91,21 @@ class DataTableExtension extends \Twig_Extension
         $options['serverSide'] = true;
         $options['bFilter'] = false;
         $options['ajax'] = array(
-            'url' => $dataTable->ajaxUrl,
-            'type' => $dataTable->ajaxType
+            'url' => $dataTable->loadUrl,
+            'type' => $dataTable->loadType
         );
         $options['lengthChange'] = $dataTable->lengthChange;
         $options['pageLength'] = $dataTable->pageLength;
         $options['lengthMenu'] = $dataTable->lengthMenu;
         $options['fixedHeader'] = $dataTable->fixedHeader;
-        $options['rowReorder'] = $dataTable->sortable;
+
+        if ($dataTable->sortable) {
+            $options['rowReorder'] = array(
+                'update' => false,
+                'url' => $dataTable->sequenceUrl,
+                'type' => $dataTable->sequenceType
+            );
+        }
 
         $columnDefs = array();
 
