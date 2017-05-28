@@ -123,12 +123,10 @@ class DataTableExtension extends \Twig_Extension
             }
         }
 
-        // order option
-        if (!empty($order)) {
-            $options['order'] = $order;
-        }
+        // default order column option
+        $options['order'] = $order;
 
-        // no order option
+        // not sortable column option
         if (!empty($noSort)) {
             $columnDefs[] = array('targets' => $noSort, 'orderable' => false);
         }
