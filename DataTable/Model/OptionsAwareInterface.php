@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 18/05/17
- * Time: 19:03
+ * Time: 19:03.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Interface OptionsAwareInterface
- * @package Umbrella\CoreBundle\DataTable\Model
+ * Interface OptionsAwareInterface.
  */
 interface OptionsAwareInterface
 {
@@ -24,5 +24,4 @@ interface OptionsAwareInterface
      * @param OptionsResolver $resolver
      */
     public function configureOptions(OptionsResolver $resolver);
-
 }

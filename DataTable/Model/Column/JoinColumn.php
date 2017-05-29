@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 21/05/17
- * Time: 11:32
+ * Time: 11:32.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
@@ -14,10 +14,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
-
 /**
- * Class JoinColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class JoinColumn.
  */
 class JoinColumn extends Column
 {
@@ -43,6 +41,7 @@ class JoinColumn extends Column
 
     /**
      * ManyColumn constructor.
+     *
      * @param $id
      */
     public function __construct($id)
@@ -53,19 +52,22 @@ class JoinColumn extends Column
 
     /**
      * @param $entity
+     *
      * @return string
      */
     public function defaultRender($entity)
     {
         $html = '';
         foreach ($this->getJoinEntitiesValues($entity) as $value) {
-            $html .= '<span class="label label-primary">' . $value . '</span>&nbsp;';
+            $html .= '<span class="label label-primary">'.$value.'</span>&nbsp;';
         }
+
         return $html;
     }
 
     /**
      * @param $entity
+     *
      * @return Collection
      */
     public function getJoinEntities($entity)
@@ -75,6 +77,7 @@ class JoinColumn extends Column
 
     /**
      * @param $joinEntity
+     *
      * @return mixed
      */
     public function getJoinEntityValue($joinEntity)
@@ -84,14 +87,15 @@ class JoinColumn extends Column
 
     /**
      * @param $entity
+     *
      * @return array
      */
     public function getJoinEntitiesValues($entity)
     {
         $entities = $this->getJoinEntities($entity);
+
         return array_map(array($this, 'getJoinEntityValue'), $entities->toArray());
     }
-
 
     /**
      * @param array $options
@@ -117,13 +121,11 @@ class JoinColumn extends Column
 
         $resolver->setDefined(array(
             'join',
-            'query_join'
+            'query_join',
         ));
 
         $resolver->setDefault('orderable', false);
         $resolver->setDefault('join', $this->id);
         $resolver->setDefault('query_join', Join::LEFT_JOIN);
-
     }
-
 }

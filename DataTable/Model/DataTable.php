@@ -3,10 +3,11 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 12:46
+ * Time: 12:46.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model;
+
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -17,8 +18,7 @@ use Umbrella\CoreBundle\Toolbar\Model\AbstractToolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class DataTable
- * @package Umbrella\CoreBundle\Model\Table
+ * Class DataTable.
  */
 class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 {
@@ -121,18 +121,17 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     protected $fetchedResults = null;
 
-
     /* Handle request */
     protected $draw;
-    
+
     use ContainerAwareTrait;
 
     /**
-     * DataTable constructor
+     * DataTable constructor.
      */
     public function __construct()
     {
-        $this->id = 'table_' . substr(md5(uniqid('', true)), 0, 12);
+        $this->id = 'table_'.substr(md5(uniqid('', true)), 0, 12);
     }
 
     /**
@@ -142,7 +141,6 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     {
         $this->draw = $request->get('draw');
         $this->query->handleRequest($request, $this);
-
     }
 
     /**
@@ -154,6 +152,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             $this->query->build($this);
             $this->results = $this->query->getResults();
         }
+
         return $this->results;
     }
 
@@ -163,7 +162,6 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     protected function fetchAll()
     {
         if ($this->fetchedResults === null) {
-
             $this->fetchedResults = array();
             foreach ($this->getResults() as $result) {
                 $row = array();
@@ -186,22 +184,23 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     public function getApiResults()
     {
         $this->fetchAll();
+
         return array(
             'draw' => $this->draw,
             'recordsTotal' => count($this->results),
             'recordsFiltered' => count($this->results),
-            'data' => $this->fetchedResults
+            'data' => $this->fetchedResults,
         );
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
             'entity',
-            'ajax_load_route'
+            'ajax_load_route',
         ));
 
         $resolver->setDefined(array(
@@ -222,7 +221,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'toolbar',
             'sortable',
 
-            'translation_prefix'
+            'translation_prefix',
         ));
 
         $resolver->setAllowedTypes('length_change', 'bool');
@@ -245,7 +244,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setOptions(array $options = array())
     {

@@ -3,14 +3,13 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 08/05/17
- * Time: 22:58
+ * Time: 22:58.
  */
 
 namespace Umbrella\CoreBundle\AppProxy;
 
 /**
- * Class AppMessage
- * @package Umbrella\CoreBundle\AppProxy
+ * Class AppMessage.
  */
 class AppMessage implements \JsonSerializable
 {
@@ -41,6 +40,7 @@ class AppMessage implements \JsonSerializable
 
     /**
      * AppMessage constructor.
+     *
      * @param $action
      * @param array $params
      */
@@ -53,11 +53,11 @@ class AppMessage implements \JsonSerializable
     /**
      * @return array
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return array(
             'action' => $this->action,
-            'params' => $this->params
+            'params' => $this->params,
         );
     }
 }

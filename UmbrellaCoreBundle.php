@@ -8,13 +8,12 @@ use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuBuilderPass;
 use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
 
 /**
- * Class UmbrellaCoreBundle
- * @package Umbrella\CoreBundle
+ * Class UmbrellaCoreBundle.
  */
 class UmbrellaCoreBundle extends Bundle
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {

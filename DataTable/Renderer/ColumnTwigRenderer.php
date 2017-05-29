@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 20/05/17
- * Time: 09:11
+ * Time: 09:11.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Renderer;
@@ -13,8 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 
 /**
- * Class ColumnTwigRenderer
- * @package Umbrella\CoreBundle\DataTable\Renderer
+ * Class ColumnTwigRenderer.
  */
 class ColumnTwigRenderer implements ColumnRendererInterface, ContainerAwareInterface
 {
@@ -27,6 +26,7 @@ class ColumnTwigRenderer implements ColumnRendererInterface, ContainerAwareInter
 
     /**
      * ColumnTwigRenderer constructor.
+     *
      * @param $template
      */
     public function __construct($template)
@@ -37,13 +37,14 @@ class ColumnTwigRenderer implements ColumnRendererInterface, ContainerAwareInter
     /**
      * @param Column $column
      * @param $entity
+     *
      * @return string
      */
     public function render(Column $column, $entity)
     {
         return $this->container->get('twig')->render($this->template, array(
             'column' => $column,
-            'entity' => $entity
+            'entity' => $entity,
         ));
     }
 }

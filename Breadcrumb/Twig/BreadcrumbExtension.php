@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 08/05/17
- * Time: 16:59
+ * Time: 16:59.
  */
 
 namespace Umbrella\CoreBundle\Breadcrumb\Twig;
@@ -13,8 +13,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Umbrella\CoreBundle\Breadcrumb\Breadcrumb;
 
 /**
- * Class BreadcrumbExtension
- * @package Umbrella\AdminBundle\Twig
+ * Class BreadcrumbExtension.
  */
 class BreadcrumbExtension extends \Twig_Extension
 {
@@ -30,6 +29,7 @@ class BreadcrumbExtension extends \Twig_Extension
 
     /**
      * BreadcrumbExtension constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -44,9 +44,9 @@ class BreadcrumbExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction("get_bc", array($this, "get")),
-            new \Twig_SimpleFunction("render_bc", array($this, "render"), array("is_safe" => array("html"))),
-            new \Twig_SimpleFunction("render_bc_menu", array($this, "renderFromMenu"), array("is_safe" => array("html"))),
+            new \Twig_SimpleFunction('get_bc', array($this, 'get')),
+            new \Twig_SimpleFunction('render_bc', array($this, 'render'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('render_bc_menu', array($this, 'renderFromMenu'), array('is_safe' => array('html'))),
         );
     }
 
@@ -55,30 +55,33 @@ class BreadcrumbExtension extends \Twig_Extension
      */
     public function get()
     {
-        return $this->container->get('umbrella.breadcrumb');    
+        return $this->container->get('umbrella.breadcrumb');
     }
-    
+
     /**
      * @return string
      */
     public function render()
     {
         $bc = $this->get();
+
         return $this->container->get('twig')->render('UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig', array(
-            'breadcrumb' => $bc
+            'breadcrumb' => $bc,
         ));
     }
 
     /**
      * @param $name
+     *
      * @return string
      */
     public function renderFromMenu($name)
     {
         $node = $this->container->get('umbrella.menu_provider')->get($name);
         $bc = Breadcrumb::constructFromMenu($node->findCurrent($this->requestStack->getMasterRequest()));
+
         return $this->container->get('twig')->render('UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig', array(
-            'breadcrumb' => $bc
+            'breadcrumb' => $bc,
         ));
     }
 }

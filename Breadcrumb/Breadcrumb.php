@@ -3,18 +3,15 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 14/05/17
- * Time: 23:11
+ * Time: 23:11.
  */
 
 namespace Umbrella\CoreBundle\Breadcrumb;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Traversable;
 use Umbrella\CoreBundle\Menu\MenuNode;
 
 /**
- * Class Breadcrumb
- * @package Umbrella\CoreBundle\Breadcrumb
+ * Class Breadcrumb.
  */
 class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
 {
@@ -25,48 +22,54 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
 
     /**
      * @param MenuNode $currentNode
+     *
      * @return Breadcrumb
      */
     public static function constructFromMenu(MenuNode $currentNode)
     {
-        $bc = new Breadcrumb();
-        while($currentNode !== null) {
+        $bc = new self();
+        while ($currentNode !== null) {
             if ($currentNode->type == MenuNode::TYPE_PAGE) {
                 $bc->prependItem($currentNode->text, $currentNode->url);
             }
             $currentNode = $currentNode->parent;
         }
+
         return $bc;
     }
 
     /**
      * @param $text
      * @param string $url
-     * @param array $translationParameters
+     * @param array  $translationParameters
+     *
      * @return $this
      */
-    public function addItem($text, $url = "", array $translationParameters = array())
+    public function addItem($text, $url = '', array $translationParameters = array())
     {
         $b = new BreadcrumbItem($text, $url, $translationParameters);
         $this->items[] = $b;
+
         return $this;
     }
 
     /**
      * @param $text
      * @param string $url
-     * @param array $translationParameters
+     * @param array  $translationParameters
+     *
      * @return $this
      */
-    public function prependItem($text, $url = "", array $translationParameters = array())
+    public function prependItem($text, $url = '', array $translationParameters = array())
     {
         $b = new BreadcrumbItem($text, $url, $translationParameters);
         array_unshift($this->items, $b);
+
         return $this;
     }
 
     /**
-     * Clear breadcrumb
+     * Clear breadcrumb.
      */
     public function clear()
     {
@@ -74,7 +77,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -82,7 +85,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -90,7 +93,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -98,7 +101,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -106,7 +109,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function count()
     {
@@ -114,7 +117,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getIterator()
     {

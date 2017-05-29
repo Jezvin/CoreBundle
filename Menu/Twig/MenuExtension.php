@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 08/05/17
- * Time: 16:58
+ * Time: 16:58.
  */
 
 namespace Umbrella\CoreBundle\Menu\Twig;
@@ -15,12 +15,10 @@ use Umbrella\CoreBundle\Menu\Provider\MenuProvider;
 use Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider;
 
 /**
- * Class MenuExtension
- * @package Umbrella\CoreBundle\Twig
+ * Class MenuExtension.
  */
 class MenuExtension extends \Twig_Extension
 {
-
     /**
      * @var ContainerInterface
      */
@@ -41,9 +39,9 @@ class MenuExtension extends \Twig_Extension
      */
     protected $menuRendererProvider;
 
-
     /**
      * TwigMenuExtension constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -60,16 +58,17 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction("get_menu", array($this, "get")),
-            new \Twig_SimpleFunction("is_granted_menu", array($this, "isGranted")),
-            new \Twig_SimpleFunction("get_current_menu", array($this, "getCurrentNode")),
-            new \Twig_SimpleFunction("get_current_menu_title", array($this, "getCurrentNodeTitle")),
-            new \Twig_SimpleFunction("render_menu", array($this, "render"), array("is_safe" => array("html"))),
+            new \Twig_SimpleFunction('get_menu', array($this, 'get')),
+            new \Twig_SimpleFunction('is_granted_menu', array($this, 'isGranted')),
+            new \Twig_SimpleFunction('get_current_menu', array($this, 'getCurrentNode')),
+            new \Twig_SimpleFunction('get_current_menu_title', array($this, 'getCurrentNodeTitle')),
+            new \Twig_SimpleFunction('render_menu', array($this, 'render'), array('is_safe' => array('html'))),
         );
     }
 
     /**
      * @param $name
+     *
      * @return MenuNode
      */
     public function get($name)
@@ -79,6 +78,7 @@ class MenuExtension extends \Twig_Extension
 
     /**
      * @param $name
+     *
      * @return null|MenuNode
      */
     public function getCurrentNode($name)
@@ -89,16 +89,19 @@ class MenuExtension extends \Twig_Extension
     /**
      * @param $name
      * @param string $default
+     *
      * @return string
      */
     public function getCurrentNodeTitle($name, $default = '')
     {
         $current = $this->getCurrentNode($name);
+
         return $current ? $current->text : $default;
     }
 
     /**
      * @param $name
+     *
      * @return string
      */
     public function render($name)
@@ -108,6 +111,7 @@ class MenuExtension extends \Twig_Extension
 
     /**
      * @param MenuNode $node
+     *
      * @return bool
      */
     public function isGranted(MenuNode $node)

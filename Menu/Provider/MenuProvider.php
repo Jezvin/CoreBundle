@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 16:51
+ * Time: 16:51.
  */
+
 namespace Umbrella\CoreBundle\Menu\Provider;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,8 +15,7 @@ use Umbrella\CoreBundle\Menu\Factory\MenuFactory;
 use Umbrella\CoreBundle\Menu\MenuNode;
 
 /**
- * Class MenuProvider
- * @package Umbrella\CoreBundle\Provider
+ * Class MenuProvider.
  */
 class MenuProvider extends BaseService
 {
@@ -31,9 +31,10 @@ class MenuProvider extends BaseService
 
     /**
      * MenuProvider constructor.
+     *
      * @param ContainerInterface $container
-     * @param MenuFactory $factory
-     * @param array $builders
+     * @param MenuFactory        $factory
+     * @param array              $builders
      */
     public function __construct(ContainerInterface $container, MenuFactory $factory, array $builders = array())
     {
@@ -44,6 +45,7 @@ class MenuProvider extends BaseService
 
     /**
      * @param $name
+     *
      * @return MenuNode
      */
     public function get($name)
@@ -63,6 +65,7 @@ class MenuProvider extends BaseService
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public function has($name)

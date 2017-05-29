@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 29/05/17
- * Time: 19:49
+ * Time: 19:49.
  */
 
 namespace Umbrella\CoreBundle\Extension;
-
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -16,18 +15,15 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-
 /**
- * Class FormTypeExtension
- * @package Umbrella\CoreBundle\Extension
+ * Class FormTypeExtension.
  */
 class FormTypeExtension extends AbstractTypeExtension
 {
-
     /**
-     * @param FormView $view
+     * @param FormView      $view
      * @param FormInterface $form
-     * @param array $options
+     * @param array         $options
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -35,7 +31,7 @@ class FormTypeExtension extends AbstractTypeExtension
         $this->setView($view, $form, 'group_class', 'col-sm-10');
 
         $label = empty($view->vars['label']) ? $view->vars['name'] : $view->vars['label'];
-        $view->vars['label'] = $options['label_prefix'] . $label;
+        $view->vars['label'] = $options['label_prefix'].$label;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -51,7 +47,7 @@ class FormTypeExtension extends AbstractTypeExtension
     {
         $resolver->setDefined(array(
             'label_class',
-            'group_class'
+            'group_class',
         ));
 
         $resolver->setDefault('label_prefix', 'form.label.');
@@ -71,7 +67,7 @@ class FormTypeExtension extends AbstractTypeExtension
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      * @param $optionName
      */
     protected function setAttribute(FormBuilderInterface $builder, array $options, $optionName)
@@ -82,7 +78,7 @@ class FormTypeExtension extends AbstractTypeExtension
     }
 
     /**
-     * @param FormView $view
+     * @param FormView      $view
      * @param FormInterface $form
      * @param $attributeName
      * @param $defaultValue
@@ -91,10 +87,8 @@ class FormTypeExtension extends AbstractTypeExtension
     {
         if ($form->getConfig()->hasAttribute($attributeName)) { // if attribute is defined -> set it to view
             $view->vars[$attributeName] = $form->getConfig()->getAttribute($attributeName);
-
         } elseif ($form->getRoot()->getConfig()->hasAttribute($attributeName)) { // else if root has attribute defined -> set it to view
             $view->vars[$attributeName] = $form->getRoot()->getConfig()->getAttribute($attributeName);
-
         } else { // else set default value to view
             $view->vars[$attributeName] = $defaultValue;
         }

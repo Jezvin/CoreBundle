@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 07/05/17
- * Time: 12:45
+ * Time: 12:45.
  */
+
 namespace Umbrella\CoreBundle\Core;
 
 use Monolog\Logger;
@@ -15,19 +16,18 @@ use Umbrella\CoreBundle\DataTable\Builder\DataTableBuilder;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
- * Class BaseController
- * @package Umbrella\CoreBundle\Core
+ * Class BaseController.
  */
 class BaseController extends Controller
 {
-
     /* Helpers */
 
     /**
      * @param $id
      * @param array $parameters
-     * @param null $domain
-     * @param null $locale
+     * @param null  $domain
+     * @param null  $locale
+     *
      * @return string
      */
     protected function trans($id, array $parameters = array(), $domain = null, $locale = null)
@@ -38,6 +38,7 @@ class BaseController extends Controller
     /**
      * @param $persistentObjectName
      * @param null $persistentManagerName
+     *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
     protected function getRepository($persistentObjectName, $persistentManagerName = null)
@@ -47,6 +48,7 @@ class BaseController extends Controller
 
     /**
      * @param null $name
+     *
      * @return \Doctrine\Common\Persistence\ObjectManager|object
      */
     protected function em($name = null)
@@ -65,6 +67,7 @@ class BaseController extends Controller
     /**
      * @param $type
      * @param array $options
+     *
      * @return DataTable
      */
     public function createTable($type, array $options = array())
@@ -73,8 +76,9 @@ class BaseController extends Controller
     }
 
     /**
-     * @param array $options
+     * @param array  $options
      * @param string $type
+     *
      * @return DataTableBuilder
      */
     public function createTableBuilder(array $options = array(), $type = 'Umbrella\CoreBundle\DataTable\DataTableType')
@@ -89,5 +93,4 @@ class BaseController extends Controller
     {
         return $this->get('logger');
     }
-
 }

@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 07/05/17
- * Time: 13:17
+ * Time: 13:17.
  */
+
 namespace Umbrella\CoreBundle\Core;
 
 use Doctrine\ORM\EntityManager;
@@ -13,8 +14,7 @@ use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class BaseService
- * @package Umbrella\CoreBundle\Core
+ * Class BaseService.
  */
 class BaseService
 {
@@ -30,6 +30,7 @@ class BaseService
 
     /**
      * BaseService constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -37,18 +38,20 @@ class BaseService
         $this->container = $container;
         $this->logger = $container->get('logger');
     }
-    
+
     /**
      * @param $name
+     *
      * @return mixed
      */
     protected function getParameter($name)
     {
-        return $this->container->getParameter($name);    
+        return $this->container->getParameter($name);
     }
 
     /**
      * @param $id
+     *
      * @return object
      */
     protected function get($id)
@@ -59,8 +62,9 @@ class BaseService
     /**
      * @param $id
      * @param array $parameters
-     * @param null $domain
-     * @param null $locale
+     * @param null  $domain
+     * @param null  $locale
+     *
      * @return string
      */
     protected function trans($id, array $parameters = array(), $domain = null, $locale = null)
@@ -71,6 +75,7 @@ class BaseService
     /**
      * @param $persistentObjectName
      * @param null $persistentManagerName
+     *
      * @return \Doctrine\Common\Persistence\ObjectRepository
      */
     protected function getRepository($persistentObjectName, $persistentManagerName = null)
@@ -80,6 +85,7 @@ class BaseService
 
     /**
      * @param null $name
+     *
      * @return EntityManager
      */
     protected function em($name = null)
@@ -100,7 +106,7 @@ class BaseService
      */
     protected function srcDir()
     {
-        return $this->get('kernel')->getRootDir() . "/../src/";
+        return $this->get('kernel')->getRootDir().'/../src/';
     }
 
     /**
@@ -108,7 +114,7 @@ class BaseService
      */
     protected function webDir()
     {
-        return $this->get('kernel')->getRootDir() . "/../web/";
+        return $this->get('kernel')->getRootDir().'/../web/';
     }
 
     /**
@@ -116,6 +122,6 @@ class BaseService
      */
     protected function appDir()
     {
-        return $this->get('kernel')->getRootDir() . '/';
+        return $this->get('kernel')->getRootDir().'/';
     }
 }

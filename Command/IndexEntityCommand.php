@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 13:35
+ * Time: 13:35.
  */
+
 namespace Umbrella\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManager;
@@ -17,12 +18,10 @@ use Umbrella\CoreBundle\Extension\SearchableInterface;
 use Umbrella\CoreBundle\Utils\SQLUtils;
 
 /**
- * Class IndexEntityCommand
- * @package Umbrella\CoreBundle\Command
+ * Class IndexEntityCommand.
  */
 class IndexEntityCommand extends BaseCommand
 {
-
     const CMD_NAME = 'umbrella:entity:index';
 
     /**
@@ -36,7 +35,7 @@ class IndexEntityCommand extends BaseCommand
     protected $output;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configure()
     {
@@ -44,7 +43,7 @@ class IndexEntityCommand extends BaseCommand
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
@@ -73,7 +72,7 @@ class IndexEntityCommand extends BaseCommand
 
         $count = 0;
         while (($entity = $iterable->next()) !== false) {
-            $count++;
+            ++$count;
             $this->indexEntity($entity[0]);
 
             if ($count % 50 == 0) {
@@ -88,7 +87,6 @@ class IndexEntityCommand extends BaseCommand
         $this->output->writeln("| $count entity indexed");
     }
 
-
     /**
      * @param SearchableInterface $entity
      */
@@ -98,7 +96,7 @@ class IndexEntityCommand extends BaseCommand
         $search = '';
         foreach ($entity->getSearchableFields() as $propertyPath) {
             try {
-                $search .= trim($propertyAccess->getValue($entity, $propertyPath)) . ' ';
+                $search .= trim($propertyAccess->getValue($entity, $propertyPath)).' ';
             } catch (\Exception $e) {
                 $this->output->writeln("! [error] Enable to reach property path '$propertyPath' for search.");
             }
@@ -106,5 +104,4 @@ class IndexEntityCommand extends BaseCommand
         $entity->setSearchable($search);
         $this->em->persist($entity);
     }
-
 }

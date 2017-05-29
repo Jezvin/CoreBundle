@@ -4,23 +4,22 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 07/05/17
- * Time: 18:50
+ * Time: 18:50.
  */
+
 namespace Umbrella\CoreBundle\Core;
 
 use Doctrine\ORM\Mapping as ORM;
 use Umbrella\CoreBundle\Extension\SearchableInterface;
 
 /**
- * Class BaseEntity
- * @package Umbrella\CoreBundle\Core
+ * Class BaseEntity.
  *
  * @ORM\MappedSuperclass
  * @ORM\HasLifecycleCallbacks
  */
 class BaseEntity implements SearchableInterface
 {
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

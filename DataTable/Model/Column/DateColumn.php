@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 21/05/17
- * Time: 10:44
+ * Time: 10:44.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
@@ -12,8 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class DateColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class DateColumn.
  */
 class DateColumn extends PropertyColumn
 {
@@ -24,6 +23,7 @@ class DateColumn extends PropertyColumn
 
     /**
      * @param $entity
+     *
      * @return mixed
      */
     public function getPropertyValue($entity)
@@ -35,7 +35,7 @@ class DateColumn extends PropertyColumn
             return $value;
         }
     }
-    
+
     /**
      * @param array $options
      */

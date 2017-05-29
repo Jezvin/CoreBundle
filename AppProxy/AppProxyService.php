@@ -3,8 +3,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 08/05/17
- * Time: 01:46
+ * Time: 01:46.
  */
+
 namespace Umbrella\CoreBundle\AppProxy;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -12,8 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Umbrella\CoreBundle\Core\BaseService;
 
 /**
- * Class AppProxyService
- * @package Umbrella\CoreBundle\AppProxy
+ * Class AppProxyService.
  */
 class AppProxyService extends BaseService
 {
@@ -24,6 +24,7 @@ class AppProxyService extends BaseService
 
     /**
      * AppProxy constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -32,20 +33,20 @@ class AppProxyService extends BaseService
     }
 
     /**
-     * Clear all messages
+     * Clear all messages.
      */
     public function clear()
     {
         $this->messages = array();
     }
-    
+
     // Misc actions
-    
+
     public function toast($id, array $parameters = array(), $level = 'success')
     {
         return $this->add(AppMessage::TOAST, array(
             'value' => $this->trans($id, $parameters),
-            'level' => $level
+            'level' => $level,
         ));
     }
 
@@ -57,19 +58,19 @@ class AppProxyService extends BaseService
     public function redirect($url)
     {
         return $this->add(AppMessage::REDIRECT, array(
-            'value' => $url
+            'value' => $url,
         ));
     }
 
     public function execute($js)
     {
         return $this->add(AppMessage::EXECUTE_JS, array(
-            'value' => $js
+            'value' => $js,
         ));
     }
 
     // Html actions
-    
+
     public function replace($html, $css_selector)
     {
         return $this->addHtmlMessage(AppMessage::REPLACE_HTML, $html, $css_selector);
@@ -106,7 +107,7 @@ class AppProxyService extends BaseService
     }
 
     // Modal actions
-    
+
     public function openModal($html)
     {
         return $this->addHtmlMessage(AppMessage::OPEN_MODAL, $html);
@@ -127,7 +128,7 @@ class AppProxyService extends BaseService
     public function reloadTable($id)
     {
         return $this->add(AppMessage::RELOAD_TABLE, array(
-            'id' => $id
+            'id' => $id,
         ));
     }
 
@@ -136,11 +137,13 @@ class AppProxyService extends BaseService
     /**
      * @param $action
      * @param array $params
+     *
      * @return AppProxyService
      */
     protected function add($action, $params = array())
     {
         $this->messages[] = new AppMessage($action, $params);
+
         return $this;
     }
 
@@ -148,13 +151,14 @@ class AppProxyService extends BaseService
      * @param $type
      * @param $html
      * @param $css_selector
+     *
      * @return AppProxyService
      */
     protected function addHtmlMessage($type, $html = null, $css_selector = null)
     {
         return $this->add($type, array(
             'value' => $html,
-            'selector' => $css_selector
+            'selector' => $css_selector,
         ));
     }
 
@@ -165,5 +169,4 @@ class AppProxyService extends BaseService
     {
         return new JsonResponse($this->messages);
     }
-
 }

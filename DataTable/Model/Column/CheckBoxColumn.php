@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 20:30
+ * Time: 20:30.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
@@ -11,13 +11,13 @@ namespace Umbrella\CoreBundle\DataTable\Model\Column;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class CheckBoxColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class CheckBoxColumn.
  */
 class CheckBoxColumn extends Column
 {
     /**
      * @param $entity
+     *
      * @return string
      */
     public function defaultRender($entity)
@@ -33,6 +33,4 @@ class CheckBoxColumn extends Column
         parent::configureOptions($resolver);
         $resolver->setDefault('orderable', false);
     }
-
-
 }

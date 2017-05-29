@@ -4,24 +4,22 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 05/05/17
- * Time: 23:42
+ * Time: 23:42.
  */
+
 namespace Umbrella\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class DatepickerType
- * @package Umbrella\CoreBundle\Form
+ * Class DatepickerType.
  */
 class DatepickerType extends AbstractType
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -30,13 +28,13 @@ class DatepickerType extends AbstractType
             'html5' => false,
             'format' => 'dd/mm/yyyy',
             'attr' => array(
-                'class' => 'js-datepicker'
-            )
+                'class' => 'js-datepicker',
+            ),
         ));
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

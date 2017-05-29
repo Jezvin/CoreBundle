@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 14/05/17
- * Time: 18:10
+ * Time: 18:10.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model;
@@ -16,16 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\DataTable\Model\Column\PropertyColumn;
-use Umbrella\CoreBundle\Toolbar\AbstractToolbar;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class DataTableQuery
- * @package Umbrella\CoreBundle\DataTable\Model
+ * Class DataTableQuery.
  */
 class DataTableQuery
 {
-
     /**
      * @var QueryBuilder
      */
@@ -43,8 +39,9 @@ class DataTableQuery
 
     /**
      * DataTableQueryBuilder constructor.
+     *
      * @param QueryBuilder $qb
-     * @param string $entityAlias
+     * @param string       $entityAlias
      */
     public function __construct(QueryBuilder $qb, $entityAlias = 'e')
     {
@@ -54,7 +51,7 @@ class DataTableQuery
     }
 
     /**
-     * Build query
+     * Build query.
      *
      * @param DataTable $table
      */
@@ -79,21 +76,20 @@ class DataTableQuery
             /** @var JoinColumn $column */
             switch ($column->queryJoin) {
                 case Join::LEFT_JOIN:
-                    $this->qb->leftJoin($this->entityAlias . '.' . $column->join, $column->join);
+                    $this->qb->leftJoin($this->entityAlias.'.'.$column->join, $column->join);
                     $this->qb->addSelect($column->join);
                     break;
 
                 case Join::INNER_JOIN:
-                    $this->qb->innerJoin($this->entityAlias . '.' . $column->join, $column->join);
+                    $this->qb->innerJoin($this->entityAlias.'.'.$column->join, $column->join);
                     $this->qb->addSelect($column->join);
                     break;
-
             }
         }
     }
 
     /**
-     * @param Request $request
+     * @param Request   $request
      * @param DataTable $table
      */
     public function handleRequest(Request $request, DataTable $table)
@@ -101,7 +97,7 @@ class DataTableQuery
         // pagination
         $start = $request->get('start', 0);
         $length = $request->get('length');
-        
+
         $this->qb->setFirstResult($start);
         if ($length !== null) {
             $this->qb->setMaxResults($length);
@@ -133,9 +129,8 @@ class DataTableQuery
                 continue; // is entity column ?
             }
 
-            $this->qb->addOrderBy($this->entityAlias . '.' . $column->propertyPath, $dir == 'asc' ? 'ASC' : 'DESC');
+            $this->qb->addOrderBy($this->entityAlias.'.'.$column->propertyPath, $dir == 'asc' ? 'ASC' : 'DESC');
         }
-
     }
 
     /**
@@ -146,6 +141,7 @@ class DataTableQuery
         // hack to keep order : see https://github.com/doctrine/doctrine2/issues/3426
         $result = new Paginator($this->qb);
         $result->getIterator();
+
         return $result;
     }
 }

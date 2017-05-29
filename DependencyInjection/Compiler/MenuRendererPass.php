@@ -6,8 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * Class MenuRendererPass
- * @package Umbrella\CoreBundle\DependencyInjection\Compiler
+ * Class MenuRendererPass.
  */
 class MenuRendererPass implements CompilerPassInterface
 {

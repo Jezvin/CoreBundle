@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 18/05/17
- * Time: 18:51
+ * Time: 18:51.
  */
+
 namespace Umbrella\CoreBundle\DataTable\Factory;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -16,8 +17,7 @@ use Umbrella\CoreBundle\DataTable\DataTableType;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
- * Class DataTableFactory
- * @package Umbrella\CoreBundle\DataTable\Factory
+ * Class DataTableFactory.
  */
 class DataTableFactory
 {
@@ -28,6 +28,7 @@ class DataTableFactory
 
     /**
      * DataTableFactory constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -38,6 +39,7 @@ class DataTableFactory
     /**
      * @param $typeClass
      * @param array $options
+     *
      * @return DataTable
      */
     public function create($typeClass, array $options = array())
@@ -47,7 +49,8 @@ class DataTableFactory
 
     /**
      * @param string $typeClass
-     * @param array $options
+     * @param array  $options
+     *
      * @return DataTableBuilder
      */
     public function createBuilder($typeClass = 'Umbrella\CoreBundle\DataTable\DataTableType', array $options = array())
@@ -68,6 +71,7 @@ class DataTableFactory
 
     /**
      * @param $typeClass
+     *
      * @return DataTableType
      */
     protected function createType($typeClass)
@@ -83,5 +87,4 @@ class DataTableFactory
 
         return $type;
     }
-
 }

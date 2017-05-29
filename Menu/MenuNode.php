@@ -4,16 +4,16 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 16:05
+ * Time: 16:05.
  */
+
 namespace Umbrella\CoreBundle\Menu;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * Class MenuNode
- * @package Umbrella\Corebundle\Menu
+ * Class MenuNode.
  */
 class MenuNode
 {
@@ -66,7 +66,7 @@ class MenuNode
     public $roles = array();
 
     /* Keep route and routeParams options for url matcher */
-    
+
     /**
      * @var string
      */
@@ -99,12 +99,14 @@ class MenuNode
 
     /**
      * @param MenuNode $child
+     *
      * @return $this
      */
     public function addChild(MenuNode $child)
     {
         $child->parent = $this;
         $this->children[] = $child;
+
         return $this;
     }
 
@@ -128,6 +130,7 @@ class MenuNode
 
     /**
      * @param AuthorizationCheckerInterface $securityChecker
+     *
      * @return bool
      */
     public function isGranted(AuthorizationCheckerInterface $securityChecker)
@@ -153,14 +156,15 @@ class MenuNode
                 $this->isGranted = true;
             }
         }
-        return $this->isGranted;
 
+        return $this->isGranted;
     }
 
     /* Helper : Current node */
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     public function isCurrent(Request $request)
@@ -180,11 +184,13 @@ class MenuNode
                 }
             }
         }
+
         return $this->isCurrent;
     }
 
     /**
      * @param Request $request
+     *
      * @return bool
      */
     public function hasCurrentChild(Request $request)
@@ -203,6 +209,7 @@ class MenuNode
 
     /**
      * @param Request $request
+     *
      * @return null|MenuNode
      */
     public function findCurrent(Request $request)

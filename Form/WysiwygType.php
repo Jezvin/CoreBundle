@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 08/05/17
- * Time: 01:14
+ * Time: 01:14.
  */
 
 namespace Umbrella\CoreBundle\Form;
@@ -13,25 +13,24 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class WysiwygType
- * @package Umbrella\CoreBundle\Form
+ * Class WysiwygType.
  */
 class WysiwygType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'attr' => array(
-                'class' => 'js-wysiwyg wysiwyg'
-            )
+                'class' => 'js-wysiwyg wysiwyg',
+            ),
         ));
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

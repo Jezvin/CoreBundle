@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 15:15
+ * Time: 15:15.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class SequenceColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class SequenceColumn.
  */
 class SequenceColumn extends PropertyColumn
 {

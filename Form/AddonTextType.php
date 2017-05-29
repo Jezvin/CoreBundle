@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 23/05/17
- * Time: 21:15
+ * Time: 21:15.
  */
 
 namespace Umbrella\CoreBundle\Form;
@@ -15,13 +15,12 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class AddonTextType
- * @package Umbrella\CoreBundle\Form
+ * Class AddonTextType.
  */
 class AddonTextType extends AbstractType
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
@@ -34,13 +33,13 @@ class AddonTextType extends AbstractType
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'prefix' => null,
-            'suffix' => null
+            'suffix' => null,
         ));
     }
 

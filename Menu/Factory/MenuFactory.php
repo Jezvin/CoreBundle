@@ -4,33 +4,34 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 16:11
+ * Time: 16:11.
  */
-namespace Umbrella\CoreBundle\Menu\Factory;
 
+namespace Umbrella\CoreBundle\Menu\Factory;
 
 use Umbrella\CoreBundle\Core\BaseService;
 use Umbrella\CoreBundle\Menu\MenuNode;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class MenuFactory
- * @package Umbrella\CoreBundle\Menu\Factory
+ * Class MenuFactory.
  */
 class MenuFactory extends BaseService
 {
     /**
      * @return MenuNode
-     */   
+     */
     public function rootNode()
     {
         $node = new MenuNode();
         $node->type = MenuNode::TYPE_ROOT;
+
         return $node;
     }
 
     /**
      * @param array $options
+     *
      * @return MenuNode
      */
     public function headerNode(array $options = array())
@@ -51,6 +52,7 @@ class MenuFactory extends BaseService
 
     /**
      * @param array $options
+     *
      * @return MenuNode
      */
     public function pageNode(array $options = array())
@@ -74,11 +76,10 @@ class MenuFactory extends BaseService
             $action = $options['action'];
 
             if (is_array($action)) {
-
                 if (isset($action['target'])) {
                     $node->target = $action['target'];
                 }
-                
+
                 if (isset($options['url'])) {
                     $node->url = $options['url'];
                 }
@@ -88,12 +89,12 @@ class MenuFactory extends BaseService
                     $node->routeParams = isset($action['params']) and is_array($action['params']) ? $action['params'] : array();
                     $node->url = $this->container->get('router')->generate($node->route, $node->routeParams);
                 }
-
             } else {
                 $node->route = $action;
                 $node->url = $this->container->get('router')->generate($node->route);
             }
         }
+
         return $node;
     }
 }

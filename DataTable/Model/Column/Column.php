@@ -3,10 +3,11 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 12:46
+ * Time: 12:46.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
+
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,12 +16,10 @@ use Umbrella\CoreBundle\DataTable\Renderer\ColumnRendererInterface;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class Column
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class Column.
  */
 class Column implements OptionsAwareInterface, ContainerAwareInterface
 {
-
     /**
      * @var string
      */
@@ -32,7 +31,7 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     public $label;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $orderable;
 
@@ -45,7 +44,7 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      * @var string
      */
     public $class;
-    
+
     /**
      * @var string
      */
@@ -55,12 +54,12 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      * @var mixed
      */
     public $renderer;
-    
-    
+
     use ContainerAwareTrait;
 
     /**
      * Column constructor.
+     *
      * @param $id
      */
     public function __construct($id)
@@ -70,9 +69,11 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
 
     /**
      * @param $entity
+     *
      * @return string
      */
-    public function render($entity) {
+    public function render($entity)
+    {
         if ($this->renderer instanceof \Closure) {
             return call_user_func($this->renderer, $this, $entity);
         }
@@ -81,14 +82,16 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
             if ($this->renderer instanceof ContainerAwareInterface) {
                 $this->renderer->setContainer($this->container);
             }
+
             return $this->renderer->render($this, $entity);
         }
-        
+
         return $this->defaultRender($entity);
     }
 
     /**
      * @param $entity
+     *
      * @return string
      */
     public function defaultRender($entity)
@@ -108,7 +111,7 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
         $this->width = ArrayUtils::get($options, 'width');
         $this->renderer = ArrayUtils::get($options, 'renderer');
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */
@@ -120,14 +123,14 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
             'order',
             'class',
             'width',
-            'renderer'
+            'renderer',
         ));
 
         $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('renderer', array(
             'null',
             'Umbrella\CoreBundle\DataTable\Renderer\ColumnRendererInterface',
-            'callable'
+            'callable',
         ));
 
         $resolver->setAllowedValues('order', ['ASC', 'DESC']);
@@ -141,8 +144,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @param $id
      * @param array $parameters
-     * @param null $domain
-     * @param null $locale
+     * @param null  $domain
+     * @param null  $locale
      */
     public function trans($id, array $parameters = array(), $domain = null, $locale = null)
     {

@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 18/05/17
- * Time: 18:43
+ * Time: 18:43.
  */
+
 namespace Umbrella\CoreBundle\DataTable;
 
 use Doctrine\ORM\QueryBuilder;
@@ -14,28 +15,24 @@ use Umbrella\CoreBundle\DataTable\Builder\DataTableBuilder;
 use Umbrella\CoreBundle\Utils\StringUtils;
 
 /**
- * Class DataTableType
- * @package Umbrella\CoreBundle\DataTable
+ * Class DataTableType.
  */
 class DataTableType
 {
-
     /**
      * @param QueryBuilder $qb
-     * @param array $options
+     * @param array        $options
      */
     public function buildQuery(QueryBuilder $qb, array $options = array())
     {
-
     }
 
     /**
      * @param DataTableBuilder $builder
-     * @param array $options
+     * @param array            $options
      */
     public function buildDataTable(DataTableBuilder $builder, array $options = array())
     {
-
     }
 
     /**
@@ -43,7 +40,6 @@ class DataTableType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-
     }
 
     /**
@@ -53,6 +49,7 @@ class DataTableType
     {
         $reflexion = new \ReflectionClass($this);
         $className = preg_replace('/Type$/', '', $reflexion->getShortName());
+
         return StringUtils::to_underscore($className);
     }
 }

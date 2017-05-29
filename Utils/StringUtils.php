@@ -3,14 +3,13 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 18/05/17
- * Time: 20:57
+ * Time: 20:57.
  */
 
 namespace Umbrella\CoreBundle\Utils;
 
 /**
- * Class StringUtils
- * @package Umbrella\CoreBundle\Utils
+ * Class StringUtils.
  */
 class StringUtils
 {
@@ -18,6 +17,7 @@ class StringUtils
      * @see http://stackoverflow.com/questions/1993721/how-to-convert-camelcase-to-camel-case
      *
      * @param $input
+     *
      * @return string
      */
     public static function to_underscore($input)
@@ -27,7 +27,7 @@ class StringUtils
         foreach ($ret as &$match) {
             $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
         }
+
         return implode('_', $ret);
     }
-
 }

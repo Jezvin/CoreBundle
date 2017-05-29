@@ -3,19 +3,17 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 14/05/17
- * Time: 11:30
+ * Time: 11:30.
  */
 
 namespace Umbrella\CoreBundle\Menu\Provider;
-
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Umbrella\CoreBundle\Core\BaseService;
 use Umbrella\CoreBundle\Menu\Renderer\MenuRendererInterface;
 
 /**
- * Class MenuRendererProvider
- * @package Umbrella\CoreBundle\Provider
+ * Class MenuRendererProvider.
  */
 class MenuRendererProvider extends BaseService
 {
@@ -26,8 +24,9 @@ class MenuRendererProvider extends BaseService
 
     /**
      * MenuRendererProvider constructor.
+     *
      * @param ContainerInterface $container
-     * @param array $renderersId
+     * @param array              $renderersId
      */
     public function __construct(ContainerInterface $container, array $renderersId = array())
     {
@@ -37,6 +36,7 @@ class MenuRendererProvider extends BaseService
 
     /**
      * @param $name
+     *
      * @return MenuRendererInterface
      */
     public function get($name)
@@ -50,6 +50,7 @@ class MenuRendererProvider extends BaseService
 
     /**
      * @param $name
+     *
      * @return bool
      */
     public function has($name)

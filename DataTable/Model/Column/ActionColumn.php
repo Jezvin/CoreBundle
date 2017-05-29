@@ -3,21 +3,20 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 14/05/17
- * Time: 19:10
+ * Time: 19:10.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class ActionColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class ActionColumn.
  */
 class ActionColumn extends Column
 {
-
     protected static $TEMPLATE = array(
         'show' => '<a data-xhr-href="__url__" title="See"><i class="fa fa-eye"></i></a>',
         'edit' => '<a data-xhr-href="__url__" title="Edit"><i class="fa fa-pencil"></i></a>',
@@ -42,6 +41,7 @@ class ActionColumn extends Column
 
     /**
      * ActionsColumn constructor.
+     *
      * @param $id
      */
     public function __construct($id)
@@ -51,10 +51,11 @@ class ActionColumn extends Column
     }
 
     /**
-     * Generate url from route name registered
+     * Generate url from route name registered.
      *
      * @param $name
      * @param $entity
+     *
      * @return string
      */
     public function generateRouteUrl($name, $entity)
@@ -62,14 +63,16 @@ class ActionColumn extends Column
         if (!isset($this->resolvedRoutes[$name])) {
             throw new \InvalidArgumentException("No route registered with name '$name'");
         }
+
         return $this->__generateRouteUrl($this->resolvedRoutes[$name], $entity);
     }
 
     /**
-     * Generate url from resolved Route
+     * Generate url from resolved Route.
      *
      * @param array $resolvedRoute
      * @param $entity
+     *
      * @return string
      */
     protected function __generateRouteUrl(array $resolvedRoute, $entity)
@@ -79,17 +82,18 @@ class ActionColumn extends Column
             $params = array_merge(
                 $resolvedRoute['params'],
                 array(
-                    'id' => $this->accessor->getValue($entity, 'id')
+                    'id' => $this->accessor->getValue($entity, 'id'),
                 )
             );
         } else {
             $params = $resolvedRoute['params'];
         }
+
         return $this->container->get('router')->generate($resolvedRoute['route'], $params);
     }
 
     /**
-     * Resolve route action
+     * Resolve route action.
      */
     protected function resolveActions()
     {
@@ -118,13 +122,14 @@ class ActionColumn extends Column
             $this->resolvedRoutes[$name] = array(
                 'route' => $route,
                 'params' => $routeParams,
-                'path_params' => $routePathVars
+                'path_params' => $routePathVars,
             );
         }
     }
 
     /**
      * @param $entity
+     *
      * @return string
      */
     public function defaultRender($entity)
@@ -135,14 +140,15 @@ class ActionColumn extends Column
             $html .= str_replace(
                 array(
                     '__url__',
-                    '__action__'
+                    '__action__',
                 ),
                 array(
                     $this->__generateRouteUrl($resolvedRoute, $entity),
-                    $name
+                    $name,
                 ),
-                $template) . '&nbsp;';
+                $template).'&nbsp;';
         }
+
         return $html;
     }
 
@@ -165,12 +171,11 @@ class ActionColumn extends Column
         parent::configureOptions($resolver);
 
         $resolver->setDefined(array(
-            'actions'
+            'actions',
         ));
         $resolver->setAllowedTypes('actions', 'array');
 
         $resolver->setDefault('actions', array());
         $resolver->setDefault('orderable', false);
     }
-
 }

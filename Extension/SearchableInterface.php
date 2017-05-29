@@ -4,17 +4,16 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 12:54
+ * Time: 12:54.
  */
+
 namespace Umbrella\CoreBundle\Extension;
 
 /**
- * Interface SearchableInterface
- * @package Umbrella\CoreBundle\Extension
+ * Interface SearchableInterface.
  */
 interface SearchableInterface
 {
-
     /**
      * @param $searchable
      */
@@ -24,5 +23,4 @@ interface SearchableInterface
      * @return array
      */
     public function getSearchableFields();
-
 }

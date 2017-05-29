@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 13:47
+ * Time: 13:47.
  */
 
 namespace Umbrella\CoreBundle\Utils;
@@ -11,8 +11,7 @@ namespace Umbrella\CoreBundle\Utils;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Class SQLUtils
- * @package Umbrella\CoreBundle\Utils
+ * Class SQLUtils.
  */
 class SQLUtils
 {

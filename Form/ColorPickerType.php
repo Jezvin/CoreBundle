@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 21/05/17
- * Time: 11:16
+ * Time: 11:16.
  */
 
 namespace Umbrella\CoreBundle\Form;
@@ -13,8 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ColorPickerType
- * @package Umbrella\CoreBundle\Form
+ * Class ColorPickerType.
  */
 class ColorPickerType extends AbstractType
 {
@@ -25,8 +24,8 @@ class ColorPickerType extends AbstractType
     {
         $resolver->setDefaults(array(
             'attr' => array(
-                'class' => 'js-colorpicker'
-            )
+                'class' => 'js-colorpicker',
+            ),
         ));
     }
 

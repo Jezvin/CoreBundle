@@ -3,25 +3,22 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 13/05/17
- * Time: 21:49
+ * Time: 21:49.
  */
 
 namespace Umbrella\CoreBundle\Form;
-
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class Entity2Type
- * @package Umbrella\CoreBundle\Form
+ * Class Entity2Type.
  */
 class Entity2Type extends AbstractType
 {
-
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -29,12 +26,12 @@ class Entity2Type extends AbstractType
             'attr' => array(
                 'class' => 'js-select2',
                 'style' => 'width: 100%',
-            )
+            ),
         ));
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getParent()
     {

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 14/05/17
- * Time: 19:09
+ * Time: 19:09.
  */
 
 namespace Umbrella\CoreBundle\DataTable\Model\Column;
@@ -13,8 +13,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class PropertyColumn
- * @package Umbrella\CoreBundle\DataTable\Model\Column
+ * Class PropertyColumn.
  */
 class PropertyColumn extends Column
 {
@@ -30,6 +29,7 @@ class PropertyColumn extends Column
 
     /**
      * EntityColumn constructor.
+     *
      * @param $id
      */
     public function __construct($id)
@@ -40,15 +40,17 @@ class PropertyColumn extends Column
 
     /**
      * @param $entity
+     *
      * @return string
      */
     public function defaultRender($entity)
     {
-        return (string)$this->getPropertyValue($entity);
+        return (string) $this->getPropertyValue($entity);
     }
 
     /**
      * @param $entity
+     *
      * @return mixed
      */
     public function getPropertyValue($entity)
@@ -73,7 +75,7 @@ class PropertyColumn extends Column
         parent::configureOptions($resolver);
 
         $resolver->setDefined(array(
-            'property_path'
+            'property_path',
         ));
 
         $resolver->setDefault('property_path', $this->id);

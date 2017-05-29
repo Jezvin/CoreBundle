@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 23/05/17
- * Time: 20:03
+ * Time: 20:03.
  */
 
 namespace Umbrella\CoreBundle\Toolbar\Factory;
@@ -13,8 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Umbrella\CoreBundle\Toolbar\Model\AbstractToolbar;
 
 /**
- * Class ToolbarFactory
- * @package Umbrella\CoreBundle\Toolbar\Factory
+ * Class ToolbarFactory.
  */
 class ToolbarFactory
 {
@@ -25,6 +24,7 @@ class ToolbarFactory
 
     /**
      * DataTableFactory constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -35,6 +35,7 @@ class ToolbarFactory
     /**
      * @param $class
      * @param array $options
+     *
      * @return AbstractToolbar
      */
     public function create($class, array $options = array())
@@ -46,6 +47,7 @@ class ToolbarFactory
         /** @var AbstractToolbar $toolbar */
         $toolbar = new $class($options);
         $toolbar->setContainer($this->container);
+
         return $toolbar;
     }
 }

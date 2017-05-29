@@ -4,9 +4,11 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 18/05/17
- * Time: 18:55
+ * Time: 18:55.
  */
+
 namespace Umbrella\CoreBundle\DataTable\Builder;
+
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,8 +18,7 @@ use Umbrella\CoreBundle\DataTable\Model\DataTable;
 use Umbrella\CoreBundle\DataTable\Model\DataTableQuery;
 
 /**
- * Class DataTableBuilder
- * @package Umbrella\CoreBundle\DataTable\Builder
+ * Class DataTableBuilder.
  */
 class DataTableBuilder
 {
@@ -30,7 +31,7 @@ class DataTableBuilder
      * @var array
      */
     protected $options = array();
-    
+
     /**
      * @var array
      */
@@ -53,9 +54,10 @@ class DataTableBuilder
 
     /**
      * DataTableBuilder constructor.
+     *
      * @param ContainerInterface $container
-     * @param OptionsResolver $dtResolver
-     * @param array $options
+     * @param OptionsResolver    $dtResolver
+     * @param array              $options
      */
     public function __construct(ContainerInterface $container, OptionsResolver $dtResolver, array $options = array())
     {
@@ -77,19 +79,22 @@ class DataTableBuilder
      * @param $id
      * @param $columnClass
      * @param array $options
+     *
      * @return $this
      */
     public function add($id, $columnClass, array $options = array())
     {
         $this->columns[$id] = array(
             'class' => $columnClass,
-            'options' => $options
+            'options' => $options,
         );
+
         return $this;
     }
 
     /**
      * @param $id
+     *
      * @return bool
      */
     public function has($id)
@@ -99,6 +104,7 @@ class DataTableBuilder
 
     /**
      * @param $id
+     *
      * @return Column
      */
     public function get($id)
@@ -119,8 +125,8 @@ class DataTableBuilder
 
             $options = $this->dtResolver->resolve($this->options);
             $this->resolvedTable->setOptions($options);
-
         }
+
         return $this->resolvedTable;
     }
 
@@ -133,7 +139,6 @@ class DataTableBuilder
         $hasSequenceColumn = false;
 
         foreach ($this->columns as $id => $column) {
-
             $resolvedColumn = $this->createColumn($id, $column['class']);
             $resolver = new OptionsResolver();
             $resolvedColumn->configureOptions($resolver);
@@ -150,12 +155,14 @@ class DataTableBuilder
                 $resolvedColumns[] = $resolvedColumn;
             }
         }
+
         return $resolvedColumns;
     }
 
     /**
      * @param $id
      * @param $class
+     *
      * @return Column
      */
     protected function createColumn($id, $class)

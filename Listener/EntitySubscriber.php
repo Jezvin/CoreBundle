@@ -4,8 +4,9 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 28/05/17
- * Time: 12:58
+ * Time: 12:58.
  */
+
 namespace Umbrella\CoreBundle\Listener;
 
 use Doctrine\Common\EventSubscriber;
@@ -17,12 +18,10 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Extension\SearchableInterface;
 
 /**
- * Class EntitySubscriber
- * @package Umbrella\CoreBundle\Listener
+ * Class EntitySubscriber.
  */
 class EntitySubscriber implements EventSubscriber
 {
-
     /**
      * @var Logger
      */
@@ -30,6 +29,7 @@ class EntitySubscriber implements EventSubscriber
 
     /**
      * EntitySubscriber constructor.
+     *
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
@@ -68,7 +68,7 @@ class EntitySubscriber implements EventSubscriber
         $search = '';
         foreach ($entity->getSearchableFields() as $propertyPath) {
             try {
-                $search .= trim($propertyAccess->getValue($entity, $propertyPath)) . ' ';
+                $search .= trim($propertyAccess->getValue($entity, $propertyPath)).' ';
             } catch (\Exception $e) {
                 $this->logger->error("Enable to reach property path '$propertyPath' for search.");
             }
@@ -85,7 +85,7 @@ class EntitySubscriber implements EventSubscriber
     {
         return array(
             Events::prePersist,
-            Events::preUpdate
+            Events::preUpdate,
         );
     }
 }

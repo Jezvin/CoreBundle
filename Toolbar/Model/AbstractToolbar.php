@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: acantepie
  * Date: 20/05/17
- * Time: 23:17
+ * Time: 23:17.
  */
 
 namespace Umbrella\CoreBundle\Toolbar\Model;
@@ -20,21 +20,20 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class Toolbar
- * @package Umbrella\CoreBundle\Toolbar
+ * Class Toolbar.
  */
 abstract class AbstractToolbar implements ContainerAwareInterface
 {
-
     use ContainerAwareTrait;
 
     /**
-     * @var $options
+     * @var
      */
     protected $options;
 
     /**
      * AbstractToolbar constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options = array())
@@ -44,22 +43,23 @@ abstract class AbstractToolbar implements ContainerAwareInterface
 
     /**
      * @param FormFactory $factory
+     *
      * @return FormInterface
      */
-    public abstract function createForm(FormFactory $factory);
+    abstract public function createForm(FormFactory $factory);
 
     /**
-     *
      * @param QueryBuilder $qb
-     * @param array $data
+     * @param array        $data
+     *
      * @return QueryBuilder
      */
-    public abstract function buildQuery(QueryBuilder $qb, array $data);
+    abstract public function buildQuery(QueryBuilder $qb, array $data);
 
     /**
      * @return FormInterface
      */
-    public final function getForm()
+    final public function getForm()
     {
         return $this->createForm($this->container->get('form.factory'));
     }
@@ -67,14 +67,14 @@ abstract class AbstractToolbar implements ContainerAwareInterface
     /**
      * @return FormView
      */
-    public final function getFormView()
+    final public function getFormView()
     {
         return $this->getForm()->createView();
     }
 
     /**
      * @param QueryBuilder $qb
-     * @param Request $request
+     * @param Request      $request
      */
     public function handleRequest(QueryBuilder $qb, Request $request)
     {
@@ -87,6 +87,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
 
     /**
      * @param FormFactory $factory
+     *
      * @return FormBuilderInterface
      */
     protected function createFormBuilder(FormFactory $factory)
@@ -94,8 +95,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
         return $factory->createNamedBuilder('toolbar', FormType::class, null, array(
             'validation_groups' => false,
             'label_class' => 'hidden',
-            'group_class' => 'col-sm-12'
+            'group_class' => 'col-sm-12',
         ));
     }
-
 }
