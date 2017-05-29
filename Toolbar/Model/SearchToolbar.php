@@ -32,7 +32,7 @@ class SearchToolbar extends AbstractToolbar
             'suffix' => '<i class="fa fa-search"></i>',
             'required' => false,
             'attr' => array(
-                'placeholder' => 'Rechercher ...'
+                'placeholder' => 'form.placeholder.search'
             )
         ));
 

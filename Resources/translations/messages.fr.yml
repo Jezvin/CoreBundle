@@ -1,0 +1,33 @@
+common:
+    delete: Supprimer
+    edit: Editer
+    yes: Oui
+    no: No
+    cancel: Annuler
+    save: Sauvegarder
+    confirm_delete: Confirmer la suppression ?
+
+form:
+    label:
+        search: Rechercher
+        firstname: Prénom
+        lastname: Nom
+        username: Login
+        email: Email
+        password: Mot de passe
+        groups: Groupes
+        title: Titre
+        roles: Roles
+
+    placeholder:
+        search: Rechercher ...
+
+table:
+    name: Nom
+    email: Email
+    username: Login
+    active: Actif ?
+    groups: Groupes
+    title: Titre
+    roles: Roles
+    actions: Actions

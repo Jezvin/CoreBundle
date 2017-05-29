@@ -32,6 +32,11 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var string
      */
+    public $translationPrefix;
+
+    /**
+     * @var string
+     */
     public $class;
 
     /**
@@ -216,6 +221,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
             'fixed_header',
             'toolbar',
             'sortable',
+
+            'translation_prefix'
         ));
 
         $resolver->setAllowedTypes('length_change', 'bool');
@@ -234,6 +241,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
         $resolver->setDefault('page_length', 25);
         $resolver->setDefault('fixed_header', false);
         $resolver->setDefault('sortable', false);
+        $resolver->setDefault('translation_prefix', 'table.');
     }
 
     /**
@@ -261,6 +269,8 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 
         $this->fixedHeader = ArrayUtils::get($options, 'fixed_header');
         $this->sortable = ArrayUtils::get($options, 'sortable');
+
+        $this->translationPrefix = ArrayUtils::get($options, 'translation_prefix');
 
         if (isset($options['toolbar'])) {
             $this->toolbar = is_string($options['toolbar'])

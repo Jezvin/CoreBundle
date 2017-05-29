@@ -1,5 +1,6 @@
 imports:
     - { resource: widgets.yml }
+    - { resource: extension.yml }
 
 services:
 
@@ -65,9 +66,3 @@ services:
         arguments: ["@service_container"]
         tags:
             - { name: doctrine.event_subscriber }
-
-    # Extension
-    umbrella.form_type_extension:
-        class: Umbrella\CoreBundle\Extension\FormExtension
-        tags:
-            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }

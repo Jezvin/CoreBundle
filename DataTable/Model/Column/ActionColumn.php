@@ -20,9 +20,9 @@ class ActionColumn extends Column
 
     protected static $TEMPLATE = array(
         'show' => '<a data-xhr-href="__url__" title="See"><i class="fa fa-eye"></i></a>',
-        'edit' => '<a data-xhr-href="__url__" title="Edit"><i class="fa fa-pencil t"></i></a>',
+        'edit' => '<a data-xhr-href="__url__" title="Edit"><i class="fa fa-pencil"></i></a>',
         'delete' => '<a data-xhr-href="__url__" title="Delete" data-confirm="Confirm delete ?"<i class="fa fa-times text-red"></i></a>',
-        '__default' => '<a data-xhr-href="__url__"><i class="fa fa-question"></i></a>',
+        '__default' => '<a data-xhr-href="__url__">__action__</a>',
     );
 
     /**
@@ -89,21 +89,6 @@ class ActionColumn extends Column
     }
 
     /**
-     * @param $entity
-     * @return string
-     */
-    public function defaultRender($entity)
-    {
-        $html = '';
-        foreach ($this->resolvedRoutes as $name => $resolvedRoute) {
-            $url = $this->__generateRouteUrl($resolvedRoute, $entity);
-            $template = ArrayUtils::get(self::$TEMPLATE, $name, self::$TEMPLATE['__default']);
-            $html .= str_replace('__url__', $url, $template) . '&nbsp;';
-        }
-        return $html;
-    }
-
-    /**
      * Resolve route action
      */
     protected function resolveActions()
@@ -136,6 +121,29 @@ class ActionColumn extends Column
                 'path_params' => $routePathVars
             );
         }
+    }
+
+    /**
+     * @param $entity
+     * @return string
+     */
+    public function defaultRender($entity)
+    {
+        $html = '';
+        foreach ($this->resolvedRoutes as $name => $resolvedRoute) {
+            $template = ArrayUtils::get(self::$TEMPLATE, $name, self::$TEMPLATE['__default']);
+            $html .= str_replace(
+                array(
+                    '__url__',
+                    '__action__'
+                ),
+                array(
+                    $this->__generateRouteUrl($resolvedRoute, $entity),
+                    $name
+                ),
+                $template) . '&nbsp;';
+        }
+        return $html;
     }
 
     /**

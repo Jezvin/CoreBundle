@@ -135,4 +135,17 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
         $resolver->setDefault('label', $this->id);
         $resolver->setDefault('orderable', true);
     }
+
+    /* Helpers */
+
+    /**
+     * @param $id
+     * @param array $parameters
+     * @param null $domain
+     * @param null $locale
+     */
+    public function trans($id, array $parameters = array(), $domain = null, $locale = null)
+    {
+        $this->container->get('translator')->trans($id, $parameters, $domain, $locale);
+    }
 }

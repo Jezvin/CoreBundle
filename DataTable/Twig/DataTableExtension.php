@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\DataTable\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
@@ -25,12 +26,18 @@ class DataTableExtension extends \Twig_Extension
     protected $container;
 
     /**
+     * @var TranslatorInterface
+     */
+    protected $translator;
+
+    /**
      * DataTableExtension constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        $this->translator = $container->get('translator');
     }
 
     /**
@@ -132,7 +139,49 @@ class DataTableExtension extends \Twig_Extension
         }
         $options['columnDefs'] = $columnDefs;
 
+        // translations
+        $options['language'] = $this->buildTranslationOptions();
+
         return $options;
+    }
+
+
+    /**
+     * @return array
+     */
+    protected function buildTranslationOptions()
+    {
+        return array(
+            "processing" => $this->transDt("processing"),
+            "search" => $this->transDt("search"),
+            "lengthMenu" => $this->transDt("lengthMenu"),
+            "info" => $this->transDt("info"),
+            "infoEmpty" => $this->transDt("infoEmpty"),
+            "infoFiltered" => $this->transDt("infoFiltered"),
+            "infoPostFix" => $this->transDt("infoPostFix"),
+            "loadingRecords" => $this->transDt("loadingRecords"),
+            "zeroRecords" => $this->transDt("zeroRecords"),
+            "emptyTable" => $this->transDt("emptyTable"),
+            "searchPlaceholder" => $this->transDt("searchPlaceholder"),
+            "paginate" => array(
+                "first" => $this->transDt("paginate.first"),
+                "previous" => $this->transDt("paginate.previous"),
+                "next" => $this->transDt("paginate.next"),
+                "last" => $this->transDt("paginate.last")
+            ),
+            "aria" => array(
+                "sortAscending" => $this->transDt("aria.sortAscending"),
+                "sortDescending" => $this->transDt("aria.sortDescending")
+            ));
+    }
+
+    /**
+     * @param $key
+     * @return string
+     */
+    protected function transDt($key)
+    {
+        return $this->translator->trans('datatable.' . $key, [], 'datatable');
     }
     
 }
