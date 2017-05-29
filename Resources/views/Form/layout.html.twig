@@ -1,1 +1,21 @@
 {% extends "bootstrap_3_horizontal_layout.html.twig" %}
+
+{% block form_label_class -%}
+    {% if form.vars.form_label_class is defined %}
+        {{ form.vars.form_label_class }}
+    {% elseif form.parent and form.parent.vars.form_label_class is defined %}
+        {{ form.parent.vars.form_label_class }}
+    {% else %}
+        col-sm-2
+    {% endif %}
+{%- endblock form_label_class %}
+
+{% block form_group_class -%}
+    {% if form.vars.form_group_class is defined %}
+        {{ form.vars.form_group_class }}
+    {% elseif form.parent and form.parent.vars.form_group_class is defined %}
+        {{ form.parent.vars.form_group_class }}
+    {% else %}
+        col-sm-10
+    {% endif %}
+{%- endblock form_group_class %}

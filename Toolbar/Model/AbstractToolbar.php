@@ -92,7 +92,9 @@ abstract class AbstractToolbar implements ContainerAwareInterface
     protected function createFormBuilder(FormFactory $factory)
     {
         return $factory->createNamedBuilder('toolbar', FormType::class, null, array(
-            'validation_groups' => false
+            'validation_groups' => false,
+            'form_label_class' => 'hidden',
+            'form_group_class' => 'col-sm-12'
         ));
     }
 
