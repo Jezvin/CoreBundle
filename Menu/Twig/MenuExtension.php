@@ -95,9 +95,10 @@ class MenuExtension extends \Twig_Extension
      */
     public function getCurrentNodeTitle($name, $default = '')
     {
-        $current = $this->getCurrentNode($name);
+        $menu = $this->get($name);
+        $current = $menu->findCurrent($this->requestStack->getMasterRequest());
 
-        return $current ? $current->text : $default;
+        return $current ? $menu->translationPrefix . $current->label : $default;
     }
 
     /**

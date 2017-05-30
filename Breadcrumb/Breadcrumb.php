@@ -8,8 +8,9 @@
 
 namespace Umbrella\CoreBundle\Breadcrumb;
 
+use Symfony\Component\HttpFoundation\Request;
+use Umbrella\CoreBundle\Menu\Model\Menu;
 use Umbrella\CoreBundle\Menu\Model\MenuNode;
-
 
 /**
  * Class Breadcrumb.
@@ -22,16 +23,24 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     protected $items = array();
 
     /**
-     * @param MenuNode $currentNode
-     *
+     * @var string
+     */
+    public $translationPrefix = 'breadcrumb.';
+
+    /**
+     * @param Menu $menu
+     * @param Request $request
      * @return Breadcrumb
      */
-    public static function constructFromMenu(MenuNode $currentNode)
+    public static function constructFromMenu(Menu $menu, Request $request)
     {
         $bc = new self();
+        $bc->translationPrefix = $menu->translationPrefix;
+
+        $currentNode = $menu->findCurrent($request);
         while ($currentNode !== null) {
             if ($currentNode->type == MenuNode::TYPE_PAGE) {
-                $bc->prependItem($currentNode->text, $currentNode->url);
+                $bc->prependItem($currentNode->label, $currentNode->url);
             }
             $currentNode = $currentNode->parent;
         }
@@ -40,30 +49,28 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     }
 
     /**
-     * @param $text
+     * @param $label
      * @param string $url
-     * @param array  $translationParameters
      *
      * @return $this
      */
-    public function addItem($text, $url = '', array $translationParameters = array())
+    public function addItem($label, $url = '')
     {
-        $b = new BreadcrumbItem($text, $url, $translationParameters);
+        $b = new BreadcrumbItem($label, $url);
         $this->items[] = $b;
 
         return $this;
     }
 
     /**
-     * @param $text
+     * @param $label
      * @param string $url
-     * @param array  $translationParameters
      *
      * @return $this
      */
-    public function prependItem($text, $url = '', array $translationParameters = array())
+    public function prependItem($label, $url = '')
     {
-        $b = new BreadcrumbItem($text, $url, $translationParameters);
+        $b = new BreadcrumbItem($label, $url);
         array_unshift($this->items, $b);
 
         return $this;

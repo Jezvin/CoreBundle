@@ -21,17 +21,17 @@ class BreadcrumbItem
     /**
      * @var string
      */
-    public $text;
+    public $label;
 
     /**
      * BreadcrumbItem constructor.
      *
-     * @param string $text
+     * @param string $label
      * @param string $url
      */
-    public function __construct($text = '', $url = '')
+    public function __construct($label = '', $url = '')
     {
         $this->url = $url;
-        $this->text = $text;
+        $this->label = $label;
     }
 }

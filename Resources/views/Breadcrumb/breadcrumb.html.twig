@@ -5,7 +5,7 @@
                 {% if loop.first %}
                     <i class="fa fa-dashboard"></i>&nbsp;
                 {% endif %}
-                {{ item.text }}
+                {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
             </li>
         {% else %}
             <li>
@@ -13,7 +13,7 @@
                     {% if loop.first %}
                         <i class="fa fa-dashboard"></i>
                     {% endif %}
-                    {{ item.text }}
+                    {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
                 </a>
             </li>
         {% endif %}

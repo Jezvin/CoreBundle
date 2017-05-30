@@ -62,7 +62,7 @@ class MenuBuilder
         $node->type = MenuNode::TYPE_HEADER;
 
         if (isset($options['label'])) {
-            $node->text = $options['label'];
+            $node->label = $options['label'];
         }
 
         if (isset($options['roles'])) {
@@ -83,7 +83,7 @@ class MenuBuilder
         $node->type = MenuNode::TYPE_PAGE;
 
         if (isset($options['label'])) {
-            $node->text = $options['label'];
+            $node->label = $options['label'];
         }
 
         if (isset($options['icon'])) {

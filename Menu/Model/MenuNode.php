@@ -48,7 +48,7 @@ class MenuNode implements \IteratorAggregate, \Countable
     /**
      * @var string
      */
-    public $text;
+    public $label;
 
     /**
      * @var string
