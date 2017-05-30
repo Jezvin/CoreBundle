@@ -7,14 +7,14 @@ services:
     # Menu
     umbrella.menu_provider:
         class: Umbrella\CoreBundle\Menu\Provider\MenuProvider
-        arguments: ["@service_container", "@umbrella.menu_factory", []]
+        arguments: ["@service_container", "@umbrella.menu_builder", []]
 
     umbrella.menu_renderer_provider:
         class: Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider
         arguments: ["@service_container", []]
 
-    umbrella.menu_factory:
-        class: Umbrella\CoreBundle\Menu\Factory\MenuFactory
+    umbrella.menu_builder:
+        class: Umbrella\CoreBundle\Menu\Builder\MenuBuilder
         arguments: ["@service_container"]
 
     umbrella.menu_twig:

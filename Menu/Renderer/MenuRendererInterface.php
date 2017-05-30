@@ -8,7 +8,7 @@
 
 namespace Umbrella\CoreBundle\Menu\Renderer;
 
-use Umbrella\CoreBundle\Menu\MenuNode;
+use Umbrella\CoreBundle\Menu\Model\Menu;
 
 /**
  * Interface MenuRendererInterface.
@@ -16,9 +16,9 @@ use Umbrella\CoreBundle\Menu\MenuNode;
 interface MenuRendererInterface
 {
     /**
-     * @param MenuNode $node
+     * @param Menu $menu
      *
      * @return string
      */
-    public function render(MenuNode $node);
+    public function render(Menu $menu);
 }

@@ -7,25 +7,47 @@
  * Time: 16:11.
  */
 
-namespace Umbrella\CoreBundle\Menu\Factory;
+namespace Umbrella\CoreBundle\Menu\Builder;
 
-use Umbrella\CoreBundle\Core\BaseService;
-use Umbrella\CoreBundle\Menu\MenuNode;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Umbrella\CoreBundle\Menu\Model\Menu;
+use Umbrella\CoreBundle\Menu\Model\MenuNode;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class MenuFactory.
+ * Class MenuBuilder.
  */
-class MenuFactory extends BaseService
+class MenuBuilder
 {
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
+     * @var Menu
+     */
+    protected $menu;
+
+    /**
+     * MenuBuilder constructor.
+     * @param ContainerInterface $container
+     */
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+        $this->menu = new Menu();
+    }
+
     /**
      * @return MenuNode
      */
-    public function rootNode()
+    public function createRootNode()
     {
         $node = new MenuNode();
         $node->type = MenuNode::TYPE_ROOT;
 
+        $this->menu->root = $node;
         return $node;
     }
 
@@ -34,7 +56,7 @@ class MenuFactory extends BaseService
      *
      * @return MenuNode
      */
-    public function headerNode(array $options = array())
+    public function createHeaderNode(array $options = array())
     {
         $node = new MenuNode();
         $node->type = MenuNode::TYPE_HEADER;
@@ -55,7 +77,7 @@ class MenuFactory extends BaseService
      *
      * @return MenuNode
      */
-    public function pageNode(array $options = array())
+    public function createPageNode(array $options = array())
     {
         $node = new MenuNode();
         $node->type = MenuNode::TYPE_PAGE;
@@ -96,5 +118,13 @@ class MenuFactory extends BaseService
         }
 
         return $node;
+    }
+
+    /**
+     * @return Menu
+     */
+    public function getMenu()
+    {
+       return $this->menu;
     }
 }

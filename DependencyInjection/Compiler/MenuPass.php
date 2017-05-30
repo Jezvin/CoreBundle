@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 /**
  * Class MenuBuilderPass.
  */
-class MenuBuilderPass implements CompilerPassInterface
+class MenuPass implements CompilerPassInterface
 {
     const TAG = 'umbrella.menu';
 
@@ -21,7 +21,7 @@ class MenuBuilderPass implements CompilerPassInterface
             $builderDefinition = $container->getDefinition($id);
 
             if (!$builderDefinition->isPublic()) {
-                throw new \InvalidArgumentException(sprintf('Menu builder services must be public but "%s" is a private service.', $id));
+                throw new \InvalidArgumentException(sprintf('Menu services must be public but "%s" is a private service.', $id));
             }
 
             if ($builderDefinition->isAbstract()) {

@@ -10,7 +10,8 @@ namespace Umbrella\CoreBundle\Menu\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Umbrella\CoreBundle\Menu\MenuNode;
+use Umbrella\CoreBundle\Menu\Model\Menu;
+use Umbrella\CoreBundle\Menu\Model\MenuNode;
 use Umbrella\CoreBundle\Menu\Provider\MenuProvider;
 use Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider;
 
@@ -69,7 +70,7 @@ class MenuExtension extends \Twig_Extension
     /**
      * @param $name
      *
-     * @return MenuNode
+     * @return Menu
      */
     public function get($name)
     {

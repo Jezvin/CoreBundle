@@ -11,8 +11,8 @@ namespace Umbrella\CoreBundle\Menu\Provider;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Umbrella\CoreBundle\Core\BaseService;
-use Umbrella\CoreBundle\Menu\Factory\MenuFactory;
-use Umbrella\CoreBundle\Menu\MenuNode;
+use Umbrella\CoreBundle\Menu\Builder\MenuBuilder;
+use Umbrella\CoreBundle\Menu\Model\Menu;
 
 /**
  * Class MenuProvider.
@@ -22,45 +22,45 @@ class MenuProvider extends BaseService
     /**
      * @var array
      */
-    protected $builders = array();
+    protected $menus = array();
 
     /**
-     * @var MenuFactory
+     * @var MenuBuilder
      */
-    protected $factory;
+    protected $builder;
 
     /**
      * MenuProvider constructor.
      *
      * @param ContainerInterface $container
-     * @param MenuFactory        $factory
-     * @param array              $builders
+     * @param MenuBuilder        $builder
+     * @param array              $menus
      */
-    public function __construct(ContainerInterface $container, MenuFactory $factory, array $builders = array())
+    public function __construct(ContainerInterface $container, MenuBuilder $builder, array $menus = array())
     {
         parent::__construct($container);
-        $this->factory = $factory;
-        $this->builders = $builders;
+        $this->builder = $builder;
+        $this->menus = $menus;
     }
 
     /**
      * @param $name
      *
-     * @return MenuNode
+     * @return Menu
      */
     public function get($name)
     {
-        if (!isset($this->builders[$name])) {
+        if (!isset($this->menus[$name])) {
             throw new \InvalidArgumentException(sprintf('The menu "%s" is not defined.', $name));
         }
 
-        if (!is_array($this->builders[$name]) || 2 !== count($this->builders[$name])) {
-            throw new \InvalidArgumentException(sprintf('The menu builder definition for the menu "%s" is invalid. It should be an array (serviceId, method)', $name));
+        if (!is_array($this->menus[$name]) || 2 !== count($this->menus[$name])) {
+            throw new \InvalidArgumentException(sprintf('The service definition for menu "%s" is invalid. It should be an array (serviceId, method)', $name));
         }
 
-        list($id, $method) = $this->builders[$name];
+        list($id, $method) = $this->menus[$name];
 
-        return $this->container->get($id)->$method($this->factory);
+        return $this->container->get($id)->$method($this->builder);
     }
 
     /**
@@ -70,6 +70,6 @@ class MenuProvider extends BaseService
      */
     public function has($name)
     {
-        return isset($this->builders[$name]);
+        return isset($this->menus[$name]);
     }
 }

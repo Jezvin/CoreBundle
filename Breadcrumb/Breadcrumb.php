@@ -8,7 +8,8 @@
 
 namespace Umbrella\CoreBundle\Breadcrumb;
 
-use Umbrella\CoreBundle\Menu\MenuNode;
+use Umbrella\CoreBundle\Menu\Model\MenuNode;
+
 
 /**
  * Class Breadcrumb.

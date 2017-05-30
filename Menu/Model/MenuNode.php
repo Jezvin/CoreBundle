@@ -7,7 +7,7 @@
  * Time: 16:05.
  */
 
-namespace Umbrella\CoreBundle\Menu;
+namespace Umbrella\CoreBundle\Menu\Model;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * Class MenuNode.
  */
-class MenuNode
+class MenuNode implements \IteratorAggregate, \Countable
 {
     const TYPE_ROOT = 'ROOT';
     const TYPE_HEADER = 'HEADER';
@@ -64,6 +64,7 @@ class MenuNode
      * @var array
      */
     public $roles = array();
+
 
     /* Keep route and routeParams options for url matcher */
 
@@ -116,14 +117,6 @@ class MenuNode
     public function hasChildren()
     {
         return count($this->children) > 0;
-    }
-
-    /**
-     * @return int
-     */
-    public function count()
-    {
-        return count($this->children);
     }
 
     /* Helper : Is granted */
@@ -224,5 +217,21 @@ class MenuNode
         } else {
             return $this->isCurrent($request) ? $this : null;
         }
+    }
+
+    /**
+     * @return \ArrayIterator
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->children);
+    }
+
+    /**
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->children);
     }
 }
