@@ -19,7 +19,14 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('umbrella_core');
-        $rootNode->children();
+        $rootNode->children()
+            ->arrayNode('webpack')
+                ->children()
+                    ->booleanNode('dev_server_enable')->end()
+                    ->integerNode('dev_server_port')->end()
+                    ->scalarNode('assets_path')->end()
+                ->end()
+            ->end();
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

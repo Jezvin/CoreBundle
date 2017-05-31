@@ -24,5 +24,8 @@ class UmbrellaCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $def = $container->getDefinition('umbrella.webpack_twig');
+        $def->addMethodCall('loadConfig', [$config['webpack']]);
     }
 }

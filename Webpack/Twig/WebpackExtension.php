@@ -23,12 +23,36 @@ class WebpackExtension  extends \Twig_Extension
     protected $container;
 
     /**
+     * @var bool
+     */
+    protected $devServerEnabled;
+
+    /**
+     * @var int
+     */
+    protected $devServerPort;
+
+    /**
+     * @var string
+     */
+    protected $assetsPath;
+
+    /**
      * WebpackExtension ContainerInterface constructor.
      * @param $container
      */
     public function __construct($container)
     {
         $this->container = $container;
+    }
+
+    /* Call by Bundle configurator */
+
+    public function loadConfig(array $config)
+    {
+        $this->devServerEnabled = $config['dev_server_enable'];
+        $this->devServerPort = $config['dev_server_port'];
+        $this->assetsPath = rtrim($config['assets_path'], '/') . '/';
     }
 
     /**
@@ -47,6 +71,6 @@ class WebpackExtension  extends \Twig_Extension
      */
     public function assets($resources)
     {
-        return '/build/' . $resources;
+        return $this->assetsPath . $resources;
     }
 }
