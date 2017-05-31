@@ -1,16 +1,11 @@
-{% javascripts
-'bundles/umbrellacore/js/plugins/*'
+<script src="{{ webpack_assets('umbrella_core.js') }}" type="text/javascript"></script>
 
-'bundles/umbrellacore/js/components/Form.js'
-'bundles/umbrellacore/js/components/DataTable.js'
-
-'bundles/umbrellacore/js/Utils.js'
-'bundles/umbrellacore/js/MessageHandler.js'
-'bundles/umbrellacore/js/Api.js'
-'bundles/umbrellacore/js/App.js'
-%}
-<script src="{{ asset_url }}" type="text/javascript"></script>
-{% endjavascripts %}
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
 <script type="text/javascript">
     $(function() {

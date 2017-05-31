@@ -1,5 +1,1 @@
-{% stylesheets
-'@UmbrellaCoreBundle/Resources/scss/main.scss'
-filter='cssrewrite' %}
-<link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
-{% endstylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ webpack_assets('umbrella_core.css') }}"/>

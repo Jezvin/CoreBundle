@@ -60,9 +60,17 @@ services:
         class: Umbrella\CoreBundle\FileUpload\FileManager
         arguments: ["@service_container"]
 
+    # Webpack
+    umbrella.webpack_twig:
+        class: Umbrella\CoreBundle\Webpack\Twig\WebpackExtension
+        arguments: ["@service_container"]
+        tags:
+            - {name: twig.extension}
+
     # Subscriber
     umbrella.entity_subscriber:
         class: Umbrella\CoreBundle\Listener\EntitySubscriber
         arguments: ["@service_container"]
         tags:
             - { name: doctrine.event_subscriber }
+
