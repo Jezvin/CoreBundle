@@ -1,6 +1,5 @@
 imports:
     - { resource: widgets.yml }
-    - { resource: extension.yml }
 
 services:
 

@@ -2,6 +2,7 @@
 
 namespace Umbrella\CoreBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -19,22 +20,50 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('umbrella_core');
-        $rootNode->children()
-            ->arrayNode('webpack')
-                ->children()
-                    ->booleanNode('dev_server_enable')->end()
-                    ->scalarNode('dev_server_host')->end()
-                    ->integerNode('dev_server_port')->end()
-                    ->scalarNode('asset_path')->end()
-                    ->scalarNode('asset_pattern_dev')->end()
-                    ->scalarNode('asset_pattern_prod')->end()
-                ->end()
-            ->end();
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode->append($this->webpackNode());
+        $rootNode->append($this->formNode());
 
         return $treeBuilder;
+    }
+
+    private function webpackNode()
+    {
+        $treeBuilder = new TreeBuilder();
+
+        /** @var ArrayNodeDefinition $webpackNode */
+        $webpackNode = $treeBuilder->root('webpack')->addDefaultsIfNotSet();
+        $webpackNode->children()
+            ->booleanNode('dev_server_enable')
+                ->defaultFalse()
+                ->end()
+            ->scalarNode('dev_server_host')
+                ->defaultValue('127.0.0.1')
+                ->end()
+            ->integerNode('dev_server_port')
+                ->defaultValue(9000)
+                ->end()
+            ->scalarNode('asset_path')
+            ->defaultValue('/build/')
+                ->end()
+            ->scalarNode('asset_pattern_dev')
+                ->defaultValue('[name].dev')
+                ->end()
+            ->scalarNode('asset_pattern_prod')
+                ->defaultValue('[name]_[hash].prod"');
+
+        return $webpackNode;
+    }
+
+    private function formNode()
+    {
+        $treeBuilder = new TreeBuilder();
+
+        /** @var ArrayNodeDefinition $formNode */
+        $formNode = $treeBuilder->root('form')->addDefaultsIfNotSet();
+        $formNode->children()
+            ->booleanNode('enable_extension')
+            ->defaultTrue();
+
+        return $formNode;
     }
 }

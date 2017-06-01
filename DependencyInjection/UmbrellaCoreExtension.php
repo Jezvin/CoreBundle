@@ -26,6 +26,11 @@ class UmbrellaCoreExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        // load form extension only if enable
+        if ($config['form']['enable_extension'] === true) {
+            $loader->load('extension.yml');
+        }
+
         $def = $container->getDefinition('umbrella.webpack_twig');
         $def->addMethodCall('loadConfig', [$config['webpack']]);
     }

@@ -6,8 +6,10 @@ umbrella_core:
         asset_path: /build/
         asset_pattern_dev: "[name].dev"
         asset_pattern_prod: "[name]_[hash].prod"
+   form:
+       enable_extension: true
 
 twig:
     form_themes:
         - 'UmbrellaCoreBundle:Form:layout.html.twig'
-        - 'UmbrellaCoreBundle:Form:addontext.html.twig'
+        - 'UmbrellaCoreBundle:Form:widget.html.twig'
