@@ -23,8 +23,11 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('webpack')
                 ->children()
                     ->booleanNode('dev_server_enable')->end()
+                    ->scalarNode('dev_server_host')->end()
                     ->integerNode('dev_server_port')->end()
-                    ->scalarNode('assets_path')->end()
+                    ->scalarNode('asset_path')->end()
+                    ->scalarNode('asset_pattern_dev')->end()
+                    ->scalarNode('asset_pattern_prod')->end()
                 ->end()
             ->end();
 

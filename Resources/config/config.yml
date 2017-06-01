@@ -1,8 +1,11 @@
 umbrella_core:
     webpack:
         dev_server_enable: true
+        dev_server_host: http://127.0.0.1
         dev_server_port: 9000
-        assets_path: /build/
+        asset_path: /build/
+        asset_pattern_dev: "[name].dev"
+        asset_pattern_prod: "[name]_[hash].prod"
 
 twig:
     form_themes:
