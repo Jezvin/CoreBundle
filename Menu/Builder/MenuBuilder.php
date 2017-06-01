@@ -108,7 +108,7 @@ class MenuBuilder
 
                 if (isset($action['route'])) {
                     $node->route = $action['route'];
-                    $node->routeParams = isset($action['params']) and is_array($action['params']) ? $action['params'] : array();
+                    $node->routeParams = (isset($action['params']) && is_array($action['params'])) ? $action['params'] : array();
                     $node->url = $this->container->get('router')->generate($node->route, $node->routeParams);
                 }
             } else {

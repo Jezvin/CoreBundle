@@ -166,7 +166,7 @@ class WebpackExtension  extends \Twig_Extension
         foreach (scandir($absolutePath, SCANDIR_SORT_DESCENDING) as $filename) {
 
             // ignore directory
-            if (is_dir($filename)) {
+            if (is_dir($absolutePath . $filename)) {
                 continue;
             }
 

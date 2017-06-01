@@ -49,7 +49,7 @@ class Configuration implements ConfigurationInterface
                 ->defaultValue('[name].dev')
                 ->end()
             ->scalarNode('asset_pattern_prod')
-                ->defaultValue('[name]_[hash].prod"');
+                ->defaultValue('[name]_[hash].prod');
 
         return $webpackNode;
     }
