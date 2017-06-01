@@ -54,11 +54,6 @@ services:
         class: Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory
         arguments: ["@service_container"]
 
-    # File
-    umbrella.file_manager:
-        class: Umbrella\CoreBundle\FileUpload\FileManager
-        arguments: ["@service_container"]
-
     # Webpack
     umbrella.webpack_twig:
         class: Umbrella\CoreBundle\Webpack\Twig\WebpackExtension
@@ -66,10 +61,18 @@ services:
         tags:
             - {name: twig.extension}
 
-    # Subscriber
+    # Searchable
+    umbrella.searchable_annotation_reader:
+        class: Umbrella\CoreBundle\Annotation\SearchableAnnotationReader
+        arguments: ["@service_container"]
+
+    umbrella.search_handler:
+        class: Umbrella\CoreBundle\Handler\SearchHandler
+        arguments: ["@service_container"]
+
+    # Listener
     umbrella.entity_subscriber:
         class: Umbrella\CoreBundle\Listener\EntitySubscriber
         arguments: ["@service_container"]
         tags:
-            - { name: doctrine.event_subscriber }
-
+            - {name: doctrine.event_subscriber}

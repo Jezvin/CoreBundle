@@ -47,7 +47,7 @@ class SearchToolbar extends AbstractToolbar
     public function buildQuery(QueryBuilder $qb, array $data)
     {
         if ($data['search']) {
-            $qb->andWhere('lower(e.searchable) LIKE :search')->setParameter('search', '%'.strtolower($data['search']).'%');
+            $qb->andWhere('lower(e.search) LIKE :search')->setParameter('search', '%'.strtolower($data['search']).'%');
         }
     }
 }

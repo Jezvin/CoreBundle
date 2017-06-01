@@ -14,8 +14,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
-use Umbrella\CoreBundle\Extension\SearchableInterface;
+use Umbrella\CoreBundle\Handler\SearchHandler;
 
 /**
  * Class EntitySubscriber.
@@ -28,6 +27,11 @@ class EntitySubscriber implements EventSubscriber
     protected $logger;
 
     /**
+     * @var SearchHandler
+     */
+    protected $searchHandler;
+
+    /**
      * EntitySubscriber constructor.
      *
      * @param ContainerInterface $container
@@ -35,6 +39,7 @@ class EntitySubscriber implements EventSubscriber
     public function __construct(ContainerInterface $container)
     {
         $this->logger = $container->get('logger');
+        $this->searchHandler = $container->get('umbrella.search_handler');
     }
 
     /**
@@ -42,10 +47,7 @@ class EntitySubscriber implements EventSubscriber
      */
     public function prePersist(LifecycleEventArgs $args)
     {
-        $entity = $args->getObject();
-        if ($entity instanceof SearchableInterface) {
-            $this->indexEntity($entity);
-        }
+        $this->searchHandler->indexEntity($args->getObject());
     }
 
     /**
@@ -53,27 +55,7 @@ class EntitySubscriber implements EventSubscriber
      */
     public function preUpdate(LifecycleEventArgs $args)
     {
-        $entity = $args->getObject();
-        if ($entity instanceof SearchableInterface) {
-            $this->indexEntity($entity);
-        }
-    }
-
-    /**
-     * @param SearchableInterface $entity
-     */
-    protected function indexEntity(SearchableInterface $entity)
-    {
-        $propertyAccess = PropertyAccess::createPropertyAccessor();
-        $search = '';
-        foreach ($entity->getSearchableFields() as $propertyPath) {
-            try {
-                $search .= trim($propertyAccess->getValue($entity, $propertyPath)).' ';
-            } catch (\Exception $e) {
-                $this->logger->error("Enable to reach property path '$propertyPath' for search.");
-            }
-        }
-        $entity->setSearchable($search);
+        $this->searchHandler->indexEntity($args->getObject());
     }
 
     /**

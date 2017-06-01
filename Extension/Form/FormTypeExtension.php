@@ -6,7 +6,7 @@
  * Time: 19:49.
  */
 
-namespace Umbrella\CoreBundle\Extension;
+namespace Umbrella\CoreBundle\Extension\Form;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

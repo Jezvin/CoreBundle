@@ -6,7 +6,7 @@
  * Time: 21:52.
  */
 
-namespace Umbrella\CoreBundle\Extension;
+namespace Umbrella\CoreBundle\Extension\Form;
 
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
