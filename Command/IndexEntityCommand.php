@@ -12,6 +12,7 @@ namespace Umbrella\CoreBundle\Command;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Umbrella\CoreBundle\Core\BaseCommand;
 use Umbrella\CoreBundle\Handler\SearchHandler;
 use Umbrella\CoreBundle\Utils\SQLUtils;
@@ -29,9 +30,9 @@ class IndexEntityCommand extends BaseCommand
     protected $em;
 
     /**
-     * @var OutputInterface
+     * @var SymfonyStyle
      */
-    protected $output;
+    protected $io;
 
     /**
      * @var SearchHandler
@@ -51,7 +52,7 @@ class IndexEntityCommand extends BaseCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
+        $this->io = new SymfonyStyle($input, $output);
         $this->em = $this->em();
         $this->searchHandler = $this->getContainer()->get(SearchHandler::class);
         SQLUtils::disableSQLLog($this->em);
@@ -73,7 +74,7 @@ class IndexEntityCommand extends BaseCommand
         $query = $this->em->createQuery("SELECT e FROM $entityClass e");
         $iterable = $query->iterate();
 
-        $this->output->writeln("+ Indexing entity $entityClass");
+        $this->io->writeln("+ Indexing $entityClass");
 
         $count = 0;
         while (($entity = $iterable->next()) !== false) {
@@ -89,6 +90,6 @@ class IndexEntityCommand extends BaseCommand
         $this->em->flush();
         $this->em->clear();
 
-        $this->output->writeln("| $count entity indexed");
+        $this->io->writeln("| $count entity indexed");
     }
 }

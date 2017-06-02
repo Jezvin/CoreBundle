@@ -3,7 +3,7 @@ services:
         autowire: true
 
     _instanceof:
-        \Twig_Extension:
+        Twig_ExtensionInterface:
             public: false
             tags:
                 - {name: twig.extension}
