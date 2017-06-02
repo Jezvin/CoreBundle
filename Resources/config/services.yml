@@ -10,11 +10,9 @@ services:
 
     # Menu
     Umbrella\CoreBundle\Menu\Provider\MenuProvider:
-        autowire: false
         arguments: ["@service_container", '@Umbrella\CoreBundle\Menu\Builder\MenuBuilder', []]
 
     Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider:
-        autowire: false
         arguments: ["@service_container", []]
 
     Umbrella\CoreBundle\Menu\Builder\MenuBuilder:
