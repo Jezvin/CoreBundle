@@ -42,7 +42,7 @@ class SearchHandler
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->container = $container;
-        $this->reader = $container->get('umbrella.searchable_annotation_reader');
+        $this->reader = $container->get(SearchableAnnotationReader::class);
     }
 
     /**

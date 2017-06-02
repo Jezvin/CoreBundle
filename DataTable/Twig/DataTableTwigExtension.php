@@ -14,9 +14,9 @@ use Umbrella\CoreBundle\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
- * Class DataTableExtension.
+ * Class DataTableTwigExtension.
  */
-class DataTableExtension extends \Twig_Extension
+class DataTableTwigExtension extends \Twig_Extension
 {
     /**
      * @var ContainerInterface
@@ -29,7 +29,7 @@ class DataTableExtension extends \Twig_Extension
     protected $translator;
 
     /**
-     * DataTableExtension constructor.
+     * DataTableTwigExtension constructor.
      *
      * @param ContainerInterface $container
      */

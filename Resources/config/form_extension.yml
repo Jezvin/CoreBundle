@@ -1,10 +1,11 @@
 services:
-    umbrella.form_type_extension:
-        class: Umbrella\CoreBundle\Extension\Form\FormTypeExtension
+    _defaults:
+        public: false
+
+    Umbrella\CoreBundle\Extension\Form\FormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-    umbrella.choice_type_extension:
-        class: Umbrella\CoreBundle\Extension\Form\ChoiceTypeExtension
+    Umbrella\CoreBundle\Extension\Form\ChoiceTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }

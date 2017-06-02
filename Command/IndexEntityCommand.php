@@ -12,9 +12,7 @@ namespace Umbrella\CoreBundle\Command;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Core\BaseCommand;
-use Umbrella\CoreBundle\Extension\SearchableInterface;
 use Umbrella\CoreBundle\Handler\SearchHandler;
 use Umbrella\CoreBundle\Utils\SQLUtils;
 
@@ -55,7 +53,7 @@ class IndexEntityCommand extends BaseCommand
     {
         $this->output = $output;
         $this->em = $this->em();
-        $this->searchHandler = $this->getContainer()->get('umbrella.search_handler');
+        $this->searchHandler = $this->getContainer()->get(SearchHandler::class);
         SQLUtils::disableSQLLog($this->em);
 
         $entitiesClass = $this->em->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();

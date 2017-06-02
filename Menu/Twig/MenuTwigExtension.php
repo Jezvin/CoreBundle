@@ -16,9 +16,9 @@ use Umbrella\CoreBundle\Menu\Provider\MenuProvider;
 use Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider;
 
 /**
- * Class MenuExtension.
+ * Class MenuTwigExtension.
  */
-class MenuExtension extends \Twig_Extension
+class MenuTwigExtension extends \Twig_Extension
 {
     /**
      * @var ContainerInterface
@@ -41,16 +41,15 @@ class MenuExtension extends \Twig_Extension
     protected $menuRendererProvider;
 
     /**
-     * TwigMenuExtension constructor.
-     *
+     * MenuTwigExtension constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
         $this->requestStack = $container->get('request_stack');
-        $this->menuProvider = $container->get('umbrella.menu_provider');
-        $this->menuRendererProvider = $container->get('umbrella.menu_renderer_provider');
+        $this->menuProvider = $container->get(MenuProvider::class);
+        $this->menuRendererProvider = $container->get(MenuRendererProvider::class);
     }
 
     /**

@@ -11,11 +11,12 @@ namespace Umbrella\CoreBundle\Breadcrumb\Twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Umbrella\CoreBundle\Breadcrumb\Breadcrumb;
+use Umbrella\CoreBundle\Menu\Provider\MenuProvider;
 
 /**
- * Class BreadcrumbExtension.
+ * Class BreadcrumbTwigExtension.
  */
-class BreadcrumbExtension extends \Twig_Extension
+class BreadcrumbTwigExtension extends \Twig_Extension
 {
     /**
      * @var ContainerInterface
@@ -28,7 +29,7 @@ class BreadcrumbExtension extends \Twig_Extension
     protected $requestStack;
 
     /**
-     * BreadcrumbExtension constructor.
+     * BreadcrumbTwigExtension constructor.
      *
      * @param ContainerInterface $container
      */
@@ -55,7 +56,7 @@ class BreadcrumbExtension extends \Twig_Extension
      */
     public function get()
     {
-        return $this->container->get('umbrella.breadcrumb');
+        return $this->container->get(Breadcrumb::class);
     }
 
     /**
@@ -77,7 +78,7 @@ class BreadcrumbExtension extends \Twig_Extension
      */
     public function renderFromMenu($name)
     {
-        $menu = $this->container->get('umbrella.menu_provider')->get($name);
+        $menu = $this->container->get(MenuProvider::class)->get($name);
         $bc = Breadcrumb::constructFromMenu($menu, $this->requestStack->getMasterRequest());
 
         return $this->container->get('twig')->render('UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig', array(

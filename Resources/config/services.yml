@@ -1,78 +1,47 @@
-imports:
-    - { resource: widgets.yml }
-
 services:
+    _defaults:
+        autowire: true
+
+    _instanceof:
+        \Twig_Extension:
+            public: false
+            tags:
+                - {name: twig.extension}
 
     # Menu
-    umbrella.menu_provider:
-        class: Umbrella\CoreBundle\Menu\Provider\MenuProvider
-        arguments: ["@service_container", "@umbrella.menu_builder", []]
+    Umbrella\CoreBundle\Menu\Provider\MenuProvider:
+        autowire: false
+        arguments: ["@service_container", '@Umbrella\CoreBundle\Menu\Builder\MenuBuilder', []]
 
-    umbrella.menu_renderer_provider:
-        class: Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider
+    Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider:
+        autowire: false
         arguments: ["@service_container", []]
 
-    umbrella.menu_builder:
-        class: Umbrella\CoreBundle\Menu\Builder\MenuBuilder
-        arguments: ["@service_container"]
-
-    umbrella.menu_twig:
-        class: Umbrella\CoreBundle\Menu\Twig\MenuExtension
-        arguments: ["@service_container"]
-        tags:
-            - {name: twig.extension}
+    Umbrella\CoreBundle\Menu\Builder\MenuBuilder:
+    Umbrella\CoreBundle\Menu\Twig\MenuTwigExtension:
 
     # Breadcrumb
-    umbrella.breadcrumb:
-        class: Umbrella\CoreBundle\Breadcrumb\Breadcrumb
-        arguments: ["@service_container"]
-
-    umbrella.breadcrumb_twig:
-        class: Umbrella\CoreBundle\Breadcrumb\Twig\BreadcrumbExtension
-        arguments: ["@service_container"]
-        tags:
-            - {name: twig.extension}
+    Umbrella\CoreBundle\Breadcrumb\Breadcrumb:
+    Umbrella\CoreBundle\Breadcrumb\Twig\BreadcrumbTwigExtension:
 
     # App proxy
-    umbrella.app_proxy_service:
-        class: Umbrella\CoreBundle\AppProxy\AppProxyService
-        arguments: ["@service_container"]
+    Umbrella\CoreBundle\AppProxy\AppMessageBuilder:
 
     # DataTable
-    umbrella.datatable_factory:
-        class: Umbrella\CoreBundle\DataTable\Factory\DataTableFactory
-        arguments: ["@service_container"]
-
-    umbrella.datatable_twig:
-        class: Umbrella\CoreBundle\DataTable\Twig\DataTableExtension
-        arguments: ["@service_container"]
-        tags:
-            - {name: twig.extension}
+    Umbrella\CoreBundle\DataTable\Factory\DataTableFactory:
+    Umbrella\CoreBundle\DataTable\Twig\DataTableTwigExtension:
 
     # Toolbar
-    umbrella.toolbar_factory:
-        class: Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory
-        arguments: ["@service_container"]
+    Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory:
 
     # Webpack
-    umbrella.webpack_twig:
-        class: Umbrella\CoreBundle\Webpack\Twig\WebpackExtension
-        arguments: ["@service_container"]
-        tags:
-            - {name: twig.extension}
+    Umbrella\CoreBundle\Webpack\Twig\WebpackTwigExtension:
 
     # Searchable
-    umbrella.searchable_annotation_reader:
-        class: Umbrella\CoreBundle\Annotation\SearchableAnnotationReader
-        arguments: ["@service_container"]
-
-    umbrella.search_handler:
-        class: Umbrella\CoreBundle\Handler\SearchHandler
-        arguments: ["@service_container"]
+    Umbrella\CoreBundle\Annotation\SearchableAnnotationReader:
+    Umbrella\CoreBundle\Handler\SearchHandler:
 
     # Listener
-    umbrella.entity_subscriber:
-        class: Umbrella\CoreBundle\Listener\EntitySubscriber
-        arguments: ["@service_container"]
+    Umbrella\CoreBundle\Listener\EntitySubscriber:
         tags:
             - {name: doctrine.event_subscriber}

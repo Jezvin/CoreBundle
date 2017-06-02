@@ -39,7 +39,7 @@ class EntitySubscriber implements EventSubscriber
     public function __construct(ContainerInterface $container)
     {
         $this->logger = $container->get('logger');
-        $this->searchHandler = $container->get('umbrella.search_handler');
+        $this->searchHandler = $container->get(SearchHandler::class);
     }
 
     /**

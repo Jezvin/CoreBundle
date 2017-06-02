@@ -11,10 +11,9 @@ namespace Umbrella\CoreBundle\Webpack\Twig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Class WebpackExtension
- * @package Umbrella\CoreBundle\Webpacke\Twig
+ * Class WebpackTwigExtension
  */
-class WebpackExtension  extends \Twig_Extension
+class WebpackTwigExtension  extends \Twig_Extension
 {
 
     /**
@@ -53,10 +52,10 @@ class WebpackExtension  extends \Twig_Extension
     protected $assetPatternProd;
 
     /**
-     * WebpackExtension ContainerInterface constructor.
-     * @param $container
+     * WebpackTwigExtension constructor.
+     * @param ContainerInterface $container
      */
-    public function __construct($container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }

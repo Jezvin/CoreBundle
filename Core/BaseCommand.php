@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
  */
 class BaseCommand extends ContainerAwareCommand
 {
+
     /**
      * @param null $name
      *

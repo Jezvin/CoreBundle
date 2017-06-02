@@ -9,18 +9,22 @@
 namespace Umbrella\CoreBundle\Menu\Provider;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Core\BaseService;
 use Umbrella\CoreBundle\Menu\Renderer\MenuRendererInterface;
 
 /**
  * Class MenuRendererProvider.
  */
-class MenuRendererProvider extends BaseService
+class MenuRendererProvider
 {
     /**
      * @var array
      */
     protected $renderersId = array();
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
 
     /**
      * MenuRendererProvider constructor.
@@ -30,14 +34,13 @@ class MenuRendererProvider extends BaseService
      */
     public function __construct(ContainerInterface $container, array $renderersId = array())
     {
-        parent::__construct($container);
+        $this->container = $container;
         $this->renderersId = $renderersId;
     }
 
     /**
      * @param $name
-     *
-     * @return MenuRendererInterface
+     * @return object|MenuRendererInterface
      */
     public function get($name)
     {

@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory;
 use Umbrella\CoreBundle\Toolbar\Model\AbstractToolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
@@ -273,7 +274,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
 
         if (isset($options['toolbar'])) {
             $this->toolbar = is_string($options['toolbar'])
-                ? $this->container->get('umbrella.toolbar_factory')->create($options['toolbar'])
+                ? $this->container->get(ToolbarFactory::class)->create($options['toolbar'])
                 : $options['toolbar'];
         }
     }

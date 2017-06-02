@@ -9,10 +9,11 @@
 
 namespace Umbrella\CoreBundle\Core;
 
-use Monolog\Logger;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Umbrella\CoreBundle\AppProxy\AppProxyService;
+use Umbrella\CoreBundle\AppProxy\AppMessageBuilder;
 use Umbrella\CoreBundle\DataTable\Builder\DataTableBuilder;
+use Umbrella\CoreBundle\DataTable\DataTableType;
+use Umbrella\CoreBundle\DataTable\Factory\DataTableFactory;
 use Umbrella\CoreBundle\DataTable\Model\DataTable;
 
 /**
@@ -20,48 +21,14 @@ use Umbrella\CoreBundle\DataTable\Model\DataTable;
  */
 class BaseController extends Controller
 {
-    /* Helpers */
+    use ContainerHelperTrait;
 
     /**
-     * @param $id
-     * @param array $parameters
-     * @param null  $domain
-     * @param null  $locale
-     *
-     * @return string
+     * @return AppMessageBuilder
      */
-    protected function trans($id, array $parameters = array(), $domain = null, $locale = null)
+    protected function appMessageBuilder()
     {
-        return $this->get('translator')->trans($id, $parameters, $domain, $locale);
-    }
-
-    /**
-     * @param $persistentObjectName
-     * @param null $persistentManagerName
-     *
-     * @return \Doctrine\Common\Persistence\ObjectRepository
-     */
-    protected function getRepository($persistentObjectName, $persistentManagerName = null)
-    {
-        return $this->getDoctrine()->getRepository($persistentObjectName, $persistentManagerName);
-    }
-
-    /**
-     * @param null $name
-     *
-     * @return \Doctrine\Common\Persistence\ObjectManager|object
-     */
-    protected function em($name = null)
-    {
-        return $this->getDoctrine()->getManager($name);
-    }
-
-    /**
-     * @return AppProxyService
-     */
-    protected function appProxy()
-    {
-        return $this->get('umbrella.app_proxy_service');
+        return $this->get(AppMessageBuilder::class);
     }
 
     /**
@@ -72,7 +39,7 @@ class BaseController extends Controller
      */
     public function createTable($type, array $options = array())
     {
-        return $this->get('umbrella.datatable_factory')->create($type, $options);
+        return $this->get(DataTableFactory::class)->create($type, $options);
     }
 
     /**
@@ -81,16 +48,8 @@ class BaseController extends Controller
      *
      * @return DataTableBuilder
      */
-    public function createTableBuilder(array $options = array(), $type = 'Umbrella\CoreBundle\DataTable\DataTableType')
+    public function createTableBuilder(array $options = array(), $type = DataTableType::class)
     {
-        return $this->get('umbrella.datatable_factory')->createBuilder($type, $options);
-    }
-
-    /**
-     * @return Logger
-     */
-    public function logger()
-    {
-        return $this->get('logger');
+        return $this->get(DataTableFactory::class)->createBuilder($type, $options);
     }
 }

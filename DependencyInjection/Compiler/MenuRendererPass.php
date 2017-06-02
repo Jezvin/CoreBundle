@@ -4,6 +4,7 @@ namespace Umbrella\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider;
 
 /**
  * Class MenuRendererPass.
@@ -14,7 +15,7 @@ class MenuRendererPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $definition = $container->getDefinition('umbrella.menu_renderer_provider');
+        $definition = $container->getDefinition(MenuRendererProvider::class);
 
         $menuRenderers = array();
         foreach ($container->findTaggedServiceIds(self::TAG) as $id => $tags) {

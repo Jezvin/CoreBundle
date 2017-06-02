@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\Yaml\Yaml;
+use Umbrella\CoreBundle\Webpack\Twig\WebpackTwigExtension;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -28,10 +28,10 @@ class UmbrellaCoreExtension extends Extension
 
         // load form extension only if enable
         if ($config['form']['enable_extension'] === true) {
-            $loader->load('extension.yml');
+            $loader->load('form_extension.yml');
         }
 
-        $def = $container->getDefinition('umbrella.webpack_twig');
+        $def = $container->getDefinition(WebpackTwigExtension::class);
         $def->addMethodCall('loadConfig', [$config['webpack']]);
     }
 }

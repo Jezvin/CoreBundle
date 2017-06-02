@@ -10,14 +10,13 @@
 namespace Umbrella\CoreBundle\Menu\Provider;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Core\BaseService;
 use Umbrella\CoreBundle\Menu\Builder\MenuBuilder;
 use Umbrella\CoreBundle\Menu\Model\Menu;
 
 /**
  * Class MenuProvider.
  */
-class MenuProvider extends BaseService
+class MenuProvider
 {
     /**
      * @var array
@@ -30,6 +29,11 @@ class MenuProvider extends BaseService
     protected $builder;
 
     /**
+     * @var ContainerInterface
+     */
+    protected $container;
+
+    /**
      * MenuProvider constructor.
      *
      * @param ContainerInterface $container
@@ -38,7 +42,7 @@ class MenuProvider extends BaseService
      */
     public function __construct(ContainerInterface $container, MenuBuilder $builder, array $menus = array())
     {
-        parent::__construct($container);
+        $this->container = $container;
         $this->builder = $builder;
         $this->menus = $menus;
     }

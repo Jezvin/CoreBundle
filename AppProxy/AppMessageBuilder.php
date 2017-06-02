@@ -10,17 +10,21 @@ namespace Umbrella\CoreBundle\AppProxy;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Umbrella\CoreBundle\Core\BaseService;
 
 /**
- * Class AppProxyService.
+ * Class AppMessageBuilder.
  */
-class AppProxyService extends BaseService
+class AppMessageBuilder
 {
     /**
      * @var array
      */
     protected $messages = array();
+
+    /**
+     * @var ContainerInterface
+     */
+    protected $container;
 
     /**
      * AppProxy constructor.
@@ -29,7 +33,7 @@ class AppProxyService extends BaseService
      */
     public function __construct(ContainerInterface $container)
     {
-        parent::__construct($container);
+        $this->container = $container;
     }
 
     /**
@@ -45,14 +49,14 @@ class AppProxyService extends BaseService
     public function toast($id, array $parameters = array(), $level = 'success')
     {
         return $this->add(AppMessage::TOAST, array(
-            'value' => $this->trans($id, $parameters),
+            'value' => $this->container->get('translator')->trans($id, $parameters),
             'level' => $level,
         ));
     }
 
     public function redirectToRoute($route, array $params = array())
     {
-        return $this->redirect($this->get('router')->generate($route, $params));
+        return $this->redirect($this->container->get('router')->generate($route, $params));
     }
 
     public function redirect($url)
@@ -78,7 +82,7 @@ class AppProxyService extends BaseService
 
     public function replaceView($template, array $context = array(), $css_selector)
     {
-        return $this->replace($this->twig()->render($template, $context), $css_selector);
+        return $this->replace($this->container->get('twig')->render($template, $context), $css_selector);
     }
 
     public function update($html, $css_selector)
@@ -88,7 +92,7 @@ class AppProxyService extends BaseService
 
     public function updateView($template, array $context = array(), $css_selector)
     {
-        return $this->update($this->twig()->render($template, $context), $css_selector);
+        return $this->update($this->container->get('twig')->render($template, $context), $css_selector);
     }
 
     public function remove($css_selector)
@@ -115,7 +119,7 @@ class AppProxyService extends BaseService
 
     public function renderModal($template, array $context = array())
     {
-        return $this->openModal($this->twig()->render($template, $context));
+        return $this->openModal($this->container->get('twig')->render($template, $context));
     }
 
     public function closeModal()
@@ -138,7 +142,7 @@ class AppProxyService extends BaseService
      * @param $action
      * @param array $params
      *
-     * @return AppProxyService
+     * @return AppMessageBuilder
      */
     protected function add($action, $params = array())
     {
@@ -152,7 +156,7 @@ class AppProxyService extends BaseService
      * @param $html
      * @param $css_selector
      *
-     * @return AppProxyService
+     * @return AppMessageBuilder
      */
     protected function addHtmlMessage($type, $html = null, $css_selector = null)
     {
