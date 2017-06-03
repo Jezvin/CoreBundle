@@ -8,32 +8,40 @@ services:
             tags:
                 - {name: twig.extension}
 
+    # ---- Component ---- #
     # Menu
-    Umbrella\CoreBundle\Menu\Provider\MenuProvider:
-        arguments: ["@service_container", '@Umbrella\CoreBundle\Menu\Builder\MenuBuilder', []]
+    Umbrella\CoreBundle\Component\Menu\MenuProvider:
+        arguments: ["@service_container", '@Umbrella\CoreBundle\Component\Menu\MenuBuilder', []]
 
-    Umbrella\CoreBundle\Menu\Provider\MenuRendererProvider:
+    Umbrella\CoreBundle\Component\Menu\MenuRendererProvider:
         arguments: ["@service_container", []]
 
-    Umbrella\CoreBundle\Menu\Builder\MenuBuilder:
-    Umbrella\CoreBundle\Menu\Twig\MenuTwigExtension:
+    Umbrella\CoreBundle\Component\Menu\MenuBuilder:
+    Umbrella\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
 
     # Breadcrumb
-    Umbrella\CoreBundle\Breadcrumb\Breadcrumb:
-    Umbrella\CoreBundle\Breadcrumb\Twig\BreadcrumbTwigExtension:
+    Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb:
+    Umbrella\CoreBundle\Component\Breadcrumb\Twig\BreadcrumbTwigExtension:
 
     # App proxy
-    Umbrella\CoreBundle\AppProxy\AppMessageBuilder:
+    Umbrella\CoreBundle\Component\AppProxy\AppMessageBuilder:
 
     # DataTable
-    Umbrella\CoreBundle\DataTable\Factory\DataTableFactory:
-    Umbrella\CoreBundle\DataTable\Twig\DataTableTwigExtension:
+    Umbrella\CoreBundle\Component\DataTable\DataTableFactory:
+    Umbrella\CoreBundle\Component\DataTable\Twig\DataTableTwigExtension:
+
+    # Tree
+    Umbrella\CoreBundle\Component\Tree\TreeFactory:
+    Umbrella\CoreBundle\Component\Tree\Twig\TreeTwigExtension:
 
     # Toolbar
-    Umbrella\CoreBundle\Toolbar\Factory\ToolbarFactory:
+    Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory:
 
     # Webpack
-    Umbrella\CoreBundle\Webpack\Twig\WebpackTwigExtension:
+    Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
+
+
+    # ---- Umbrella ----#
 
     # Searchable
     Umbrella\CoreBundle\Annotation\SearchableAnnotationReader:

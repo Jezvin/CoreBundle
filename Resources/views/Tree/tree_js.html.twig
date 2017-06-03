@@ -1,0 +1,7 @@
+{% spaceless %}
+    <script type="text/javascript">
+        $(function() {
+            new Tree('{{ '#' ~ id }}', {{ js | json_encode() | raw }});
+        });
+    </script>
+{% endspaceless %}

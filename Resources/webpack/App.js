@@ -10,6 +10,8 @@ window.swal = require('sweetalert2');
 
 require('bootstrap-datepicker');
 require('jquery-minicolors');
+require('jquery-ui-sortable-npm');
+require('nestedSortable');
 
 require('datatables.net');
 require('datatables.net-bs');
@@ -22,11 +24,10 @@ require('./scss/app.scss');
 // plugins
 require('./plugins/serialze_object_jquery');
 
-// core
-window.Api = require('./appproxy/Api');
-
 // components
-window.DataTable = require('./components/DataTable');
+window.Api = require('./components/appproxy/Api');
+window.DataTable = require('./components/datatable/DataTable');
+window.Tree = require('./components/tree/Tree');
 window.Form = require('./components/Form');
 
 window.App = {

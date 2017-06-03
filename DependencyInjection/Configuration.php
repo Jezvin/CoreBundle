@@ -37,7 +37,7 @@ class Configuration implements ConfigurationInterface
                 ->defaultFalse()
                 ->end()
             ->scalarNode('dev_server_host')
-                ->defaultValue('127.0.0.1')
+                ->defaultValue('http://127.0.0.1')
                 ->end()
             ->integerNode('dev_server_port')
                 ->defaultValue(9000)

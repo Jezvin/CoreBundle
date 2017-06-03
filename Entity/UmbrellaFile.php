@@ -8,7 +8,7 @@
 
 namespace Umbrella\CoreBundle\Entity;
 
-use Umbrella\CoreBundle\Core\BaseEntity;
+use Umbrella\CoreBundle\Component\Core\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

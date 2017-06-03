@@ -1,0 +1,29 @@
+.umbrella-tree {
+
+  &, ol {
+    list-style: none;
+  }
+
+  .node-content {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin: 5px 0 5px 0;
+  }
+
+  .collapse-handle {
+    &.expanded i:before {
+      content: '\f067';
+    }
+
+    &.collapsed i:before {
+      content: '\f068';
+    }
+  }
+
+  .mjs-nestedSortable-collapsed li {
+    display: none;
+  }
+}
