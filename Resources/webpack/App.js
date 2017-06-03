@@ -1,5 +1,5 @@
 // Lib
-var $ = require("jquery");
+let $ = require("jquery");
 window.jQuery = $;
 window.$ = $;
 
@@ -30,23 +30,23 @@ window.DataTable = require('./components/datatable/DataTable');
 window.Tree = require('./components/tree/Tree');
 window.Form = require('./components/Form');
 
-window.App = {
+class App {
 
-    init: function () {
+    static init() {
         $.fn.dataTable.ext.errMode = 'throw';
         App.bind();
-    },
+    }
 
-    bind: function() {
-        var $body = $('body');
+    static bind() {
+        let $body = $('body');
 
         // bind xhr link
         $body.on('click', 'a[data-xhr-href]', function(e) {
             e.stopPropagation();
             e.preventDefault();
 
-            var url = $(this).data('xhr-href');
-            var confirm = $(this).data('confirm');
+            let url = $(this).data('xhr-href');
+            let confirm = $(this).data('confirm');
 
             if (confirm) {
                 swal({
@@ -73,7 +73,7 @@ window.App = {
         // bind xhr form
         $body.on('submit', 'form[data-xhr-action]', function (e) {
             e.preventDefault();
-            var $form = $(this);
+            let $form = $(this);
             Api.ajax($form.attr('method'), $form.data('xhr-action'), $form.serialize());
         });
 
@@ -81,4 +81,6 @@ window.App = {
             new Form($(this));
         });
     }
-};
+}
+
+window.App = App;

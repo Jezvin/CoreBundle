@@ -1,27 +1,27 @@
 require('./datatable.scss');
 
-function DataTable(view_selector, options) {
-    this.$view = $(view_selector);
-    this.$table = this.$view.find('.js-umbrella-datatable');
-    this.$toolbar = this.$view.find('.js-umbrella-toolbar');
+class DataTable {
 
-    this.table = null;
+    constructor(view_selector, options) {
+        this.$view = $(view_selector);
+        this.$table = this.$view.find('.js-umbrella-datatable');
+        this.$toolbar = this.$view.find('.js-umbrella-toolbar');
 
-    this.options = options;
+        this.table = null;
 
-    this.init();
-    this.bind();
-};
+        this.options = options;
 
-DataTable.prototype = {
+        this.init();
+        this.bind();
+    }
 
-    init: function () {
+    init() {
         this.configureOptions();
         this.table = this.$table.DataTable(this.options);
-    },
+    }
 
-    bind: function () {
-        var self = this;
+    bind() {
+        let self = this;
 
         if (this.$toolbar.length) {
             this.$toolbar.on('change', 'select, input[type=checkbox], input[type=radio]', function(e) {
@@ -35,9 +35,9 @@ DataTable.prototype = {
 
         if (this.options['rowReorder']) {
             this.table.on('row-reorder', function (e, diff, edit) {
-                var changeSet = [];
-                for (var i = 0, ien = diff.length; i < ien; i++) {
-                    var id = self.table.row(diff[i].node).id();
+                let changeSet = [];
+                for (let i = 0, ien = diff.length; i < ien; i++) {
+                    let id = self.table.row(diff[i].node).id();
                     changeSet.push({
                         'id' : id,
                         'old_sequence' : diff[i].oldData,
@@ -45,33 +45,33 @@ DataTable.prototype = {
                     });
                 }
 
-                var ajax_url = self.options['rowReorder']['url'];
-                var ajax_method = self.options['rowReorder']['type'];
+                let ajax_url = self.options['rowReorder']['url'];
+                let ajax_method = self.options['rowReorder']['type'];
 
                 if (ajax_url) {
                     Api.ajax(ajax_method, ajax_url, {'change_set' : changeSet});
                 }
             });
         }
-    },
+    }
 
-    configureOptions: function () {
-        var self = this;
+    configureOptions() {
+        let self = this;
 
         this.options['ajax']['data'] = function (d) {
-            return $.extend({}, d, self.toolbarData());
+            return {...d, ...self.toolbarData()};
         };
-    },
+    }
 
-    toolbarData: function () {
+    toolbarData() {
         return this.$toolbar.length
             ? this.$toolbar.find('form').serializeObject()
             : [];
-    },
+    }
 
-    reload: function() {
+    reload() {
         this.$table.DataTable().ajax.reload();
     }
-};
+}
 
 module.exports = DataTable;
