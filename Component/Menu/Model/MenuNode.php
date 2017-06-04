@@ -10,6 +10,8 @@
 namespace Umbrella\CoreBundle\Component\Menu\Model;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Matcher\UrlMatcher;
+use Symfony\Component\Routing\Route;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
@@ -78,18 +80,6 @@ class MenuNode implements \IteratorAggregate, \Countable
      */
     public $routeParams = array();
 
-    /* Cache */
-
-    /**
-     * @var null
-     */
-    private $isCurrent = null;
-
-    /**
-     * @var null
-     */
-    private $isGranted = null;
-
     /**
      * @return int|mixed
      */
@@ -117,106 +107,6 @@ class MenuNode implements \IteratorAggregate, \Countable
     public function hasChildren()
     {
         return count($this->children) > 0;
-    }
-
-    /* Helper : Is granted */
-
-    /**
-     * @param AuthorizationCheckerInterface $securityChecker
-     *
-     * @return bool
-     */
-    public function isGranted(AuthorizationCheckerInterface $securityChecker)
-    {
-        if ($this->isGranted == null) {
-            $this->isGranted = false;
-
-            if (!empty($this->roles)) { // roles assigned : display if granted
-                foreach ($this->roles as $role) {
-                    if ($securityChecker->isGranted($role)) {
-                        $this->isGranted = true;
-                        break;
-                    }
-                }
-            } elseif ($this->hasChildren()) { // no roles assigned and has children : granted if one children granted
-                foreach ($this->children as $child) {
-                    if ($child->isGranted($securityChecker)) {
-                        $this->isGranted = true;
-                        break;
-                    }
-                }
-            } else { // no roles assigned and no children : always granted
-                $this->isGranted = true;
-            }
-        }
-
-        return $this->isGranted;
-    }
-
-    /* Helper : Current node */
-
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    public function isCurrent(Request $request)
-    {
-        if ($this->isCurrent == null) {
-            $this->isCurrent = true;
-
-            $route = $request->get('_route');
-            if (empty($route) || $route !== $this->route) {
-                $this->isCurrent = false;
-            } else {
-                foreach ($this->routeParams as $key => $value) {
-                    if ($request->get($key) != $value) {
-                        $this->isCurrent = false;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return $this->isCurrent;
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    public function hasCurrentChild(Request $request)
-    {
-        if ($this->hasChildren()) {
-            foreach ($this->children as $child) {
-                $childActive = $child->hasCurrentChild($request);
-                if ($childActive) {
-                    return true;
-                }
-            }
-        } else {
-            return $this->isCurrent($request);
-        }
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return null|MenuNode
-     */
-    public function findCurrent(Request $request)
-    {
-        if ($this->hasChildren()) {
-            foreach ($this->children as $child) {
-                $current = $child->findCurrent($request);
-                if ($current !== null) {
-                    return $current;
-                }
-            }
-        } else {
-            return $this->isCurrent($request) ? $this : null;
-        }
     }
 
     /**

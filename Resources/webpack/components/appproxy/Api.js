@@ -8,19 +8,19 @@ class Api {
             url: url,
             method: method,
             data: params,
-            success: function (response) {
+            success: (response) => {
                 Api.handleResponse(response);
                 if (successCb) {
                     successCb(response);
                 }
             },
-            error: function (requestObject, error, errorThrown) {
+            error: (requestObject, error, errorThrown) => {
                 toastr.error('Internal server error');
                 if (errorCb) {
                     errorCb(requestObject, error, errorThrown);
                 }
             },
-            complete: function () {
+            complete: () => {
                 if (completeCb) {
                     completeCb();
                 }
@@ -32,11 +32,11 @@ class Api {
         Api.ajax('GET', url, params, successCb, errorCb, completeCb);
     }
 
-    static POST = function(url, params, successCb, errorCb, completeCb) {
+    static POST(url, params, successCb, errorCb, completeCb) {
         Api.ajax('POST', url, params, successCb, errorCb, completeCb);
     };
 
-    static handleResponse = function(response) {
+    static handleResponse(response) {
         for (const message of response) {
             MessageHandler.handle(message);
         }

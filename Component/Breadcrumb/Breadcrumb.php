@@ -28,23 +28,26 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     public $translationPrefix = 'breadcrumb.';
 
     /**
-     * @param Menu $menu
-     * @param Request $request
+     * @var string
+     */
+    public $template = 'UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig';
+
+    /**
+     * @param MenuNode $node
+     * @param $translationPrefix
      * @return Breadcrumb
      */
-    public static function constructFromMenu(Menu $menu, Request $request)
+    public static function constructFromMenuNode(MenuNode $node, $translationPrefix)
     {
         $bc = new self();
-        $bc->translationPrefix = $menu->translationPrefix;
+        $bc->translationPrefix = $translationPrefix;
 
-        $currentNode = $menu->findCurrent($request);
-        while ($currentNode !== null) {
-            if ($currentNode->type == MenuNode::TYPE_PAGE) {
-                $bc->prependItem($currentNode->label, $currentNode->url);
+        while ($node !== null) {
+            if ($node->type == MenuNode::TYPE_PAGE) {
+                $bc->prependItem($node->label, $node->url);
             }
-            $currentNode = $currentNode->parent;
+            $node = $node->parent;
         }
-
         return $bc;
     }
 

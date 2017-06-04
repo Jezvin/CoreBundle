@@ -41,12 +41,13 @@ class App {
         let $body = $('body');
 
         // bind xhr link
-        $body.on('click', 'a[data-xhr-href]', function(e) {
+        $body.on('click', 'a[data-xhr-href]', (e) => {
             e.stopPropagation();
             e.preventDefault();
 
-            let url = $(this).data('xhr-href');
-            let confirm = $(this).data('confirm');
+            let $target = $(e.currentTarget);
+            let url = $target.data('xhr-href');
+            let confirm = $target.data('confirm');
 
             if (confirm) {
                 swal({
@@ -59,7 +60,7 @@ class App {
                     showCancelButton: true,
                     cancelButtonText: "No",
                     cancelButtonClass: "btn btn-default btn-flat"
-                }).then(function () {
+                }).then(() => {
                     Api.GET(url);
                     swal.close();
                 }).catch(swal.noop);
@@ -71,14 +72,14 @@ class App {
         });
 
         // bind xhr form
-        $body.on('submit', 'form[data-xhr-action]', function (e) {
+        $body.on('submit', 'form[data-xhr-action]', (e) => {
             e.preventDefault();
-            let $form = $(this);
+            let $form = $(e.currentTarget);
             Api.ajax($form.attr('method'), $form.data('xhr-action'), $form.serialize());
         });
 
-        $body.find('.js-umbrella-form').each(function() {
-            new Form($(this));
+        $body.find('.js-umbrella-form').each((i, e) => {
+            new Form($(e));
         });
     }
 }

@@ -1,14 +1,16 @@
 <div class="node-content">
 
     {% block collapse %}
-        {% if node | length > 0 and tree.collapsable %}
-            <span class="js-collapse-handle collapse-handle {{ tree.startExpanded ? 'expanded' : 'collapsed' }}">
+        {% if tree.collapsable %}
+            <div class="js-collapse-handle collapse-handle">
                 <i class="fa"></i>
-            </span>
+            </div>
         {% endif %}
     {% endblock %}
 
     {% block content %}
-        {{ node }}
+        <div>
+            {{ node }}
+        </div>
     {% endblock %}
 </div>

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block node %}
-    <li>
+    <li data-id="{{ node.id }}">
         {% include(tree.templateRow) %}
 
         {% if node | length > 0 %}

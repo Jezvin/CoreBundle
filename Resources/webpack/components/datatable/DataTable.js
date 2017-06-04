@@ -21,23 +21,22 @@ class DataTable {
     }
 
     bind() {
-        let self = this;
 
         if (this.$toolbar.length) {
-            this.$toolbar.on('change', 'select, input[type=checkbox], input[type=radio]', function(e) {
-                self.reload();
+            this.$toolbar.on('change', 'select, input[type=checkbox], input[type=radio]', () => {
+                this.reload();
             });
 
-            this.$toolbar.on('keyup', 'input[type=text]', function(e) {
-                self.reload();
+            this.$toolbar.on('keyup', 'input[type=text]', () => {
+                this.reload();
             })
         }
 
         if (this.options['rowReorder']) {
-            this.table.on('row-reorder', function (e, diff, edit) {
+            this.table.on('row-reorder', (e, diff, edit) => {
                 let changeSet = [];
                 for (let i = 0, ien = diff.length; i < ien; i++) {
-                    let id = self.table.row(diff[i].node).id();
+                    let id = this.table.row(diff[i].node).id();
                     changeSet.push({
                         'id' : id,
                         'old_sequence' : diff[i].oldData,
@@ -45,8 +44,8 @@ class DataTable {
                     });
                 }
 
-                let ajax_url = self.options['rowReorder']['url'];
-                let ajax_method = self.options['rowReorder']['type'];
+                let ajax_url = this.options['rowReorder']['url'];
+                let ajax_method = this.options['rowReorder']['type'];
 
                 if (ajax_url) {
                     Api.ajax(ajax_method, ajax_url, {'change_set' : changeSet});
@@ -56,10 +55,8 @@ class DataTable {
     }
 
     configureOptions() {
-        let self = this;
-
-        this.options['ajax']['data'] = function (d) {
-            return {...d, ...self.toolbarData()};
+        this.options['ajax']['data'] = (d) => {
+            return {...d, ...this.toolbarData()};
         };
     }
 

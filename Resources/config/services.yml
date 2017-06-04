@@ -16,8 +16,13 @@ services:
     Umbrella\CoreBundle\Component\Menu\MenuRendererProvider:
         arguments: ["@service_container", []]
 
+    Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher:
+        public: false
+    Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker:
+        public: false
     Umbrella\CoreBundle\Component\Menu\MenuBuilder:
     Umbrella\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
+
 
     # Breadcrumb
     Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb:

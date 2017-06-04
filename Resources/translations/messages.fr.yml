@@ -7,6 +7,12 @@ common:
     save: Sauvegarder
     confirm_delete: Confirmer la suppression ?
 
+
+toastr:
+    entity_updated: L'élément à bien été mise à jour.
+    entity_added: L'élément à bien été crée.
+    entity_deleted: L'élément a été supprimée.
+
 form:
     label:
         search: Rechercher

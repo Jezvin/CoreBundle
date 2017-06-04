@@ -8,8 +8,9 @@
 
 namespace Umbrella\CoreBundle\Component\Menu\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker;
+use Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
 use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
 use Umbrella\CoreBundle\Component\Menu\MenuProvider;
@@ -21,35 +22,38 @@ use Umbrella\CoreBundle\Component\Menu\MenuRendererProvider;
 class MenuTwigExtension extends \Twig_Extension
 {
     /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    /**
-     * @var RequestStack
-     */
-    protected $requestStack;
-
-    /**
      * @var MenuProvider
      */
-    protected $menuProvider;
+    private $provider;
 
     /**
      * @var MenuRendererProvider
      */
-    protected $menuRendererProvider;
+    private $rendererProvider;
+
+    /**
+     * @var MenuRouteMatcher
+     */
+    private $matcher;
+
+    /**
+     * @var MenuAuthorizationChecker
+     */
+    private $checker;
 
     /**
      * MenuTwigExtension constructor.
-     * @param ContainerInterface $container
+     * @param MenuProvider $provider
+     * @param MenuRendererProvider $rendererProvider
+     * @param MenuRouteMatcher $matcher
+     * @param MenuAuthorizationChecker $checker
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(MenuProvider $provider, MenuRendererProvider $rendererProvider, MenuRouteMatcher $matcher, MenuAuthorizationChecker $checker)
     {
-        $this->container = $container;
-        $this->requestStack = $container->get('request_stack');
-        $this->menuProvider = $container->get(MenuProvider::class);
-        $this->menuRendererProvider = $container->get(MenuRendererProvider::class);
+        $this->provider = $provider;
+        $this->rendererProvider = $rendererProvider;
+        $this->matcher = $matcher;
+        $this->checker = $checker;
     }
 
     /**
@@ -58,11 +62,15 @@ class MenuTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('get_menu', array($this, 'get')),
-            new \Twig_SimpleFunction('is_granted_menu', array($this, 'isGranted')),
-            new \Twig_SimpleFunction('get_current_menu', array($this, 'getCurrentNode')),
-            new \Twig_SimpleFunction('get_current_menu_title', array($this, 'getCurrentNodeTitle')),
-            new \Twig_SimpleFunction('render_menu', array($this, 'render'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('menu_get', array($this, 'get')),
+            new \Twig_SimpleFunction('menu_render', array($this, 'render'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('menu_is_granted_node', array($this, 'isGranted')),
+            new \Twig_SimpleFunction('menu_is_current_node', array($this, 'isCurrent')),
+            new \Twig_SimpleFunction('menu_get_current_node', array($this, 'getCurrentNode')),
+            new \Twig_SimpleFunction('menu_get_current_node_title', array($this, 'getCurrentNodeTitle')),
+            new \Twig_SimpleFunction('menu_render_breadcrumb',
+                array($this, 'renderBreadcrumb'),
+                array('needs_environment' => true, 'is_safe' => array('html'))),
         );
     }
 
@@ -73,18 +81,48 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function get($name)
     {
-        return $this->menuProvider->get($name);
+        return $this->provider->get($name);
     }
 
     /**
      * @param $name
      *
+     * @return string
+     */
+    public function render($name)
+    {
+        return $this->rendererProvider->get($name)->render($this->get($name));
+    }
+
+    /**
+     * @param MenuNode $node
+     *
+     * @return bool
+     */
+    public function isGranted(MenuNode $node)
+    {
+        return $this->checker->isGranted($node);
+    }
+
+    /**
+     * @param MenuNode $node
+     * @return bool
+     */
+    public function isCurrent(MenuNode $node)
+    {
+        return $this->matcher->isCurrentOrHasChildCurrent($node);
+    }
+
+    /**
+     * @param $name
      * @return null|MenuNode
      */
     public function getCurrentNode($name)
     {
-        return $this->get($name)->findCurrent($this->requestStack->getMasterRequest());
+        $menu = $this->get($name);
+        return $this->retrieveCurrentNode($menu->root);
     }
+
 
     /**
      * @param $name
@@ -95,28 +133,43 @@ class MenuTwigExtension extends \Twig_Extension
     public function getCurrentNodeTitle($name, $default = '')
     {
         $menu = $this->get($name);
-        $current = $menu->findCurrent($this->requestStack->getMasterRequest());
-
-        return $current ? $menu->translationPrefix . $current->label : $default;
+        $currentNode = $this->retrieveCurrentNode($menu->root);
+        return $currentNode ? ($menu->translationPrefix . $currentNode->label) : $default;
     }
 
     /**
+     * @param \Twig_Environment $twig
      * @param $name
-     *
      * @return string
      */
-    public function render($name)
+    public function renderBreadcrumb(\Twig_Environment $twig, $name)
     {
-        return $this->menuRendererProvider->get($name)->render($this->get($name));
+        $menu = $this->get($name);
+        $currentNode = $this->retrieveCurrentNode($menu->root);
+
+        $bc = Breadcrumb::constructFromMenuNode($currentNode, $menu->translationPrefix);
+        return $twig->render($bc->template, [ 'breadcrumb' => $bc ]);
     }
+
 
     /**
      * @param MenuNode $node
-     *
-     * @return bool
+     * @return null|MenuNode
      */
-    public function isGranted(MenuNode $node)
+    private function retrieveCurrentNode(MenuNode $node)
     {
-        return $node->isGranted($this->container->get('security.authorization_checker'));
+        if ($this->matcher->isCurrent($node)) {
+            return $node;
+        }
+
+        /** @var MenuNode $child */
+        foreach ($node as $child) {
+            $currentNode = $this->retrieveCurrentNode($child);
+            if ($currentNode !== null) {
+                return $currentNode;
+            }
+        }
+
+        return null;
     }
 }

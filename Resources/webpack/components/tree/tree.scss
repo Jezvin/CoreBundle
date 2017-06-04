@@ -6,24 +6,43 @@
 
   .node-content {
     position: relative;
-    display: block;
-    padding: 10px 15px;
     background-color: #fff;
     border: 1px solid #ddd;
     margin: 5px 0 5px 0;
+    display: flex;
+
+    & > div {
+      &.collapse-handle {
+        cursor: pointer;
+        padding-right: 0;
+      }
+
+      margin: auto 0;
+      display: inline-block;
+      padding: 10px 15px;
+    }
   }
 
-  .collapse-handle {
-    &.expanded i:before {
-      content: '\f067';
-    }
-
-    &.collapsed i:before {
+  .mjs-nestedSortable-branch.mjs-nestedSortable-expanded {
+    .collapse-handle i:before {
       content: '\f068';
     }
   }
 
-  .mjs-nestedSortable-collapsed li {
-    display: none;
+  .mjs-nestedSortable-branch.mjs-nestedSortable-collapsed {
+    li {
+      display: none;
+    }
+
+    .collapse-handle i:before {
+      content: '\f067';
+    }
+  }
+
+  .mjs-nestedSortable-leaf {
+
+    .collapse-handle i:before {
+      content: initial !important;
+    }
   }
 }
