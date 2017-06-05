@@ -22,22 +22,31 @@ abstract class BaseTreeEntity extends BaseEntity implements \Countable, \Iterato
 {
 
     /**
+     * @var int
      * @Gedmo\TreeLeft
      * @ORM\Column(type="integer")
      */
     public $lft;
 
     /**
+     * @var int
      * @Gedmo\TreeRight
      * @ORM\Column(type="integer")
      */
     public $rgt;
 
     /**
+     * @var int
      * @Gedmo\TreeLevel
      * @ORM\Column(type="integer")
      */
     public $lvl;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     */
+    public $alias;
 
     /**
      * @var BaseTreeEntity

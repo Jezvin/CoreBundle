@@ -21,6 +21,7 @@ services:
     Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker:
         public: false
     Umbrella\CoreBundle\Component\Menu\MenuBuilder:
+    Umbrella\CoreBundle\Component\Menu\Helper\MenuHelper:
     Umbrella\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
 
 

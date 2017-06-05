@@ -1,8 +1,10 @@
 {% block tree %}
-    <ol class="js-umbrella-tree mjs-nestedSortable-branch {{ class }}">
-        {% for node in tree.results %}
-            {{ block('node') }}
-        {% endfor %}
+    <ol class="js-umbrella-tree mjs-nestedSortable-branch {{ class }}" data-root-id="{{ tree.result ? tree.result.id }}">
+        {% if tree.result %}
+            {% for node in tree.result %}
+                {{ block('node') }}
+            {% endfor %}
+        {% endif %}
     </ol>
 {% endblock %}
 

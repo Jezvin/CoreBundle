@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -56,12 +57,27 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var string
      */
+    public $entityRootAlias;
+
+    /**
+     * @var string
+     */
     public $template;
 
     /**
      * @var string
      */
     public $templateRow;
+
+    /**
+     * @var string
+     */
+    public $relocateUrl;
+
+    /**
+     * @var string
+     */
+    public $relocateType;
 
     use ContainerAwareTrait;
 
@@ -73,9 +89,9 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
     public $query;
 
     /**
-     * @var array
+     * @var BaseTreeEntity|null
      */
-    private $results = null;
+    private $result = null;
 
     /**
      * Tree constructor.
@@ -86,16 +102,16 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
     }
 
     /**
-     * @return array
+     * @return BaseTreeEntity|null
      */
-    public function getResults()
+    public function getResult()
     {
-        if ($this->results === null) {
+        if ($this->result === null) {
             $this->query->build($this);
-            $this->results = $this->query->getResults();
+            $this->result = $this->query->getResult();
         }
 
-        return $this->results;
+        return $this->result;
     }
 
     /**
@@ -103,6 +119,9 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
+        $this->relocateUrl = $this->container->get('router')->generate($options['ajax_relocate_route']);
+        $this->relocateType = ArrayUtils::get($options, 'ajax_relocate_type');
+
         $this->id = ArrayUtils::get($options, 'id');
         $this->class = ArrayUtils::get($options, 'class');
         $this->collapsable = ArrayUtils::get($options, 'collapsable');
@@ -110,6 +129,7 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
         $this->template = ArrayUtils::get($options, 'template');
         $this->templateRow = ArrayUtils::get($options, 'template_row');
         $this->entityName = ArrayUtils::get($options, 'entity');
+        $this->entityRootAlias = ArrayUtils::get($options, 'root_alias');
         $this->translationPrefix = ArrayUtils::get($options, 'translationPrefix');
     }
 
@@ -120,10 +140,15 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
     {
         $resolver->setRequired(array(
             'entity',
+            'ajax_relocate_route',
         ));
 
         $resolver->setDefined(array(
             'id',
+            'root_alias',
+
+            'ajax_relocate_route',
+            'ajax_relocate_type',
 
             'class',
             'collapsable',
@@ -134,10 +159,13 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
             'translation_prefix',
         ));
 
+
+
         $resolver->setAllowedTypes('collapsable', array('bool'));
         $resolver->setAllowedTypes('start_expanded', array('bool'));
 
         $resolver->setDefault('id', $this->id);
+        $resolver->setDefault('ajax_relocate_type', 'POST');
         $resolver->setDefault('class', 'umbrella-tree');
         $resolver->setDefault('collapsable', true);
         $resolver->setDefault('start_expanded', true);

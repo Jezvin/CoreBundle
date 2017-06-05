@@ -35,6 +35,7 @@ class Tree {
 
                 let $node = $(object.item[0]).closest('li');
 
+                let $root = $node.closest('ol');
                 let $parent = $node.parent().closest('li');
                 let $prev_node = $node.prev();
 
@@ -43,11 +44,15 @@ class Tree {
                     prev_node_id = $prev_node.data('id');
                 } else if($parent.length) {
                     parent_node_id = $parent.data('id');
+                } else if ($root.length) {
+                    parent_node_id = $root.data('root-id');
                 }
 
                 let params = { prev_node_id, parent_node_id, node_id};
-                console.log(params);
 
+                if (this.options['ajax_relocate_url']) {
+                    Api.ajax(this.options['ajax_relocate_type'], this.options['ajax_relocate_url'], params);
+                }
             }
         });
     }

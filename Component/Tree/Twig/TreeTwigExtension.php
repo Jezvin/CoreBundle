@@ -86,6 +86,8 @@ class TreeTwigExtension extends \Twig_Extension
         $options = array();
         $options['collapsable'] = $tree->collapsable;
         $options['start_expanded'] = $tree->startExpanded;
+        $options['ajax_relocate_url'] = $tree->relocateUrl;
+        $options['ajax_relocate_type'] = $tree->relocateType;
         return $options;
     }
 

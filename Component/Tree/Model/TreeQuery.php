@@ -61,15 +61,22 @@ class TreeQuery
         $this->qb->from($tree->entityName, $this->entityAlias);
         $this->qb->addSelect('children');
         $this->qb->leftJoin($this->entityAlias . '.children', 'children');
-        $this->qb->andWhere($this->entityAlias . '.parent IS NULL');
+
+        // get root node
+        if ($tree->entityRootAlias === null) {
+            $this->qb->andWhere($this->entityAlias . '.parent IS NULL');
+        } else {
+            $this->qb->andWhere($this->entityAlias . '.alias = :alias');
+            $this->qb->setParameter('alias', $tree->entityRootAlias);
+        }
     }
 
     /**
      * @return array
      */
-    public function getResults()
+    public function getResult()
     {
-        return $this->qb->getQuery()->getResult();
+        return $this->qb->getQuery()->getOneOrNullResult();
     }
 
 }

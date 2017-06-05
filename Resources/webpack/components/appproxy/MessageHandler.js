@@ -47,7 +47,7 @@ class MessageHandler {
     static handle(message) {
         let handler = MessageHandler.handlers[message.action];
         if (!handler) {
-            console.log('App message handler : no handler found for message ', message);
+            console.error('App message handler : no handler found for message ', message);
         } else {
             handler(message.params);
         }

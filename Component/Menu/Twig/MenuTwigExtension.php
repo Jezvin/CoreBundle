@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\Component\Menu\Twig;
 
 use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Umbrella\CoreBundle\Component\Menu\Helper\MenuHelper;
 use Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker;
 use Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
@@ -22,38 +23,17 @@ use Umbrella\CoreBundle\Component\Menu\MenuRendererProvider;
 class MenuTwigExtension extends \Twig_Extension
 {
     /**
-     * @var MenuProvider
+     * @var MenuHelper
      */
-    private $provider;
-
-    /**
-     * @var MenuRendererProvider
-     */
-    private $rendererProvider;
-
-    /**
-     * @var MenuRouteMatcher
-     */
-    private $matcher;
-
-    /**
-     * @var MenuAuthorizationChecker
-     */
-    private $checker;
+    private $helper;
 
     /**
      * MenuTwigExtension constructor.
-     * @param MenuProvider $provider
-     * @param MenuRendererProvider $rendererProvider
-     * @param MenuRouteMatcher $matcher
-     * @param MenuAuthorizationChecker $checker
+     * @param MenuHelper $helper
      */
-    public function __construct(MenuProvider $provider, MenuRendererProvider $rendererProvider, MenuRouteMatcher $matcher, MenuAuthorizationChecker $checker)
+    public function __construct(MenuHelper $helper)
     {
-        $this->provider = $provider;
-        $this->rendererProvider = $rendererProvider;
-        $this->matcher = $matcher;
-        $this->checker = $checker;
+        $this->helper = $helper;
     }
 
     /**
@@ -81,7 +61,7 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function get($name)
     {
-        return $this->provider->get($name);
+        return $this->helper->get($name);
     }
 
     /**
@@ -91,7 +71,7 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function render($name)
     {
-        return $this->rendererProvider->get($name)->render($this->get($name));
+        return $this->helper->getRenderer($name)->render($this->get($name));
     }
 
     /**
@@ -101,7 +81,7 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function isGranted(MenuNode $node)
     {
-        return $this->checker->isGranted($node);
+        return $this->helper->isGranted($node);
     }
 
     /**
@@ -110,7 +90,7 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function isCurrent(MenuNode $node)
     {
-        return $this->matcher->isCurrentOrHasChildCurrent($node);
+        return $this->helper->isCurrent($node);
     }
 
     /**
@@ -119,8 +99,8 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function getCurrentNode($name)
     {
-        $menu = $this->get($name);
-        return $this->retrieveCurrentNode($menu->root);
+        $menu = $this->helper->get($name);
+        return $this->helper->getCurrentNode($menu);
     }
 
 
@@ -132,8 +112,8 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function getCurrentNodeTitle($name, $default = '')
     {
-        $menu = $this->get($name);
-        $currentNode = $this->retrieveCurrentNode($menu->root);
+        $menu = $this->helper->get($name);
+        $currentNode = $this->helper->getCurrentNode($menu);
         return $currentNode ? ($menu->translationPrefix . $currentNode->label) : $default;
     }
 
@@ -144,32 +124,8 @@ class MenuTwigExtension extends \Twig_Extension
      */
     public function renderBreadcrumb(\Twig_Environment $twig, $name)
     {
-        $menu = $this->get($name);
-        $currentNode = $this->retrieveCurrentNode($menu->root);
-
-        $bc = Breadcrumb::constructFromMenuNode($currentNode, $menu->translationPrefix);
+        $menu = $this->helper->get($name);
+        $bc = $this->helper->buildBreadcrumb($menu);
         return $twig->render($bc->template, [ 'breadcrumb' => $bc ]);
-    }
-
-
-    /**
-     * @param MenuNode $node
-     * @return null|MenuNode
-     */
-    private function retrieveCurrentNode(MenuNode $node)
-    {
-        if ($this->matcher->isCurrent($node)) {
-            return $node;
-        }
-
-        /** @var MenuNode $child */
-        foreach ($node as $child) {
-            $currentNode = $this->retrieveCurrentNode($child);
-            if ($currentNode !== null) {
-                return $currentNode;
-            }
-        }
-
-        return null;
     }
 }

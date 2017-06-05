@@ -8,7 +8,6 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable\Twig;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
@@ -18,10 +17,6 @@ use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
  */
 class DataTableTwigExtension extends \Twig_Extension
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
 
     /**
      * @var TranslatorInterface
@@ -30,13 +25,11 @@ class DataTableTwigExtension extends \Twig_Extension
 
     /**
      * DataTableTwigExtension constructor.
-     *
-     * @param ContainerInterface $container
+     * @param TranslatorInterface $translator
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(TranslatorInterface $translator)
     {
-        $this->container = $container;
-        $this->translator = $container->get('translator');
+        $this->translator = $translator;
     }
 
     /**

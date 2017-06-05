@@ -37,8 +37,13 @@ class Api {
     };
 
     static handleResponse(response) {
-        for (const message of response) {
-            MessageHandler.handle(message);
+        if (Array.isArray(response)) {
+            for (const message of response) {
+                MessageHandler.handle(message);
+            }
+        } else {
+            console.error('Api : invalid response, response must be an array.');
+            console.error(response);
         }
     };
 }
