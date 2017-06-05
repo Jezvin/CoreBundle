@@ -9,11 +9,6 @@
 
 namespace Umbrella\CoreBundle\Component\Menu\Model;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Matcher\UrlMatcher;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-
 /**
  * Class MenuNode.
  */

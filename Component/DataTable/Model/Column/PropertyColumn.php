@@ -8,6 +8,7 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
@@ -28,13 +29,12 @@ class PropertyColumn extends Column
     protected $accessor;
 
     /**
-     * EntityColumn constructor.
-     *
-     * @param $id
+     * PropertyColumn constructor.
+     * @param ContainerInterface $container
      */
-    public function __construct($id)
+    public function __construct(ContainerInterface $container)
     {
-        parent::__construct($id);
+        parent::__construct($container);
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -64,7 +64,7 @@ class PropertyColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->propertyPath = ArrayUtils::get($options, 'property_path');
+        $this->propertyPath = ArrayUtils::get($options, 'property_path', $options['id']);
     }
 
     /**
@@ -77,7 +77,5 @@ class PropertyColumn extends Column
         $resolver->setDefined(array(
             'property_path',
         ));
-
-        $resolver->setDefault('property_path', $this->id);
     }
 }

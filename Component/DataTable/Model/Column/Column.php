@@ -8,8 +8,9 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
 use Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
@@ -18,7 +19,7 @@ use Umbrella\CoreBundle\Utils\ArrayUtils;
 /**
  * Class Column.
  */
-class Column implements OptionsAwareInterface, ContainerAwareInterface
+class Column implements OptionsAwareInterface
 {
     /**
      * @var string
@@ -46,6 +47,7 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
     public $class;
 
     /**
+        return $this->qb;
      * @var string
      */
     public $width;
@@ -55,16 +57,18 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      */
     public $renderer;
 
-    use ContainerAwareTrait;
+    /**
+     * @var Container
+     */
+    protected $container;
 
     /**
      * Column constructor.
-     *
-     * @param $id
+     * @param ContainerInterface $container
      */
-    public function __construct($id)
+    public function __construct(ContainerInterface $container)
     {
-        $this->id = $id;
+        $this->container = $container;
     }
 
     /**
@@ -79,6 +83,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
         }
 
         if ($this->renderer instanceof ColumnRendererInterface) {
+
+            // FIXME
             if ($this->renderer instanceof ContainerAwareInterface) {
                 $this->renderer->setContainer($this->container);
             }
@@ -104,7 +110,8 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
-        $this->label = ArrayUtils::get($options, 'label');
+        $this->id = $options['id'];
+        $this->label = ArrayUtils::get($options, 'label', $this->id);
         $this->orderable = ArrayUtils::get($options, 'orderable');
         $this->order = ArrayUtils::get($options, 'order');
         $this->class = ArrayUtils::get($options, 'class');
@@ -117,6 +124,10 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired(array(
+            'id'
+        ));
+
         $resolver->setDefined(array(
             'label',
             'orderable',
@@ -134,21 +145,6 @@ class Column implements OptionsAwareInterface, ContainerAwareInterface
         ));
 
         $resolver->setAllowedValues('order', ['ASC', 'DESC']);
-
-        $resolver->setDefault('label', $this->id);
         $resolver->setDefault('orderable', true);
-    }
-
-    /* Helpers */
-
-    /**
-     * @param $id
-     * @param array $parameters
-     * @param null  $domain
-     * @param null  $locale
-     */
-    public function trans($id, array $parameters = array(), $domain = null, $locale = null)
-    {
-        $this->container->get('translator')->trans($id, $parameters, $domain, $locale);
     }
 }

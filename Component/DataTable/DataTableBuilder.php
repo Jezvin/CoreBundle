@@ -118,9 +118,8 @@ class DataTableBuilder
     public function getTable()
     {
         if ($this->resolvedTable === null) {
-            $this->resolvedTable = new DataTable();
+            $this->resolvedTable = new DataTable($this->container);
             $this->resolvedTable->query = new DataTableQuery($this->qb);
-            $this->resolvedTable->setContainer($this->container);
             $this->resolvedTable->columns = $this->resolveColumns();
 
             $options = $this->dtResolver->resolve($this->options);
@@ -139,9 +138,11 @@ class DataTableBuilder
         $hasSequenceColumn = false;
 
         foreach ($this->columns as $id => $column) {
-            $resolvedColumn = $this->createColumn($id, $column['class']);
+            $resolvedColumn = $this->createColumn($column['class']);
             $resolver = new OptionsResolver();
             $resolvedColumn->configureOptions($resolver);
+
+            $column['options']['id'] = $id;
             $options = $resolver->resolve($column['options']);
             $resolvedColumn->setOptions($options);
 
@@ -149,8 +150,8 @@ class DataTableBuilder
             if (is_a($resolvedColumn, SequenceColumn::class)) {
                 if (!$hasSequenceColumn) {
                     array_unshift($resolvedColumns, $resolvedColumn);
+                    $hasSequenceColumn = true;
                 }
-                $hasSequenceColumn = true;
             } else {
                 $resolvedColumns[] = $resolvedColumn;
             }
@@ -160,19 +161,17 @@ class DataTableBuilder
     }
 
     /**
-     * @param $id
      * @param $class
      *
      * @return Column
      */
-    protected function createColumn($id, $class)
+    protected function createColumn($class)
     {
         if (!is_subclass_of($class, Column::class) and !$class == Column::class) {
             throw new \InvalidArgumentException("Class '$class' must extends Column class.");
         }
 
-        $column = new $class($id);
-        $column->setContainer($this->container);
+        $column = new $class($this->container);
 
         return $column;
     }

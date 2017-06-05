@@ -10,6 +10,7 @@ namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
@@ -40,13 +41,12 @@ class JoinColumn extends Column
     protected $accessor;
 
     /**
-     * ManyColumn constructor.
-     *
-     * @param $id
+     * JoinColumn constructor.
+     * @param Container $container
      */
-    public function __construct($id)
+    public function __construct(Container $container)
     {
-        parent::__construct($id);
+        parent::__construct($container);
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
@@ -103,9 +103,9 @@ class JoinColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->join = ArrayUtils::get($options, 'join');
-        $this->queryJoin = ArrayUtils::get($options, 'query_join');
-        $this->joinPropertyPath = ArrayUtils::get($options, 'property_path');
+        $this->join = ArrayUtils::get($options, 'join', $options['id']);
+        $this->queryJoin = $options['query_join'];
+        $this->joinPropertyPath = $options['property_path'];
     }
 
     /**
@@ -125,7 +125,6 @@ class JoinColumn extends Column
         ));
 
         $resolver->setDefault('orderable', false);
-        $resolver->setDefault('join', $this->id);
         $resolver->setDefault('query_join', Join::LEFT_JOIN);
     }
 }

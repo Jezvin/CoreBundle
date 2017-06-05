@@ -9,8 +9,7 @@
 namespace Umbrella\CoreBundle\Component\DataTable\Model;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -22,7 +21,7 @@ use Umbrella\CoreBundle\Utils\ArrayUtils;
 /**
  * Class DataTable.
  */
-class DataTable implements OptionsAwareInterface, ContainerAwareInterface
+class DataTable implements OptionsAwareInterface
 {
     /**
      * @var string
@@ -116,24 +115,30 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
     /**
      * @var Paginator
      */
-    protected $results = null;
+    private $results = null;
 
     /**
      * @var array
      */
-    protected $fetchedResults = null;
+    private $fetchedResults = null;
 
-    /* Handle request */
-    protected $draw;
+    /**
+     * @var int
+     */
+    private $draw;
 
-    use ContainerAwareTrait;
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     /**
      * DataTable constructor.
+     * @param ContainerInterface $container
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
-        $this->id = 'table_'.substr(md5(uniqid('', true)), 0, 12);
+       $this->container = $container;
     }
 
     /**
@@ -250,7 +255,7 @@ class DataTable implements OptionsAwareInterface, ContainerAwareInterface
      */
     public function setOptions(array $options = array())
     {
-        $this->id = ArrayUtils::get($options, 'id');
+        $this->id = ArrayUtils::get($options, 'id', 'table_'.substr(md5(uniqid('', true)), 0, 12));
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template');
 

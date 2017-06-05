@@ -22,7 +22,7 @@ class DataTableFactory
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * DataTableFactory constructor.
@@ -55,7 +55,7 @@ class DataTableFactory
     {
         $type = $this->createType($typeClass);
 
-        $dt = new DataTable();
+        $dt = new DataTable($this->container);
         $resolver = new OptionsResolver();
         $dt->configureOptions($resolver);
         $type->configureOptions($resolver);
@@ -78,11 +78,6 @@ class DataTableFactory
             throw new \InvalidArgumentException("Class '$typeClass' must extends DataTableType class.");
         }
 
-        $type = new $typeClass();
-        if (is_a($type, ContainerAwareInterface::class)) {
-            $type->setContainer($this->container);
-        }
-
-        return $type;
+        return new $typeClass();
     }
 }
