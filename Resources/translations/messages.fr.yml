@@ -6,7 +6,7 @@ common:
     cancel: Annuler
     save: Sauvegarder
     confirm_delete: Confirmer la suppression ?
-
+    browser: Browse
 
 toastr:
     entity_updated: L'élément à bien été mise à jour.
@@ -24,6 +24,7 @@ form:
         groups: Groupes
         title: Titre
         roles: Roles
+        avatar: Avatar
 
     placeholder:
         search: Rechercher ...

@@ -7,6 +7,10 @@ services:
             public: false
             tags:
                 - {name: twig.extension}
+        Symfony\Component\Form\FormTypeInterface:
+            public: false
+            tags:
+                - {name: form.type}
 
     # ---- Component ---- #
     # Menu
@@ -45,7 +49,6 @@ services:
 
     # Webpack
     Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
-
 
     # ---- Umbrella ----#
 

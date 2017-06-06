@@ -18,3 +18,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 a[data-xhr-href] {
   cursor: pointer;
 }
+
+.input-group-btn .btn {
+  height: 34px;
+}

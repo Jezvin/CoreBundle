@@ -1,0 +1,21 @@
+{% block fileupload_widget %}
+    {% spaceless %}
+        <div class="js-umbrella-fileupload umbrella-fileupload">
+            <div hidden="hidden">
+                <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+            </div>
+
+            <div class="input-group">
+                <input type="text" class="form-control" readonly="readonly">
+                <div class="input-group-btn">
+                    <button class="btn btn-default js-umbrella-remove umbrella-remove" type="button">
+                        <i class="fa fa-trash" aria-hidden="true"></i> {{ 'common.delete' | trans }}
+                    </button>
+                    <button class="btn btn-primary js-umbrella-browse umbrella-browse" type="button">
+                        <i class="fa fa-folder-open"></i> {{ 'common.browser' | trans }} ...
+                    </button>
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}

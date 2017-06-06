@@ -1,3 +1,5 @@
+let Fileupload = require('./FileUpload');
+
 class Form {
 
     constructor(view_selector) {
@@ -11,6 +13,8 @@ class Form {
         });
         this.$view.find('.js-datepicker').datepicker();
         this.$view.find('.js-select2').select2();
+
+        new Fileupload('.js-umbrella-fileupload');
     }
 }
 

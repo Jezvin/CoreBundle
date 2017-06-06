@@ -21,9 +21,12 @@ class MessageHandler {
 
             if ($opened_modal.length) {
                 $opened_modal.html($modal.find('.modal-dialog'));
-                new Form($opened_modal);
             } else {
                 $modal.modal('show');
+                $modal.on('hidden.bs.modal', (e) => {
+                    $(e.target).data('bs.modal', null);
+                    $(e.target).html('');
+                });
             }
         },
 

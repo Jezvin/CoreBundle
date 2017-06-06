@@ -24,11 +24,14 @@ require('./scss/app.scss');
 // plugins
 require('./plugins/serialze_object_jquery');
 
+// utils
+window.Utils = require('./utils/Utils');
+
 // components
 window.Api = require('./components/appproxy/Api');
 window.DataTable = require('./components/datatable/DataTable');
 window.Tree = require('./components/tree/Tree');
-window.Form = require('./components/Form');
+window.Form = require('./components/form/Form');
 
 class App {
 
