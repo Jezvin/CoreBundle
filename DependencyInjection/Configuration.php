@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('umbrella_core');
         $rootNode->append($this->webpackNode());
         $rootNode->append($this->formNode());
-
+        $rootNode->append($this->fileNode());
         return $treeBuilder;
     }
 
@@ -63,6 +63,19 @@ class Configuration implements ConfigurationInterface
         $formNode->children()
             ->booleanNode('enable_extension')
             ->defaultTrue();
+
+        return $formNode;
+    }
+
+    private function fileNode()
+    {
+        $treeBuilder = new TreeBuilder();
+
+        /** @var ArrayNodeDefinition $formNode */
+        $formNode = $treeBuilder->root('file')->addDefaultsIfNotSet();
+        $formNode->children()
+            ->booleanNode('asset_path')
+            ->defaultValue('/uploads');
 
         return $formNode;
     }

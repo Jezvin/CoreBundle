@@ -50,13 +50,27 @@ services:
     # Webpack
     Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
 
+
+
     # ---- Umbrella ----#
 
-    # Searchable
+    #Form
+    Umbrella\CoreBundle\Form\FileUploadType:
+
+    # Services
+    Umbrella\CoreBundle\Services\UmbrellaFileUploader:
+    Umbrella\CoreBundle\Services\SearchHandler:
+
+    # Annotation
     Umbrella\CoreBundle\Annotation\SearchableAnnotationReader:
-    Umbrella\CoreBundle\Handler\SearchHandler:
+        public: false
 
     # Listener
     Umbrella\CoreBundle\Listener\EntitySubscriber:
+        public: false
         tags:
             - {name: doctrine.event_subscriber}
+    Umbrella\CoreBundle\Listener\UmbrellaFileListener:
+        public: false
+        tags:
+            - { name: doctrine.orm.entity_listener }

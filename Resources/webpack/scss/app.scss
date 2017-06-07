@@ -22,3 +22,7 @@ a[data-xhr-href] {
 .input-group-btn .btn {
   height: 34px;
 }
+
+input.form-control.readonly {
+  pointer-events: none;
+}

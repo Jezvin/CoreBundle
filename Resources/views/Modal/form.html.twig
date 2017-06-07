@@ -8,6 +8,7 @@
 
         <div class="modal-body">
             {% block modal_content %}
+                {{ form_errors(form) }}
                 {{ form_rest(form) }}
             {% endblock %}
         </div>

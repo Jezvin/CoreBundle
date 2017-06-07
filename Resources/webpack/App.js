@@ -22,7 +22,8 @@ require('datatables.net-fixedheader');
 require('./scss/app.scss');
 
 // plugins
-require('./plugins/serialze_object_jquery');
+require('./plugins/serialize_object_jquery');
+require('./plugins/serialize_file_jquery');
 
 // utils
 window.Utils = require('./utils/Utils');
@@ -78,7 +79,7 @@ class App {
         $body.on('submit', 'form[data-xhr-action]', (e) => {
             e.preventDefault();
             let $form = $(e.currentTarget);
-            Api.ajax($form.attr('method'), $form.data('xhr-action'), $form.serialize());
+            Api.ajax($form.attr('method'), $form.data('xhr-action'), $form.serializeFiles());
         });
 
         $body.find('.js-umbrella-form').each((i, e) => {

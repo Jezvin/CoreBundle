@@ -7,6 +7,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension;
+use Umbrella\CoreBundle\Services\UmbrellaFileUploader;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -33,5 +34,8 @@ class UmbrellaCoreExtension extends Extension
 
         $def = $container->getDefinition(WebpackTwigExtension::class);
         $def->addMethodCall('loadConfig', [$config['webpack']]);
+
+        $def = $container->getDefinition(UmbrellaFileUploader::class);
+        $def->addMethodCall('loadConfig', [$config['file']]);
     }
 }

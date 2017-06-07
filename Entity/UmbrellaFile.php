@@ -8,14 +8,18 @@
 
 namespace Umbrella\CoreBundle\Entity;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Umbrella\CoreBundle\Component\Core\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Umbrella\CoreBundle\Utils\MathUtils;
 
 /**
  * Class UmbrellaFile.
  *
  * @ORM\Entity
  * @ORM\Table(name="umbrella_file")
+ * @ORM\HasLifecycleCallbacks
+ * @ORM\EntityListeners({ "Umbrella\CoreBundle\Listener\UmbrellaFileListener" })
  */
 class UmbrellaFile extends BaseEntity
 {
@@ -27,7 +31,7 @@ class UmbrellaFile extends BaseEntity
 
     /**
      * @var int
-     * @ORM\Column(type="smallint", nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     public $size;
 
@@ -47,5 +51,34 @@ class UmbrellaFile extends BaseEntity
      * @var string
      * @ORM\Column(type="string", nullable=false)
      */
-    public $fileName;
+    public $path;
+
+    /**
+     * @var UploadedFile
+     */
+    public $file;
+
+    /**
+     * @return string
+     */
+    public function getWebPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbsolutePath()
+    {
+        return __DIR__ . '/../../../../web' . $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHumanSize()
+    {
+        return MathUtils::bytes_to_size($this->size);
+    }
 }

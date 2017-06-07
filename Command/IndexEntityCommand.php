@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Umbrella\CoreBundle\Component\Core\BaseCommand;
-use Umbrella\CoreBundle\Handler\SearchHandler;
+use Umbrella\CoreBundle\Services\SearchHandler;
 use Umbrella\CoreBundle\Utils\SQLUtils;
 
 /**

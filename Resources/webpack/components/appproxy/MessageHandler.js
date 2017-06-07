@@ -25,7 +25,7 @@ class MessageHandler {
                 $modal.modal('show');
                 $modal.on('hidden.bs.modal', (e) => {
                     $(e.target).data('bs.modal', null);
-                    $(e.target).html('');
+                    $(e.target).remove();
                 });
             }
         },

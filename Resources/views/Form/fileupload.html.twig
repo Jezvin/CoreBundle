@@ -2,15 +2,25 @@
     {% spaceless %}
         <div class="js-umbrella-fileupload umbrella-fileupload">
             <div hidden="hidden">
-                <input type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+                {{ form_widget(form.file, { 'attr' : { 'class' : 'js-umbrella-file' }}) }}
+                {{ form_widget(form.id, { 'attr' : { 'class' : 'js-umbrella-entity' }}) }}
+                {{ form_widget(form.delete, { 'attr' : { 'class' : 'js-umbrella-delete' }}) }}
             </div>
 
             <div class="input-group">
-                <input type="text" class="form-control" readonly="readonly">
+
+                {# Use readonly class to allow required attribute #}
+                {{ form_widget(form.text, { 'attr' : { 'class' : 'js-umbrella-text readonly' }}) }}
+
                 <div class="input-group-btn">
                     <button class="btn btn-default js-umbrella-remove umbrella-remove" type="button">
                         <i class="fa fa-trash" aria-hidden="true"></i> {{ 'common.delete' | trans }}
                     </button>
+                    {% if form.vars.entity  %}
+                        <a href="{{ asset(form.vars.entity.webPath) }}" class="btn btn-default js-umbrella-download umbrella-download" target="_blank">
+                            <i class="fa fa-download"></i>
+                        </a>
+                    {% endif %}
                     <button class="btn btn-primary js-umbrella-browse umbrella-browse" type="button">
                         <i class="fa fa-folder-open"></i> {{ 'common.browser' | trans }} ...
                     </button>

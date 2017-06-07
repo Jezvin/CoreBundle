@@ -6,9 +6,8 @@
  * Date: 01/06/17
  * Time: 23:52
  */
-namespace Umbrella\CoreBundle\Handler;
+namespace Umbrella\CoreBundle\Services;
 
-use Psr\Container\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Umbrella\CoreBundle\Annotation\SearchableAnnotationReader;
@@ -25,24 +24,18 @@ class SearchHandler
     private $accessor;
 
     /**
-     * @var ContainerInterface
-     */
-    private $container;
-
-    /**
      * @var SearchableAnnotationReader
      */
     private $reader;
 
     /**
      * SearchHandler constructor.
-     * @param ContainerInterface $container
+     * @param SearchableAnnotationReader $reader
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(SearchableAnnotationReader $reader)
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->container = $container;
-        $this->reader = $container->get(SearchableAnnotationReader::class);
+        $this->reader = $reader;
     }
 
     /**
@@ -63,7 +56,6 @@ class SearchHandler
         $entityClass = get_class($entity);
 
         $searchable = $this->reader->getSearchable($entityClass);
-        $this->container->get('logger')->info('Searchable ? ' . ($searchable ? 'TRUE' : 'FALSE'));
 
         // Entity doesn't have annotation Searchable
         if ($searchable === null) {

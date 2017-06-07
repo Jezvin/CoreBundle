@@ -14,7 +14,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Handler\SearchHandler;
+use Umbrella\CoreBundle\Services\SearchHandler;
 
 /**
  * Class EntitySubscriber.

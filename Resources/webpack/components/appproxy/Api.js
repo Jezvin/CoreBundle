@@ -2,12 +2,11 @@ let MessageHandler = require('./MessageHandler');
 
 class Api {
 
-    static ajax(method, url, params, successCb, errorCb, completeCb) {
-        console.log('method = ', method, ', url = ', url, ', params = ', params);
-        $.ajax({
+    static ajax(method, url, data, successCb, errorCb, completeCb) {
+        let options = {
             url: url,
             method: method,
-            data: params,
+            data: data,
             success: (response) => {
                 Api.handleResponse(response);
                 if (successCb) {
@@ -25,15 +24,22 @@ class Api {
                     completeCb();
                 }
             }
-        });
+        };
+
+        if (data instanceof FormData) {
+            options['contentType'] = false;
+            options['processData'] = false;
+        }
+
+        $.ajax(options);
     }
 
-    static GET(url, params, successCb, errorCb, completeCb) {
-        Api.ajax('GET', url, params, successCb, errorCb, completeCb);
+    static GET(url, data, successCb, errorCb, completeCb) {
+        Api.ajax('GET', url, data, successCb, errorCb, completeCb);
     }
 
-    static POST(url, params, successCb, errorCb, completeCb) {
-        Api.ajax('POST', url, params, successCb, errorCb, completeCb);
+    static POST(url, data, successCb, errorCb, completeCb) {
+        Api.ajax('POST', url, data, successCb, errorCb, completeCb);
     };
 
     static handleResponse(response) {
@@ -43,7 +49,7 @@ class Api {
             }
         } else {
             console.error('Api : invalid response, response must be an array.');
-            console.error(response);
+            // console.error(response);
         }
     };
 }
