@@ -15,7 +15,8 @@
         "psr-4": {"Umbrella\\CoreBundle\\": ""}
     },
     "require": {
-        "symfony/symfony": "~3.3"
+        "symfony/symfony": "~3.3",
+        "liip/imagine-bundle": "^1.8"
     },
     "scripts": {
         "post-install-cmd": [],

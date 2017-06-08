@@ -109,10 +109,10 @@ class DataTableTwigExtension extends \Twig_Extension
             );
         }
 
-        $columnDefs = array();
-
         $order = array();
-        $noSort = array();
+
+        // columns options
+        $columnsOptions = array();
 
         /** @var Column $column */
         foreach ($dataTable->columns as $idx => $column) {
@@ -120,19 +120,17 @@ class DataTableTwigExtension extends \Twig_Extension
                 $order[] = array($idx, strtolower($column->order));
             }
 
-            if (!$column->orderable) {
-                $noSort[] = $idx;
-            }
+            $columnsOption = array(
+                'orderable' => $column->orderable,
+                'className' => $column->class
+            );
+            $columnsOptions[] = $columnsOption;
         }
 
-        // default order column option
+        $options['columns'] = $columnsOptions;
+
+        // default column order
         $options['order'] = $order;
-
-        // not sortable column option
-        if (!empty($noSort)) {
-            $columnDefs[] = array('targets' => $noSort, 'orderable' => false);
-        }
-        $options['columnDefs'] = $columnDefs;
 
         // translations
         $options['language'] = $this->buildTranslationOptions();

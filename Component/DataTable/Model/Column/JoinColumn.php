@@ -57,12 +57,21 @@ class JoinColumn extends Column
      */
     public function defaultRender($entity)
     {
-        $html = '';
-        foreach ($this->getJoinEntitiesValues($entity) as $value) {
-            $html .= '<span class="label label-primary">'.$value.'</span>&nbsp;';
+        $joinEntity = $this->getJoinEntity($entity);
+
+        if ($joinEntity === null) {
+            return null;
         }
 
-        return $html;
+        if ($joinEntity instanceof \Traversable) {
+            $html = '';
+            foreach ($joinEntity as $e) {
+                $html .= '<span class="label label-primary">' . $this->getJoinEntityValue($e) . '</span>&nbsp;';
+            }
+            return $html;
+        }
+
+        return $this->getJoinEntityValue($joinEntity);
     }
 
     /**
@@ -70,7 +79,7 @@ class JoinColumn extends Column
      *
      * @return Collection
      */
-    public function getJoinEntities($entity)
+    public function getJoinEntity($entity)
     {
         return $this->accessor->getValue($entity, $this->join);
     }
@@ -78,23 +87,13 @@ class JoinColumn extends Column
     /**
      * @param $joinEntity
      *
-     * @return mixed
+     * @return string
      */
     public function getJoinEntityValue($joinEntity)
     {
-        return $this->accessor->getValue($joinEntity, $this->joinPropertyPath);
-    }
-
-    /**
-     * @param $entity
-     *
-     * @return array
-     */
-    public function getJoinEntitiesValues($entity)
-    {
-        $entities = $this->getJoinEntities($entity);
-
-        return array_map(array($this, 'getJoinEntityValue'), $entities->toArray());
+        return empty($this->joinPropertyPath)
+            ? (string) $joinEntity
+            : $this->accessor->getValue($joinEntity, $this->joinPropertyPath);
     }
 
     /**
@@ -105,7 +104,7 @@ class JoinColumn extends Column
         parent::setOptions($options);
         $this->join = ArrayUtils::get($options, 'join', $options['id']);
         $this->queryJoin = $options['query_join'];
-        $this->joinPropertyPath = $options['property_path'];
+        $this->joinPropertyPath = ArrayUtils::get($options, 'property_path');
     }
 
     /**
@@ -115,13 +114,10 @@ class JoinColumn extends Column
     {
         parent::configureOptions($resolver);
 
-        $resolver->setRequired(array(
-            'property_path',
-        ));
-
         $resolver->setDefined(array(
             'join',
             'query_join',
+            'property_path'
         ));
 
         $resolver->setDefault('orderable', false);
