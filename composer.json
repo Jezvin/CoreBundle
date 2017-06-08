@@ -1,20 +1,21 @@
 {
     "name": "umbrella/corebundle",
     "type": "symfony-bundle",
-    "description": "Umbrella CoreBundle",
+    "description": "Umbrella framework",
     "keywords": [],
     "version": "1.0.0",
     "license": "GPL-3.0+",
     "authors": [
         {
-            "name": "Adrien Cantepie"
+            "name": "Adrien Cantepie",
+            "email": "adrien.cantepie@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {"Umbrella\\CoreBundle\\": ""}
     },
     "require": {
-        "symfony/symfony": ">=2.8"
+        "symfony/symfony": "~3.3"
     },
     "scripts": {
         "post-install-cmd": [],
