@@ -3,22 +3,22 @@
 {% use "UmbrellaCoreBundle:Form:addontext.html.twig" %}
 {% use "UmbrellaCoreBundle:Form:fileupload.html.twig" %}
 
-{% block form_label_class -%}
+{%- block form_label_class -%}
     {{ form.vars.label_class }}
-{%- endblock form_label_class %}
+{%- endblock form_label_class -%}
 
-{% block form_group_class -%}
+{%- block form_group_class -%}
     {{ form.vars.group_class }}
-{%- endblock form_group_class %}
+{%- endblock form_group_class -%}
 
 
-{% block form_help -%}
+{%- block form_help -%}
     {% if help is defined and help is not none %}
         <span class="help-block">{{ help | trans }}</span>
     {% endif %}
-{%- endblock form_help %}
+{%- endblock form_help -%}
 
-{% block form_row -%}
+{%- block form_row -%}
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
         {{- form_label(form) -}}
         <div class="{{ block('form_group_class') }}">
@@ -26,5 +26,18 @@
             {{ block('form_help') }}
             {{- form_errors(form) -}}
         </div>
-        {##}</div>
-{%- endblock form_row %}
+    </div>
+{%- endblock form_row -%}
+
+{%- block choice_widget_options -%}
+    {% for group_label, choice in options %}
+        {%- if choice is iterable -%}
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : (choice_prefix ~ group_label)|trans({}, choice_translation_domain) }}">
+                {% set options = choice %}
+                {{- block('choice_widget_options') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice.attr %}{% with { attr: choice.attr } %}{{ block('attributes') }}{% endwith %}{% endif %}{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice_translation_domain is same as(false) ? choice.label : (choice_prefix ~ choice.label)|trans({}, choice_translation_domain) }}</option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock choice_widget_options -%}

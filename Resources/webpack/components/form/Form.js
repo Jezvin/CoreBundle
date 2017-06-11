@@ -4,10 +4,10 @@ class Form {
 
     constructor(view_selector) {
         this.$view = $(view_selector);
-        this.bind();
+        this.init();
     }
 
-    bind() {
+    init() {
         this.$view.find('.js-colorpicker').minicolors({
             theme: 'bootstrap'
         });
@@ -15,25 +15,26 @@ class Form {
 
 
         this.$view.find('.js-select2').each((i, e) => {
-            let $select = $(e);
-            let data_options = $select.data('select2-options');
-            let options = [];
-
-            if (data_options) {
-                options = JSON.parse(Utils.decode_html(data_options));
-            }
-
-            // options['templateResult'] = function formatState (state) {
-            //     if (!state.id) { return state.text; }
-            //     let $state = $(
-            //         '<span><img src="vendor/images/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-            //     );
-            //     return $state;
-            // };
-
-            $select.select2(options);
+            this.initSelect2($(e));
         });
         new Fileupload('.js-umbrella-fileupload');
+    }
+
+    initSelect2($select) {
+        let data_options = $select.data('options');
+        let options = data_options ? JSON.parse(Utils.decode_html(data_options)) : [];
+
+        if (options['template']) {
+            options['templateResult'] = (state) => {
+                if (!state.id) {
+                    return state.text;
+                } else {
+                    return $('<span>' + Utils.decode_html($(state.element).data('template')) + '</span>');
+                }
+            };
+        }
+
+        $select.select2(options);
     }
 }
 

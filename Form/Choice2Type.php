@@ -9,6 +9,7 @@
 namespace Umbrella\CoreBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -26,6 +27,11 @@ class Choice2Type extends AbstractType
     private $translator;
 
     /**
+     * @var bool
+     */
+    private $templated = false;
+
+    /**
      * Choice2Type constructor.
      * @param TranslatorInterface $translator
      */
@@ -41,15 +47,28 @@ class Choice2Type extends AbstractType
     {
         $placeholder = $view->vars['placeholder'];
 
-        // select 2 attributes
-        $select2Attributes = array();
-        $select2Attributes['placeholder'] = empty($placeholder) ? $placeholder : $this->translator->trans($placeholder);
+        $jsonOptions = array();
 
+        // select2 placeholder
+        $jsonOptions['placeholder'] = empty($placeholder) ? $placeholder : $this->translator->trans($placeholder);
+
+        // select 2 allowClear
         if ($view->vars['required'] !== true) {
-            $select2Attributes['allowClear'] = true;
+            $jsonOptions['allowClear'] = true;
         }
 
-        $view->vars['attr']['data-select2-options'] = htmlspecialchars(json_encode($select2Attributes));
+        // select 2 template
+        if (!$this->templated && $options['template'] !== null) {
+            /** @var ChoiceView $choice */
+            foreach ($view->vars['choices'] as $idx => $choice) {
+                $template = (string)call_user_func($options['template'], $choice->value, $choice->label, $idx);
+                $choice->attr['data-template'] = htmlspecialchars($template);
+            }
+            $this->templated = true;
+            $jsonOptions['template'] = true;
+        }
+
+        $view->vars['attr']['data-options'] = htmlspecialchars(json_encode($jsonOptions));
 
         // avoid use some values
         $view->vars['placeholder'] = $placeholder === null ? null : '';
@@ -67,6 +86,9 @@ class Choice2Type extends AbstractType
                 'style' => 'width: 100%',
             ),
         ));
+
+        $resolver->setDefault('template', null);
+        $resolver->setAllowedTypes('template', array('callable', 'null'));
     }
 
     /**
