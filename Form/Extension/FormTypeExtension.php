@@ -32,6 +32,10 @@ class FormTypeExtension extends AbstractTypeExtension
 
         $label = empty($view->vars['label']) ? $view->vars['name'] : $view->vars['label'];
         $view->vars['label'] = $options['label_prefix'].$label;
+
+        if (isset($options['help'])) {
+            $view->vars['help'] = $options['help'];
+        }
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -48,6 +52,7 @@ class FormTypeExtension extends AbstractTypeExtension
         $resolver->setDefined(array(
             'label_class',
             'group_class',
+            'help'
         ));
 
         $resolver->setDefault('label_prefix', 'form.label.');

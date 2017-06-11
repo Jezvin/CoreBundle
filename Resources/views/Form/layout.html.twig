@@ -1,5 +1,8 @@
 {% extends "bootstrap_3_horizontal_layout.html.twig" %}
 
+{% use "UmbrellaCoreBundle:Form:addontext.html.twig" %}
+{% use "UmbrellaCoreBundle:Form:fileupload.html.twig" %}
+
 {% block form_label_class -%}
     {{ form.vars.label_class }}
 {%- endblock form_label_class %}
@@ -7,3 +10,21 @@
 {% block form_group_class -%}
     {{ form.vars.group_class }}
 {%- endblock form_group_class %}
+
+
+{% block form_help -%}
+    {% if help is defined and help is not none %}
+        <span class="help-block">{{ help | trans }}</span>
+    {% endif %}
+{%- endblock form_help %}
+
+{% block form_row -%}
+    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- form_label(form) -}}
+        <div class="{{ block('form_group_class') }}">
+            {{- form_widget(form) -}}
+            {{ block('form_help') }}
+            {{- form_errors(form) -}}
+        </div>
+        {##}</div>
+{%- endblock form_row %}

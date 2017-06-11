@@ -50,12 +50,11 @@ services:
     # Webpack
     Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
 
-
-
     # ---- Umbrella ----#
 
     #Form
     Umbrella\CoreBundle\Form\FileUploadType:
+    Umbrella\CoreBundle\Form\Choice2Type:
 
     # Services
     Umbrella\CoreBundle\Services\UmbrellaFileUploader:
