@@ -2,8 +2,8 @@ require('./tree.scss');
 
 class Tree {
 
-    constructor(view_selector, options) {
-        this.$view = $(view_selector);
+    constructor($elt, options) {
+        this.$view = $elt;
         this.$tree = this.$view.find('.js-umbrella-tree');
 
         this.options = options;

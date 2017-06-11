@@ -2,8 +2,8 @@ require('./datatable.scss');
 
 class DataTable {
 
-    constructor(view_selector, options) {
-        this.$view = $(view_selector);
+    constructor($elt, options) {
+        this.$view = $elt;
         this.$table = this.$view.find('.js-umbrella-datatable');
         this.$toolbar = this.$view.find('.js-umbrella-toolbar');
 

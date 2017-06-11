@@ -2,8 +2,8 @@ let Fileupload = require('./FileUpload');
 
 class Form {
 
-    constructor(view_selector) {
-        this.$view = $(view_selector);
+    constructor($elt) {
+        this.$view = $elt;
         this.init();
     }
 
@@ -17,7 +17,10 @@ class Form {
         this.$view.find('.js-select2').each((i, e) => {
             this.initSelect2($(e));
         });
-        new Fileupload('.js-umbrella-fileupload');
+
+        this.$view.find('.js-umbrella-fileupload').each((i, e) => {
+            new Fileupload($(e));
+        });
     }
 
     initSelect2($select) {

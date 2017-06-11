@@ -2,8 +2,8 @@ require('./FileUpload.scss');
 
 class FileUpload {
 
-    constructor(view_selector) {
-        this.$view = $(view_selector);
+    constructor($elt) {
+        this.$view = $elt;
 
         this.$inputFile = this.$view.find('input.js-umbrella-file');
         this.$inputEntity = this.$view.find('input.js-umbrella-entity');
@@ -42,7 +42,6 @@ class FileUpload {
     }
 
     clear() {
-        console.log('clear');
         this.$inputFile.replaceWith(this.$inputFile.val('').clone(true));
         this.$inputFile = this.$view.find('input[type="file"]');
         this.$inputDelete.prop('checked', true);
