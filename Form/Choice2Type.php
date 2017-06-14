@@ -29,7 +29,7 @@ class Choice2Type extends AbstractType
     /**
      * @var bool
      */
-    private $templated = false;
+    protected $templated = false;
 
     /**
      * Choice2Type constructor.
@@ -58,13 +58,8 @@ class Choice2Type extends AbstractType
         }
 
         // select 2 template
-        if (!$this->templated && $options['template'] !== null) {
-            /** @var ChoiceView $choice */
-            foreach ($view->vars['choices'] as $idx => $choice) {
-                $template = (string)call_user_func($options['template'], $choice->value, $choice->label, $idx);
-                $choice->attr['data-template'] = htmlspecialchars($template);
-            }
-            $this->templated = true;
+        if ($options['template'] !== null) {
+            $this->buildTemplate($options['template'], $view->vars['choices']);
             $jsonOptions['template'] = true;
         }
 
@@ -73,6 +68,20 @@ class Choice2Type extends AbstractType
         // avoid use some values
         $view->vars['placeholder'] = $placeholder === null ? null : '';
         $view->vars['expanded'] = false;
+    }
+
+    protected function buildTemplate($templateOption, array &$choices)
+    {
+        if ($this->templated) {
+            return;
+        }
+
+        /** @var ChoiceView $choice */
+        foreach ($choices as $idx => &$choice) {
+            $template = (string)call_user_func($templateOption, $choice->value, $choice->label, $idx);
+            $choice->attr['data-template'] = htmlspecialchars($template);
+        }
+        $this->templated = true;
     }
 
     /**
