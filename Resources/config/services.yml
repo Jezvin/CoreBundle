@@ -55,6 +55,7 @@ services:
     #Form
     Umbrella\CoreBundle\Form\FileUploadType:
     Umbrella\CoreBundle\Form\Choice2Type:
+    Umbrella\CoreBundle\Form\Entity2Type:
 
     # Services
     Umbrella\CoreBundle\Services\UmbrellaFileUploader:
