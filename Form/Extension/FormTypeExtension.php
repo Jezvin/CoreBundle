@@ -28,13 +28,18 @@ class FormTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $this->setView($view, $form, 'label_class', 'col-sm-2');
-        $this->setView($view, $form, 'group_class', 'col-sm-10');
+        $this->setView($view, $form, 'group_class', 'col-sm-9');
+        $this->setView($view, $form, 'help_class', 'col-sm-1');
 
         $label = empty($view->vars['label']) ? $view->vars['name'] : $view->vars['label'];
         $view->vars['label'] = $options['label_prefix'].$label;
 
         if (isset($options['help'])) {
             $view->vars['help'] = $options['help'];
+        }
+
+        if (isset($options['help_popover'])) {
+            $view->vars['help_popover'] = $options['help_popover'];
         }
     }
 
@@ -52,7 +57,9 @@ class FormTypeExtension extends AbstractTypeExtension
         $resolver->setDefined(array(
             'label_class',
             'group_class',
-            'help'
+            'help_class',
+            'help',
+            'help_popover'
         ));
 
         $resolver->setDefault('label_prefix', 'form.label.');

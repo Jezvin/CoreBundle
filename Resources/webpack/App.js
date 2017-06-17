@@ -2,6 +2,7 @@
 let $ = require("jquery");
 window.jQuery = $;
 window.$ = $;
+window._ = require("lodash");
 
 require('bootstrap');
 require('select2');
@@ -43,6 +44,11 @@ class App {
 
     static bind() {
         let $body = $('body');
+
+        // bind popover
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
 
         // bind xhr link
         $body.on('click', 'a[data-xhr-href]', (e) => {

@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -32,12 +33,19 @@ class Choice2Type extends AbstractType
     protected $templated = false;
 
     /**
+     * @var RouterInterface
+     */
+    protected $router;
+
+    /**
      * Choice2Type constructor.
      * @param TranslatorInterface $translator
+     * @param RouterInterface $router
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, RouterInterface $router)
     {
         $this->translator = $translator;
+        $this->router = $router;
     }
 
     /**
@@ -45,43 +53,33 @@ class Choice2Type extends AbstractType
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        $placeholder = $view->vars['placeholder'];
-
-        $jsonOptions = array();
-
-        // select2 placeholder
-        $jsonOptions['placeholder'] = empty($placeholder) ? $placeholder : $this->translator->trans($placeholder);
-
-        // select 2 allowClear
-        if ($view->vars['required'] !== true) {
-            $jsonOptions['allowClear'] = true;
-        }
-
-        // select 2 template
-        if ($options['template'] !== null) {
-            $this->buildTemplate($options['template'], $view->vars['choices']);
-            $jsonOptions['template'] = true;
-        }
-
-        $view->vars['attr']['data-options'] = htmlspecialchars(json_encode($jsonOptions));
+        $view->vars['attr']['data-options'] = htmlspecialchars(json_encode($this->buildJsOptions($view, $form, $options)));
 
         // avoid use some values
-        $view->vars['placeholder'] = $placeholder === null ? null : '';
+        $view->vars['placeholder'] = $view->vars['placeholder'] === null ? null : '';
         $view->vars['expanded'] = false;
     }
 
-    protected function buildTemplate($templateOption, array &$choices)
+    protected function buildJsOptions(FormView $view, FormInterface $form, array $options)
     {
-        if ($this->templated) {
-            return;
+        $jsOptions = array();
+        $jsSelect2Options = array();
+
+        $jsSelect2Options['placeholder'] = empty($options['placeholder']) ? $options['placeholder'] : $this->translator->trans($options['placeholder']);
+        $jsSelect2Options['allowClear'] = $view->vars['required'] !== true; // allow clear if not required
+        $jsSelect2Options['minimumInputLength'] = $options['min_search_length'];
+
+        if (isset($options['template']) && !empty($options['template'])) {
+            $jsOptions['template'] = $options['template'];
         }
 
-        /** @var ChoiceView $choice */
-        foreach ($choices as $idx => &$choice) {
-            $template = (string)call_user_func($templateOption, $choice->value, $choice->label, $idx);
-            $choice->attr['data-template'] = htmlspecialchars($template);
+        if (isset($options['ajax_load_route']) && !empty($options['ajax_load_route'])) {
+            $jsOptions['ajax_url'] = $this->router->generate($options['ajax_load_route']);
         }
-        $this->templated = true;
+
+        $jsOptions['select2'] = $jsSelect2Options;
+
+        return $jsOptions;
     }
 
     /**
@@ -89,15 +87,21 @@ class Choice2Type extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setDefined(array(
+            'ajax_load_route',
+            'min_search_length',
+            'template'
+        ));
+
         $resolver->setDefaults(array(
+            'min_search_length' => 0,
             'attr' => array(
                 'class' => 'js-select2',
                 'style' => 'width: 100%',
-            ),
+            )
         ));
 
-        $resolver->setDefault('template', null);
-        $resolver->setAllowedTypes('template', array('callable', 'null'));
+        $resolver->setAllowedTypes('min_search_length', 'int');
     }
 
     /**

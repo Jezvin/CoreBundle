@@ -26,3 +26,12 @@ a[data-xhr-href] {
 input.form-control.readonly {
   pointer-events: none;
 }
+
+.help-btn {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.popover {
+  max-width: 350px;
+}

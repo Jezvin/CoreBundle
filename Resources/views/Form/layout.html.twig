@@ -18,6 +18,19 @@
     {% endif %}
 {%- endblock form_help -%}
 
+{% block form_help_popover -%}
+    {% if help_popover is defined and help_popover is not none %}
+        <div class="{{ help_class }} help-btn">
+            <a data-toggle="popover"
+               data-trigger="focus"
+               data-html="true"
+               tabindex="0"
+               data-content="{{ help_popover }}"> <i class="fa fa-question-circle"></i>
+            </a>
+        </div>
+    {% endif %}
+{%- endblock form_help_popover -%}
+
 {%- block form_row -%}
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
         {{- form_label(form) -}}
@@ -26,6 +39,7 @@
             {{ block('form_help') }}
             {{- form_errors(form) -}}
         </div>
+        {{ block('form_help_popover') }}
     </div>
 {%- endblock form_row -%}
 
