@@ -8,6 +8,9 @@ common:
     confirm_delete: Confirmer la suppression ?
     browser: Browse
 
+action:
+    signout: Se déconnecter
+
 toastr:
     entity_updated: L'élément à bien été mise à jour.
     entity_added: L'élément à bien été crée.
