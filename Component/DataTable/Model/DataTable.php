@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
 use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory;
-use Umbrella\CoreBundle\Component\Toolbar\Model\AbstractToolbar;
+use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -102,6 +102,11 @@ class DataTable implements OptionsAwareInterface
      */
     public $entityName;
 
+    /**
+     * @var \Closure|null
+     */
+    public $queryClosure;
+
     // Model
 
     /**
@@ -112,12 +117,12 @@ class DataTable implements OptionsAwareInterface
     /**
      * @var DataTableQuery
      */
-    public $query;
+    private $query;
 
     /**
-     * @var AbstractToolbar
+     * @var Toolbar
      */
-    public $toolbar;
+    private $toolbar;
 
     /**
      * @var Paginator
@@ -152,6 +157,7 @@ class DataTable implements OptionsAwareInterface
     {
        $this->container = $container;
        $this->router = $container->get('router');
+       $this->query = new DataTableQuery($container->get('doctrine.orm.entity_manager'));
     }
 
     /**
@@ -174,6 +180,14 @@ class DataTable implements OptionsAwareInterface
         }
 
         return $this->results;
+    }
+
+    /**
+     * @return Toolbar
+     */
+    public function getToolbar()
+    {
+        return $this->toolbar;
     }
 
     /**
@@ -234,6 +248,9 @@ class DataTable implements OptionsAwareInterface
 
             'ajax_row_route',
 
+            'entity',
+            'query',
+
             'class',
             'template',
             'length_change',
@@ -252,6 +269,7 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('fixed_header', 'bool');
         $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
         $resolver->setAllowedTypes('sortable', 'bool');
+        $resolver->setAllowedTypes('query', ['null', 'callable']);
 
         $resolver->setDefault('id', $this->id);
         $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
@@ -288,6 +306,7 @@ class DataTable implements OptionsAwareInterface
         }
 
         $this->entityName = ArrayUtils::get($options, 'entity');
+        $this->queryClosure = ArrayUtils::get($options, 'query');
 
         $this->lengthChange = ArrayUtils::get($options, 'length_change');
         $this->lengthMenu = ArrayUtils::get($options, 'length_menu');

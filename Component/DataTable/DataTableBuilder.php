@@ -9,13 +9,11 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable;
 
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\SequenceColumn;
 use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
-use Umbrella\CoreBundle\Component\DataTable\Model\DataTableQuery;
 
 /**
  * Class DataTableBuilder.
@@ -25,54 +23,33 @@ class DataTableBuilder
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * @var array
      */
-    protected $options = array();
+    private $options = array();
 
     /**
      * @var array
      */
-    protected $columns = array();
-
-    /**
-     * @var QueryBuilder
-     */
-    protected $qb;
+    private $columns = array();
 
     /**
      * @var DataTable|null
      */
-    protected $resolvedTable = null;
-
-    /**
-     * @var OptionsResolver
-     */
-    protected $dtResolver;
+    private $resolvedTable = null;
 
     /**
      * DataTableBuilder constructor.
      *
      * @param ContainerInterface $container
-     * @param OptionsResolver    $dtResolver
      * @param array              $options
      */
-    public function __construct(ContainerInterface $container, OptionsResolver $dtResolver, array $options = array())
+    public function __construct(ContainerInterface $container, array $options = array())
     {
         $this->container = $container;
-        $this->qb = $this->container->get('doctrine.orm.entity_manager')->createQueryBuilder();
-        $this->dtResolver = $dtResolver;
         $this->options = $options;
-    }
-
-    /**
-     * @return QueryBuilder
-     */
-    public function getQueryBuilder()
-    {
-        return $this->qb;
     }
 
     /**
@@ -119,11 +96,9 @@ class DataTableBuilder
     {
         if ($this->resolvedTable === null) {
             $this->resolvedTable = new DataTable($this->container);
-            $this->resolvedTable->query = new DataTableQuery($this->qb);
             $this->resolvedTable->columns = $this->resolveColumns();
 
-            $options = $this->dtResolver->resolve($this->options);
-            $this->resolvedTable->setOptions($options);
+            $this->resolvedTable->setOptions($this->options);
         }
 
         return $this->resolvedTable;

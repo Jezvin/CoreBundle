@@ -59,10 +59,10 @@ class DataTableFactory
         $resolver = new OptionsResolver();
         $dt->configureOptions($resolver);
         $type->configureOptions($resolver);
+        $options = $resolver->resolve($options);
 
-        $builder = new DataTableBuilder($this->container, $resolver, $options);
+        $builder = new DataTableBuilder($this->container, $options);
         $type->buildDataTable($builder, $options);
-        $type->buildQuery($builder->getQueryBuilder(), $options);
 
         return $builder;
     }
@@ -72,7 +72,7 @@ class DataTableFactory
      *
      * @return DataTableType
      */
-    protected function createType($typeClass)
+    private function createType($typeClass)
     {
         if ($typeClass !== DataTableType::class and !is_subclass_of($typeClass, DataTableType::class)) {
             throw new \InvalidArgumentException("Class '$typeClass' must extends DataTableType class.");

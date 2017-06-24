@@ -6,19 +6,20 @@
         {% endif %}
     {% endblock %}
 
-    <table class="table datatable {{ class | default('table-bordered') }} js-umbrella-datatable">
-        <thead>
-        <tr>
-            {% for column in columns %}
-                <th class="{{ column.class }}" {% if column.width %}width="{{ column.width }}"{% endif %}>
-                    {% set label = datatable.translationPrefix ~ column.label %}
-                    {{ label | trans }}
-                </th>
-            {% endfor %}
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
+    {% block table %}
+        <table class="table datatable {{ class | default('table-bordered') }} js-umbrella-datatable">
+            <thead>
+            <tr>
+                {% for column in columns %}
+                    <th class="{{ column.class }}" {% if column.width %}width="{{ column.width }}"{% endif %}>
+                        {% set label = datatable.translationPrefix ~ column.label %}
+                        {{ label | trans }}
+                    </th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    {% endblock %}
 </div>

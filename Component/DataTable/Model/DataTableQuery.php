@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
+use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
 
 /**
  * Class DataTableQuery.
@@ -38,15 +39,14 @@ class DataTableQuery
     protected $entityAlias;
 
     /**
-     * DataTableQueryBuilder constructor.
-     *
-     * @param QueryBuilder $qb
-     * @param string       $entityAlias
+     * DataTableQuery constructor.
+     * @param EntityManager $em
+     * @param string $entityAlias
      */
-    public function __construct(QueryBuilder $qb, $entityAlias = 'e')
+    public function __construct(EntityManager $em, $entityAlias = 'e')
     {
-        $this->qb = $qb;
-        $this->em = $qb->getEntityManager();
+        $this->em = $em;
+        $this->qb = $em->createQueryBuilder();
         $this->entityAlias = $entityAlias;
     }
 
@@ -68,6 +68,10 @@ class DataTableQuery
         $this->qb->select($this->entityAlias);
         $this->qb->from($table->entityName, $this->entityAlias);
         $this->buildJoin($table->columns);
+
+        if ($table->queryClosure) {
+            call_user_func($table->queryClosure, $this->qb);
+        }
     }
 
     /**
@@ -97,7 +101,7 @@ class DataTableQuery
     }
 
     /**
-     * @param Request   $request
+     * @param Request $request
      * @param DataTable $table
      */
     public function handleRequest(Request $request, DataTable $table)
@@ -112,8 +116,8 @@ class DataTableQuery
         }
 
         // toolbar
-        if ($table->toolbar !== null) {
-            $table->toolbar->handleRequest($this->qb, $request);
+        if ($table->getToolbar() !== null) {
+            $table->getToolbar()->handleRequest($this->qb, $request);
         }
 
         // order by

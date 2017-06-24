@@ -9,7 +9,6 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable;
 
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -17,14 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class DataTableType
 {
-    /**
-     * @param QueryBuilder $qb
-     * @param array        $options
-     */
-    public function buildQuery(QueryBuilder $qb, array $options = array())
-    {
-    }
-
     /**
      * @param DataTableBuilder $builder
      * @param array            $options
