@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class Toolbar.
  */
-abstract class AbstractToolbar implements ContainerAwareInterface
+abstract class Toolbar implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
@@ -50,11 +50,9 @@ abstract class AbstractToolbar implements ContainerAwareInterface
 
     /**
      * @param QueryBuilder $qb
-     * @param array        $data
-     *
-     * @return QueryBuilder
+     * @param $data
      */
-    abstract public function buildQuery(QueryBuilder $qb, array $data);
+    abstract public function filter(QueryBuilder $qb, $data);
 
     /**
      * @return FormInterface
@@ -80,7 +78,7 @@ abstract class AbstractToolbar implements ContainerAwareInterface
     {
         $form = $this->getForm();
         $form->handleRequest($request);
-        $this->buildQuery($qb, $form->getData());
+        $this->filter($qb, $form->getData());
     }
 
     /* Helper */

@@ -16,7 +16,7 @@ use Umbrella\CoreBundle\Form\AddonTextType;
 /**
  * Class SearchToolbar.
  */
-class SearchToolbar extends AbstractToolbar
+class SearchToolbar extends Toolbar
 {
     /**
      * @param FormFactory $factory
@@ -44,7 +44,7 @@ class SearchToolbar extends AbstractToolbar
      *
      * @return QueryBuilder
      */
-    public function buildQuery(QueryBuilder $qb, array $data)
+    public function filter(QueryBuilder $qb, $data)
     {
         if ($data['search']) {
             $qb->andWhere('lower(e.search) LIKE :search')->setParameter('search', '%'.strtolower($data['search']).'%');

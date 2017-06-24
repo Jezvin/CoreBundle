@@ -10,7 +10,7 @@
 namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Component\Toolbar\Model\AbstractToolbar;
+use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
 
 /**
  * Class ToolbarFactory.
@@ -36,15 +36,15 @@ class ToolbarFactory
      * @param $class
      * @param array $options
      *
-     * @return AbstractToolbar
+     * @return Toolbar
      */
     public function create($class, array $options = array())
     {
-        if (!is_subclass_of($class, AbstractToolbar::class)) {
+        if (!is_subclass_of($class, Toolbar::class)) {
             throw new \InvalidArgumentException("Class '$class' must extends AbstractToolbar class.");
         }
 
-        /** @var AbstractToolbar $toolbar */
+        /** @var Toolbar $toolbar */
         $toolbar = new $class($options);
         $toolbar->setContainer($this->container);
 
