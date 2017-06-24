@@ -109,6 +109,12 @@ class DataTableTwigExtension extends \Twig_Extension
             );
         }
 
+        if ($dataTable->rowUrl) {
+            $options['rowClick'] = array(
+                'url' => $dataTable->rowUrl
+            );
+        }
+
         $order = array();
 
         // columns options

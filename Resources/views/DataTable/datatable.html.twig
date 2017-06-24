@@ -6,7 +6,7 @@
         {% endif %}
     {% endblock %}
 
-    <table class="{{ class | default('table table-bordered') }} js-umbrella-datatable">
+    <table class="table datatable {{ class | default('table-bordered') }} js-umbrella-datatable">
         <thead>
         <tr>
             {% for column in columns %}

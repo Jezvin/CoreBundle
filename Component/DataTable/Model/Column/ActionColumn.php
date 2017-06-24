@@ -10,7 +10,11 @@ namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use Umbrella\CoreBundle\Component\Routing\EntityRouteCollection;
+use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -28,7 +32,12 @@ class ActionColumn extends Column
     /**
      * @var array
      */
-    private $routeCollection;
+    private $routeCollection = array();
+
+    /**
+     * @var RouterInterface
+     */
+    private $router;
 
     /**
      * ActionColumn constructor.
@@ -37,7 +46,7 @@ class ActionColumn extends Column
     public function __construct(ContainerInterface $container)
     {
         parent::__construct($container);
-        $this->routeCollection = new EntityRouteCollection($container->get('router'));
+        $this->router = $container->get('router');
     }
 
     /**
@@ -48,7 +57,10 @@ class ActionColumn extends Column
      */
     public function generateUrl($id, $entity)
     {
-        return $this->routeCollection->generateUrl($id, $entity);
+        if (!array_key_exists($id, $this->routeCollection)) {
+            throw new \InvalidArgumentException("No router with id '$id' registered");
+        }
+        return $this->routeCollection[$id]->generateEntityUrl($this->router, $entity);
     }
 
     /**
@@ -59,7 +71,9 @@ class ActionColumn extends Column
     public function defaultRender($entity)
     {
         $html = '';
-        foreach ($this->routeCollection as $id => $data) {
+
+        /** @var  UmbrellaRoute $route */
+        foreach ($this->routeCollection as $id => $route) {
             $template = ArrayUtils::get(self::$TEMPLATE, $id, self::$TEMPLATE['__default']);
             $html .= str_replace(
                 array(
@@ -67,7 +81,7 @@ class ActionColumn extends Column
                     '__action__',
                 ),
                 array(
-                    $this->routeCollection->generateUrl($id, $entity),
+                    $route->generateEntityUrl($this->router, $entity),
                     $id,
                 ),
                 $template).'&nbsp;';
@@ -81,7 +95,9 @@ class ActionColumn extends Column
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->routeCollection->set($options['actions']);
+        foreach ($options['actions'] as $id => $value) {
+            $this->routeCollection[$id] = UmbrellaRoute::createFromOptions($value);
+        }
     }
 
     /**
@@ -98,5 +114,6 @@ class ActionColumn extends Column
 
         $resolver->setDefault('actions', array());
         $resolver->setDefault('orderable', false);
+        $resolver->setDefault('class', 'disable-row-click');
     }
 }

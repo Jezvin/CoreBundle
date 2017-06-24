@@ -13,7 +13,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Routing\RouterInterface;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory;
 use Umbrella\CoreBundle\Component\Toolbar\Model\AbstractToolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
@@ -93,6 +95,11 @@ class DataTable implements OptionsAwareInterface
     /**
      * @var string
      */
+    public $rowUrl;
+
+    /**
+     * @var string
+     */
     public $entityName;
 
     // Model
@@ -133,12 +140,18 @@ class DataTable implements OptionsAwareInterface
     private $container;
 
     /**
+     * @var RouterInterface
+     */
+    private $router;
+
+    /**
      * DataTable constructor.
      * @param ContainerInterface $container
      */
     public function __construct(ContainerInterface $container)
     {
        $this->container = $container;
+       $this->router = $container->get('router');
     }
 
     /**
@@ -219,6 +232,8 @@ class DataTable implements OptionsAwareInterface
             'ajax_sequence_type',
             'ajax_sequence_route',
 
+            'ajax_row_route',
+
             'class',
             'template',
             'length_change',
@@ -259,13 +274,18 @@ class DataTable implements OptionsAwareInterface
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template');
 
-        $this->loadUrl = $this->container->get('router')->generate($options['ajax_load_route']);
+        $this->loadUrl = UmbrellaRoute::createFromOptions($options['ajax_load_route'])->generateUrl($this->router);
         $this->loadType = ArrayUtils::get($options, 'ajax_load_type');
 
         if (isset($options['ajax_sequence_route'])) {
-            $this->sequenceUrl = $this->container->get('router')->generate($options['ajax_sequence_route']);
+            $this->sequenceUrl = UmbrellaRoute::createFromOptions($options['ajax_sequence_route'])->generateUrl($this->router);
         }
         $this->sequenceType = ArrayUtils::get($options, 'ajax_sequence_type');
+
+        if (isset($options['ajax_row_route'])) {
+            // set an random id to replace it on view
+            $this->rowUrl = UmbrellaRoute::createFromOptions($options['ajax_row_route'])->generateUrl($this->router, ['id' => 123456789]);
+        }
 
         $this->entityName = ArrayUtils::get($options, 'entity');
 
@@ -284,4 +304,5 @@ class DataTable implements OptionsAwareInterface
                 : $options['toolbar'];
         }
     }
+
 }

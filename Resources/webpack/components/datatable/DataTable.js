@@ -52,6 +52,16 @@ class DataTable {
                 }
             });
         }
+
+        if (this.options['rowClick']) {
+            this.table.on('click', 'tbody tr td:not(.disable-row-click)', (e) => {
+                let $tr = $(e.currentTarget).closest('tr');
+                let id = $tr.attr('id');
+                if (id) {
+                    Api.GET(this.options['rowClick']['url'].replace('123456789', id));
+                }
+            });
+        }
     }
 
     configureOptions() {
