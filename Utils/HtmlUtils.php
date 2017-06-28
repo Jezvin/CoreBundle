@@ -6,7 +6,7 @@
  * Time: 21:53
  */
 
-namespace Umbrella\CoreBundle\Utils;
+namespace Umbrellac\CoreBundle\Utils;
 
 /**
  * Class HtmlUtils

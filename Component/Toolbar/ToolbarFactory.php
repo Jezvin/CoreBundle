@@ -7,7 +7,7 @@
  * Time: 20:03.
  */
 
-namespace Umbrella\CoreBundle\Component\Toolbar;
+namespace Umbrellac\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;

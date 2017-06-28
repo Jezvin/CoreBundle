@@ -7,7 +7,7 @@
  * Time: 12:58.
  */
 
-namespace Umbrella\CoreBundle\Listener;
+namespace Umbrellac\CoreBundle\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;

@@ -6,7 +6,7 @@
  * Time: 21:24
  */
 
-namespace Umbrella\CoreBundle\Component\Core;
+namespace Umbrellac\CoreBundle\Component\Core;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

@@ -6,7 +6,7 @@
  * Time: 09:45.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
 
 /**
  * Class BooleanColumn.

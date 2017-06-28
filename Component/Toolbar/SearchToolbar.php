@@ -6,7 +6,7 @@
  * Time: 14:06.
  */
 
-namespace Umbrella\CoreBundle\Component\Toolbar;
+namespace Umbrellac\CoreBundle\Component\Toolbar;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormBuilder;

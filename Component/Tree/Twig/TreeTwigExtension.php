@@ -5,7 +5,7 @@
  * Date: 03/06/17
  * Time: 14:09
  */
-namespace Umbrella\CoreBundle\Component\Tree\Twig;
+namespace Umbrellac\CoreBundle\Component\Tree\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Umbrellac\CoreBundle\Component\Tree\Model\Tree;

@@ -6,7 +6,7 @@
  * Time: 17:21
  */
 
-namespace Umbrella\CoreBundle\Component\Routing;
+namespace Umbrellac\CoreBundle\Component\Routing;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

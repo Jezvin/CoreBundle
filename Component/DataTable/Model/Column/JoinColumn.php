@@ -6,7 +6,7 @@
  * Time: 11:32.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Query\Expr\Join;

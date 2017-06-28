@@ -6,7 +6,7 @@
  * Time: 18:55.
  */
 
-namespace Umbrella\CoreBundle\Component\Menu\Renderer;
+namespace Umbrellac\CoreBundle\Component\Menu\Renderer;
 
 use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
 

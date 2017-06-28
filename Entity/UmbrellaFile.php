@@ -6,7 +6,7 @@
  * Time: 22:08.
  */
 
-namespace Umbrella\CoreBundle\Entity;
+namespace Umbrellac\CoreBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Umbrellac\CoreBundle\Component\Core\BaseEntity;

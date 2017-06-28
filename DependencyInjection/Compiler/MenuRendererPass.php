@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\CoreBundle\DependencyInjection\Compiler;
+namespace Umbrellac\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;

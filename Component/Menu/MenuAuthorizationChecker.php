@@ -6,7 +6,7 @@
  * Time: 21:52
  */
 
-namespace Umbrella\CoreBundle\Component\Menu;
+namespace Umbrellac\CoreBundle\Component\Menu;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;

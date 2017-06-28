@@ -6,7 +6,7 @@
  * Time: 22:58.
  */
 
-namespace Umbrella\CoreBundle\Component\AppProxy;
+namespace Umbrellac\CoreBundle\Component\AppProxy;
 
 /**
  * Class AppMessage.

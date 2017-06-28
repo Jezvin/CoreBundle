@@ -6,7 +6,7 @@
  * Time: 16:58.
  */
 
-namespace Umbrella\CoreBundle\Component\Menu\Twig;
+namespace Umbrellac\CoreBundle\Component\Menu\Twig;
 
 use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
 use Umbrellac\CoreBundle\Component\Menu\Helper\MenuHelper;

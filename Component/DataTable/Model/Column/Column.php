@@ -6,7 +6,7 @@
  * Time: 12:46.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

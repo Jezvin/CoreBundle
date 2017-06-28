@@ -6,7 +6,7 @@
  * Time: 18:10.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Model;
+namespace Umbrellac\CoreBundle\Component\DataTable\Model;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;

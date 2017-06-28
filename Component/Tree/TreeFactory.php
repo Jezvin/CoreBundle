@@ -6,7 +6,7 @@
  * Date: 03/06/17
  * Time: 14:16
  */
-namespace Umbrella\CoreBundle\Component\Tree;
+namespace Umbrellac\CoreBundle\Component\Tree;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;

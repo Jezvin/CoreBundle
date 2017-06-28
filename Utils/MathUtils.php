@@ -6,7 +6,7 @@
  * Time: 23:40
  */
 
-namespace Umbrella\CoreBundle\Utils;
+namespace Umbrellac\CoreBundle\Utils;
 
 /**
  * Class MathUtils

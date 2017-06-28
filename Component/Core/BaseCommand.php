@@ -6,7 +6,7 @@
  * Time: 13:35.
  */
 
-namespace Umbrella\CoreBundle\Component\Core;
+namespace Umbrellac\CoreBundle\Component\Core;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;

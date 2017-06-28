@@ -7,7 +7,7 @@
  * Time: 18:55.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable;
+namespace Umbrellac\CoreBundle\Component\DataTable;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

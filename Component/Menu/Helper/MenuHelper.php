@@ -6,7 +6,7 @@
  * Time: 16:58.
  */
 
-namespace Umbrella\CoreBundle\Component\Menu\Helper;
+namespace Umbrellac\CoreBundle\Component\Menu\Helper;
 
 use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
 use Umbrellac\CoreBundle\Component\Menu\MenuAuthorizationChecker;

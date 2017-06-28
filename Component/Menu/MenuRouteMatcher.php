@@ -6,7 +6,7 @@
  * Time: 21:48
  */
 
-namespace Umbrella\CoreBundle\Component\Menu;
+namespace Umbrellac\CoreBundle\Component\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;

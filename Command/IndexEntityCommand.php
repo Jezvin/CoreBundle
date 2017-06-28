@@ -7,7 +7,7 @@
  * Time: 13:35.
  */
 
-namespace Umbrella\CoreBundle\Command;
+namespace Umbrellac\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;

@@ -6,7 +6,7 @@
  * Time: 21:08
  */
 
-namespace Umbrella\CoreBundle\Component\Core;
+namespace Umbrellac\CoreBundle\Component\Core;
 
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;

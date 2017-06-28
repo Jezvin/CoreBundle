@@ -6,7 +6,7 @@
  * Time: 23:11.
  */
 
-namespace Umbrella\CoreBundle\Component\Breadcrumb;
+namespace Umbrellac\CoreBundle\Component\Breadcrumb;
 
 use Symfony\Component\HttpFoundation\Request;
 use Umbrellac\CoreBundle\Component\Menu\Model\Menu;

@@ -6,7 +6,7 @@
  * Time: 01:46.
  */
 
-namespace Umbrella\CoreBundle\Component\AppProxy;
+namespace Umbrellac\CoreBundle\Component\AppProxy;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

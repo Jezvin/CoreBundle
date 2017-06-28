@@ -6,7 +6,7 @@
  * Time: 12:46.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Model;
+namespace Umbrellac\CoreBundle\Component\DataTable\Model;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\DependencyInjection\ContainerInterface;

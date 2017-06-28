@@ -6,7 +6,7 @@
  * Date: 03/06/17
  * Time: 10:39
  */
-namespace Umbrella\CoreBundle\Component\Tree\Entity;
+namespace Umbrellac\CoreBundle\Component\Tree\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;

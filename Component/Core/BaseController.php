@@ -7,7 +7,7 @@
  * Time: 12:45.
  */
 
-namespace Umbrella\CoreBundle\Component\Core;
+namespace Umbrellac\CoreBundle\Component\Core;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Umbrellac\CoreBundle\Component\AppProxy\AppMessageBuilder;

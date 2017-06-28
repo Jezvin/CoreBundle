@@ -6,7 +6,7 @@
  * Time: 14:06.
  */
 
-namespace Umbrella\CoreBundle\Component\Toolbar;
+namespace Umbrellac\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;

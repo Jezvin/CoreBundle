@@ -6,7 +6,7 @@
  * Date: 01/06/17
  * Time: 23:52
  */
-namespace Umbrella\CoreBundle\Services;
+namespace Umbrellac\CoreBundle\Services;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;

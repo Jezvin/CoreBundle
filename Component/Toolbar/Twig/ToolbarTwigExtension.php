@@ -6,7 +6,7 @@
  * Time: 18:46.
  */
 
-namespace Umbrella\CoreBundle\Component\Toolbar\Twig;
+namespace Umbrellac\CoreBundle\Component\Toolbar\Twig;
 
 use Umbrellac\CoreBundle\Component\Toolbar\Toolbar;
 

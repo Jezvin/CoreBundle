@@ -7,7 +7,7 @@
  * Time: 18:50.
  */
 
-namespace Umbrella\CoreBundle\Component\Core;
+namespace Umbrellac\CoreBundle\Component\Core;
 
 use Doctrine\ORM\Mapping as ORM;
 use Umbrellac\CoreBundle\Annotation\Searchable;

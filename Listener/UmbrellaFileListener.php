@@ -6,7 +6,7 @@
  * Time: 23:02
  */
 
-namespace Umbrella\CoreBundle\Listener;
+namespace Umbrellac\CoreBundle\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

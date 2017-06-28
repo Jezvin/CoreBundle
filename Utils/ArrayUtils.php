@@ -7,7 +7,7 @@
  * Time: 21:17.
  */
 
-namespace Umbrella\CoreBundle\Utils;
+namespace Umbrellac\CoreBundle\Utils;
 
 /**
  * Class ArrayUtils.

@@ -6,7 +6,7 @@
  * Time: 18:46.
  */
 
-namespace Umbrella\CoreBundle\Component\DataTable\Twig;
+namespace Umbrellac\CoreBundle\Component\DataTable\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
 use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrella\CoreBundle;
+namespace Umbrellac\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

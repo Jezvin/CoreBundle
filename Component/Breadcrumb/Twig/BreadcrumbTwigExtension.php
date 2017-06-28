@@ -6,7 +6,7 @@
  * Time: 16:59.
  */
 
-namespace Umbrella\CoreBundle\Component\Breadcrumb\Twig;
+namespace Umbrellac\CoreBundle\Component\Breadcrumb\Twig;
 
 use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
 

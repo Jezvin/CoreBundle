@@ -6,7 +6,7 @@
  * Date: 27/06/17
  * Time: 22:07
  */
-namespace Umbrella\CoreBundle\Component\Toolbar\Action;
+namespace Umbrellac\CoreBundle\Component\Toolbar\Action;
 
 
 use Symfony\Component\DependencyInjection\ContainerInterface;

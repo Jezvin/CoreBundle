@@ -6,7 +6,7 @@
  * Time: 19:44
  */
 
-namespace Umbrella\CoreBundle\Form;
+namespace Umbrellac\CoreBundle\Form;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
