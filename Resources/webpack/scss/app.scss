@@ -15,6 +15,10 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import "~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css";
 @import "~datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css";
 
+@import "./components/_toolbar.scss";
+
+// layout
+
 a[data-xhr-href] {
   cursor: pointer;
 }

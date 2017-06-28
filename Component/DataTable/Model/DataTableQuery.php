@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
-use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
 
 /**
  * Class DataTableQuery.

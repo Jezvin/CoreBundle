@@ -1,0 +1,24 @@
+<div class="umbrella-toolbar js-umbrella-toolbar {{ class }}">
+    <div class="col-md-12">
+        {% block actions %}
+            {% if actions %}
+                <div class="umbrella-actions">
+                    {% for action in actions %}
+                        {% include action.template %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endblock %}
+
+        {% block form %}
+            {% if form %}
+                <form class="js-umbrella-form form-inline"
+                      enctype="multipart/form-data"
+                      method="POST">
+                    {{ form_rest(form) }}
+                </form>
+            {% endif %}
+        {% endblock %}
+
+    </div>
+</div>

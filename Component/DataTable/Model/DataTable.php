@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
 use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory;
-use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
+use Umbrella\CoreBundle\Component\Toolbar\Toolbar;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -258,6 +258,7 @@ class DataTable implements OptionsAwareInterface
             'page_length',
             'fixed_header',
             'toolbar',
+            'toolbar_options',
             'sortable',
 
             'translation_prefix',
@@ -268,6 +269,7 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('page_length', 'int');
         $resolver->setAllowedTypes('fixed_header', 'bool');
         $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
+        $resolver->setAllowedTypes('toolbar_options', 'array');
         $resolver->setAllowedTypes('sortable', 'bool');
         $resolver->setAllowedTypes('query', ['null', 'callable']);
 
@@ -279,6 +281,7 @@ class DataTable implements OptionsAwareInterface
         $resolver->setDefault('length_menu', array(25, 50, 100));
         $resolver->setDefault('page_length', 25);
         $resolver->setDefault('fixed_header', false);
+        $resolver->setDefault('toolbar_options', array());
         $resolver->setDefault('sortable', false);
         $resolver->setDefault('translation_prefix', 'table.');
     }
@@ -319,7 +322,7 @@ class DataTable implements OptionsAwareInterface
 
         if (isset($options['toolbar'])) {
             $this->toolbar = is_string($options['toolbar'])
-                ? $this->container->get(ToolbarFactory::class)->create($options['toolbar'])
+                ? $this->container->get(ToolbarFactory::class)->create($options['toolbar'], $options['toolbar_options'])
                 : $options['toolbar'];
         }
     }

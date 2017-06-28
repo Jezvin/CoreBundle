@@ -2,7 +2,7 @@
 
     {% block toolbar %}
         {% if datatable.toolbar %}
-            {{ include('UmbrellaCoreBundle:DataTable:toolbar.html.twig', { toolbar : datatable.toolbar }) }}
+            {{ render_toolbar(datatable.toolbar) }}
         {% endif %}
     {% endblock %}
 

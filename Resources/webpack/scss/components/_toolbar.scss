@@ -1,0 +1,12 @@
+.umbrella-toolbar {
+  @extend .row;
+
+  .umbrella-actions {
+    float: left;
+  }
+  
+  form {
+    margin-bottom: 20px;
+    float: right;
+  }
+}

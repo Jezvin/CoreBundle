@@ -10,7 +10,11 @@
 namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Component\Toolbar\Model\Toolbar;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormFactory;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
 
 /**
  * Class ToolbarFactory.
@@ -41,12 +45,26 @@ class ToolbarFactory
     public function create($class, array $options = array())
     {
         if (!is_subclass_of($class, Toolbar::class)) {
-            throw new \InvalidArgumentException("Class '$class' must extends AbstractToolbar class.");
+            throw new \InvalidArgumentException("Class '$class' must extends Toolbar class.");
         }
 
         /** @var Toolbar $toolbar */
-        $toolbar = new $class($options);
-        $toolbar->setContainer($this->container);
+        $toolbar = new $class($this->container);
+        $resolver = new OptionsResolver();
+        $toolbar->configureOptions($resolver);
+        $resolvedOptions = $resolver->resolve($options);
+        $toolbar->setOptions($resolvedOptions);
+
+        // build Actions
+        $actionsBuilder = $this->container->get(ActionsBuilder::class);
+        $toolbar->buildActions($actionsBuilder, $resolvedOptions);
+        $toolbar->actions = $actionsBuilder->getActions();
+
+        // build form
+        $formFactory = $this->container->get('form.factory');
+        $formBuilder = $formFactory->createBuilder(FormType::class, null, $resolvedOptions['form_options']);
+        $toolbar->buildForm($formBuilder, $resolvedOptions);
+        $toolbar->form = $formBuilder->getForm();
 
         return $toolbar;
     }

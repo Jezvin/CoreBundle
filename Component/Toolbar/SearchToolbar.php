@@ -6,11 +6,10 @@
  * Time: 14:06.
  */
 
-namespace Umbrella\CoreBundle\Component\Toolbar\Model;
+namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\Form\FormFactory;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormBuilder;
 use Umbrella\CoreBundle\Form\AddonTextType;
 
 /**
@@ -19,13 +18,10 @@ use Umbrella\CoreBundle\Form\AddonTextType;
 class SearchToolbar extends Toolbar
 {
     /**
-     * @param FormFactory $factory
-     *
-     * @return FormInterface
+     * @inheritdoc
      */
-    public function createForm(FormFactory $factory)
+    public function buildForm(FormBuilder $builder, array $options)
     {
-        $builder = $this->createFormBuilder($factory);
         $builder->add('search', AddonTextType::class, array(
             'label' => false,
             'suffix' => '<i class="fa fa-search"></i>',
@@ -34,15 +30,10 @@ class SearchToolbar extends Toolbar
                 'placeholder' => 'form.placeholder.search',
             ),
         ));
-
-        return $builder->getForm();
     }
 
     /**
-     * @param QueryBuilder $qb
-     * @param array        $data
-     *
-     * @return QueryBuilder
+     * @inheritdoc
      */
     public function filter(QueryBuilder $qb, $data)
     {

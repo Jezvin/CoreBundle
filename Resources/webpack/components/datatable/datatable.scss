@@ -1,14 +1,9 @@
 .umbrella-datatable-container {
 
-  .datatable-toolbar {
-    margin-bottom: 20px;
-    float:right;
-  }
-}
-
-.datatable {
-  &.hover tbody tr:hover {
-    background-color: rgba(246, 246, 246, 0.43);
-    cursor: pointer;
+  .datatable {
+    &.hover tbody tr:hover {
+      background-color: rgba(246, 246, 246, 0.43);
+      cursor: pointer;
+    }
   }
 }
