@@ -6,14 +6,14 @@
  * Time: 11:32.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class JoinColumn.

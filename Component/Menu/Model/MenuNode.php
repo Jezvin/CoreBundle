@@ -7,7 +7,7 @@
  * Time: 16:05.
  */
 
-namespace Umbrellac\CoreBundle\Component\Menu\Model;
+namespace Umbrella\CoreBundle\Component\Menu\Model;
 
 /**
  * Class MenuNode.

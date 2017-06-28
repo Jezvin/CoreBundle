@@ -6,7 +6,7 @@
  * Time: 20:57.
  */
 
-namespace Umbrellac\CoreBundle\Utils;
+namespace Umbrella\CoreBundle\Utils;
 
 /**
  * Class StringUtils.

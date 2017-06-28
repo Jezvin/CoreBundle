@@ -14,65 +14,65 @@ services:
 
     # ---- Component ---- #
     # Menu
-    Umbrellac\CoreBundle\Component\Menu\MenuProvider:
-        arguments: ["@service_container", '@Umbrellac\CoreBundle\Component\Menu\MenuBuilder', []]
+    Umbrella\CoreBundle\Component\Menu\MenuProvider:
+        arguments: ["@service_container", '@Umbrella\CoreBundle\Component\Menu\MenuBuilder', []]
 
-    Umbrellac\CoreBundle\Component\Menu\MenuRendererProvider:
+    Umbrella\CoreBundle\Component\Menu\MenuRendererProvider:
         arguments: ["@service_container", []]
 
-    Umbrellac\CoreBundle\Component\Menu\MenuRouteMatcher:
+    Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher:
         public: false
-    Umbrellac\CoreBundle\Component\Menu\MenuAuthorizationChecker:
+    Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker:
         public: false
-    Umbrellac\CoreBundle\Component\Menu\MenuBuilder:
-    Umbrellac\CoreBundle\Component\Menu\Helper\MenuHelper:
-    Umbrellac\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
+    Umbrella\CoreBundle\Component\Menu\MenuBuilder:
+    Umbrella\CoreBundle\Component\Menu\Helper\MenuHelper:
+    Umbrella\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
 
 
     # Breadcrumb
-    Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb:
-    Umbrellac\CoreBundle\Component\Breadcrumb\Twig\BreadcrumbTwigExtension:
+    Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb:
+    Umbrella\CoreBundle\Component\Breadcrumb\Twig\BreadcrumbTwigExtension:
 
     # App proxy
-    Umbrellac\CoreBundle\Component\AppProxy\AppMessageBuilder:
+    Umbrella\CoreBundle\Component\AppProxy\AppMessageBuilder:
 
     # DataTable
-    Umbrellac\CoreBundle\Component\DataTable\DataTableFactory:
-    Umbrellac\CoreBundle\Component\DataTable\Twig\DataTableTwigExtension:
+    Umbrella\CoreBundle\Component\DataTable\DataTableFactory:
+    Umbrella\CoreBundle\Component\DataTable\Twig\DataTableTwigExtension:
 
     # Tree
-    Umbrellac\CoreBundle\Component\Tree\TreeFactory:
-    Umbrellac\CoreBundle\Component\Tree\Twig\TreeTwigExtension:
+    Umbrella\CoreBundle\Component\Tree\TreeFactory:
+    Umbrella\CoreBundle\Component\Tree\Twig\TreeTwigExtension:
 
     # Toolbar
-    Umbrellac\CoreBundle\Component\Toolbar\ToolbarFactory:
-    Umbrellac\CoreBundle\Component\Toolbar\Twig\ToolbarTwigExtension:
-    Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder:
+    Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory:
+    Umbrella\CoreBundle\Component\Toolbar\Twig\ToolbarTwigExtension:
+    Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder:
 
     # Webpack
-    Umbrellac\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
+    Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
 
     # ---- Umbrella ----#
 
     #Form
-    Umbrellac\CoreBundle\Form\FileUploadType:
-    Umbrellac\CoreBundle\Form\Choice2Type:
-    Umbrellac\CoreBundle\Form\Entity2Type:
+    Umbrella\CoreBundle\Form\FileUploadType:
+    Umbrella\CoreBundle\Form\Choice2Type:
+    Umbrella\CoreBundle\Form\Entity2Type:
 
     # Services
-    Umbrellac\CoreBundle\Services\UmbrellaFileUploader:
-    Umbrellac\CoreBundle\Services\SearchHandler:
+    Umbrella\CoreBundle\Services\UmbrellaFileUploader:
+    Umbrella\CoreBundle\Services\SearchHandler:
 
     # Annotation
-    Umbrellac\CoreBundle\Annotation\SearchableAnnotationReader:
+    Umbrella\CoreBundle\Annotation\SearchableAnnotationReader:
         public: false
 
     # Listener
-    Umbrellac\CoreBundle\Listener\EntitySubscriber:
+    Umbrella\CoreBundle\Listener\EntitySubscriber:
         public: false
         tags:
             - {name: doctrine.event_subscriber}
-    Umbrellac\CoreBundle\Listener\UmbrellaFileListener:
+    Umbrella\CoreBundle\Listener\UmbrellaFileListener:
         public: false
         tags:
             - { name: doctrine.orm.entity_listener }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Umbrellac\CoreBundle\DependencyInjection;
+namespace Umbrella\CoreBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

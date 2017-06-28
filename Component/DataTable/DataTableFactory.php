@@ -7,12 +7,12 @@
  * Time: 18:51.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable;
+namespace Umbrella\CoreBundle\Component\DataTable;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class DataTableFactory.

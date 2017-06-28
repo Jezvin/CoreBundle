@@ -6,11 +6,11 @@
  * Time: 14:06.
  */
 
-namespace Umbrellac\CoreBundle\Component\Toolbar;
+namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
-use Umbrellac\CoreBundle\Component\Toolbar\Action\AddAction;
+use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrella\CoreBundle\Component\Toolbar\Action\AddAction;
 
 /**
  * Class AddSearchToolbar

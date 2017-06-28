@@ -2,10 +2,10 @@ services:
     _defaults:
         public: false
 
-    Umbrellac\CoreBundle\Form\Extension\FormTypeExtension:
+    Umbrella\CoreBundle\Form\Extension\FormTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
 
-    Umbrellac\CoreBundle\Form\Extension\ChoiceTypeExtension:
+    Umbrella\CoreBundle\Form\Extension\ChoiceTypeExtension:
         tags:
             - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\ChoiceType }

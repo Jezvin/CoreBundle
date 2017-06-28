@@ -6,10 +6,10 @@
  * Time: 10:44.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DateColumn.

@@ -6,7 +6,7 @@
  * Time: 19:03.
  */
 
-namespace Umbrellac\CoreBundle\Component\Core;
+namespace Umbrella\CoreBundle\Component\Core;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

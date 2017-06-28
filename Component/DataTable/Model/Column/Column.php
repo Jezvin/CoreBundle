@@ -6,15 +6,15 @@
  * Time: 12:46.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrellac\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Column.
@@ -140,7 +140,7 @@ class Column implements OptionsAwareInterface
         $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('renderer', array(
             'null',
-            'Umbrellac\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface',
+            'Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface',
             'callable',
         ));
 

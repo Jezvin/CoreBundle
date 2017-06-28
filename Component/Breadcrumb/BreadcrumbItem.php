@@ -6,7 +6,7 @@
  * Time: 01:46.
  */
 
-namespace Umbrellac\CoreBundle\Component\Breadcrumb;
+namespace Umbrella\CoreBundle\Component\Breadcrumb;
 
 /**
  * Class BreadcrumbItem.

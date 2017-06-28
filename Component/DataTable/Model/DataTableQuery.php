@@ -6,16 +6,16 @@
  * Time: 18:10.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model;
+namespace Umbrella\CoreBundle\Component\DataTable\Model;
 
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
-use Umbrellac\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
-use Umbrellac\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
+use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrella\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
+use Umbrella\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
 
 /**
  * Class DataTableQuery.

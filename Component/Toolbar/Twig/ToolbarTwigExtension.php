@@ -6,9 +6,9 @@
  * Time: 18:46.
  */
 
-namespace Umbrellac\CoreBundle\Component\Toolbar\Twig;
+namespace Umbrella\CoreBundle\Component\Toolbar\Twig;
 
-use Umbrellac\CoreBundle\Component\Toolbar\Toolbar;
+use Umbrella\CoreBundle\Component\Toolbar\Toolbar;
 
 /**
  * Class DataTableTwigExtension.

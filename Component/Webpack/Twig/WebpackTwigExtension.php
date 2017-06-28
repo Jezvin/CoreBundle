@@ -6,7 +6,7 @@
  * Time: 20:15
  */
 
-namespace Umbrellac\CoreBundle\Component\Webpack\Twig;
+namespace Umbrella\CoreBundle\Component\Webpack\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

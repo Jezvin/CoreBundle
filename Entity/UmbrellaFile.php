@@ -6,12 +6,12 @@
  * Time: 22:08.
  */
 
-namespace Umbrellac\CoreBundle\Entity;
+namespace Umbrella\CoreBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Umbrellac\CoreBundle\Component\Core\BaseEntity;
+use Umbrella\CoreBundle\Component\Core\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
-use Umbrellac\CoreBundle\Utils\MathUtils;
+use Umbrella\CoreBundle\Utils\MathUtils;
 
 /**
  * Class UmbrellaFile.

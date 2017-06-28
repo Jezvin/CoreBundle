@@ -6,11 +6,11 @@
  * Date: 01/06/17
  * Time: 23:52
  */
-namespace Umbrellac\CoreBundle\Services;
+namespace Umbrella\CoreBundle\Services;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Umbrellac\CoreBundle\Annotation\SearchableAnnotationReader;
+use Umbrella\CoreBundle\Annotation\SearchableAnnotationReader;
 
 /**
  * Class SearchableHandler

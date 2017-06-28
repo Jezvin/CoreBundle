@@ -6,11 +6,11 @@
  * Time: 18:46.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Twig;
+namespace Umbrella\CoreBundle\Component\DataTable\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
-use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
-use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class DataTableTwigExtension.
@@ -79,7 +79,7 @@ class DataTableTwigExtension extends \Twig_Extension
         $options['id'] = $dataTable->id;
         $options['js'] = $this->buildJsOptions($dataTable);
 
-        return $twig->render('UmbrellacCoreBundle:DataTable:datatable_js.html.twig', $options);
+        return $twig->render('UmbrellaCoreBundle:DataTable:datatable_js.html.twig', $options);
     }
 
     /**

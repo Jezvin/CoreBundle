@@ -6,15 +6,15 @@
  * Date: 03/06/17
  * Time: 13:46
  */
-namespace Umbrellac\CoreBundle\Component\Tree\Model;
+namespace Umbrella\CoreBundle\Component\Tree\Model;
 
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrellac\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Tree
@@ -169,7 +169,7 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
         $resolver->setDefault('class', 'umbrella-tree');
         $resolver->setDefault('collapsable', true);
         $resolver->setDefault('start_expanded', true);
-        $resolver->setDefault('template', 'UmbrellacCoreBundle:Tree:tree.html.twig');
-        $resolver->setDefault('template_row', 'UmbrellacCoreBundle:Tree:tree_row.html.twig');
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:Tree:tree.html.twig');
+        $resolver->setDefault('template_row', 'UmbrellaCoreBundle:Tree:tree_row.html.twig');
     }
 }

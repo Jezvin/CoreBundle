@@ -6,7 +6,7 @@
  * Time: 21:49.
  */
 
-namespace Umbrellac\CoreBundle\Form;
+namespace Umbrella\CoreBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Umbrellac\CoreBundle\DependencyInjection\Compiler;
+namespace Umbrella\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Umbrellac\CoreBundle\Component\Menu\MenuProvider;
+use Umbrella\CoreBundle\Component\Menu\MenuProvider;
 
 /**
  * Class MenuBuilderPass.

@@ -6,11 +6,11 @@
  * Date: 03/06/17
  * Time: 10:39
  */
-namespace Umbrellac\CoreBundle\Component\Tree\Entity;
+namespace Umbrella\CoreBundle\Component\Tree\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Umbrellac\CoreBundle\Component\Core\BaseEntity;
+use Umbrella\CoreBundle\Component\Core\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

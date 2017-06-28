@@ -6,12 +6,12 @@
  * Time: 19:09.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class PropertyColumn.

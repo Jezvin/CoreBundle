@@ -7,14 +7,14 @@
  * Time: 20:03.
  */
 
-namespace Umbrellac\CoreBundle\Component\Toolbar;
+namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
 
 /**
  * Class ToolbarFactory.

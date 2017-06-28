@@ -7,10 +7,10 @@
  * Time: 16:51.
  */
 
-namespace Umbrellac\CoreBundle\Component\Menu;
+namespace Umbrella\CoreBundle\Component\Menu;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
+use Umbrella\CoreBundle\Component\Menu\Model\Menu;
 
 /**
  * Class MenuProvider.

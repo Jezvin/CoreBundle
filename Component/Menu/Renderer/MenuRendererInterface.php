@@ -6,9 +6,9 @@
  * Time: 18:55.
  */
 
-namespace Umbrellac\CoreBundle\Component\Menu\Renderer;
+namespace Umbrella\CoreBundle\Component\Menu\Renderer;
 
-use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
+use Umbrella\CoreBundle\Component\Menu\Model\Menu;
 
 /**
  * Interface MenuRendererInterface.

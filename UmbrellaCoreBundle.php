@@ -1,16 +1,16 @@
 <?php
 
-namespace Umbrellac\CoreBundle;
+namespace Umbrella\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Umbrellac\CoreBundle\DependencyInjection\Compiler\MenuPass;
-use Umbrellac\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
+use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuPass;
+use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
 
 /**
  * Class UmbrellaCoreBundle.
  */
-class UmbrellacCoreBundle extends Bundle
+class UmbrellaCoreBundle extends Bundle
 {
     /**
      * {@inheritdoc}

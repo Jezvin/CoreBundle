@@ -6,11 +6,11 @@
  * Time: 23:11.
  */
 
-namespace Umbrellac\CoreBundle\Component\Breadcrumb;
+namespace Umbrella\CoreBundle\Component\Breadcrumb;
 
 use Symfony\Component\HttpFoundation\Request;
-use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
-use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrella\CoreBundle\Component\Menu\Model\Menu;
+use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
 
 /**
  * Class Breadcrumb.
@@ -30,7 +30,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * @var string
      */
-    public $template = 'UmbrellacCoreBundle:Breadcrumb:breadcrumb.html.twig';
+    public $template = 'UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig';
 
     /**
      * @param $label

@@ -6,15 +6,15 @@
  * Date: 27/06/17
  * Time: 22:07
  */
-namespace Umbrellac\CoreBundle\Component\Toolbar\Action;
+namespace Umbrella\CoreBundle\Component\Toolbar\Action;
 
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Action
@@ -111,6 +111,6 @@ class Action implements OptionsAwareInterface
         $resolver->setAllowedTypes('xhr', 'boolean');
 
         $resolver->setDefault('xhr', true);
-        $resolver->setDefault('template', 'UmbrellacCoreBundle:Toolbar:action.html.twig');
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:action.html.twig');
     }
 }

@@ -6,11 +6,11 @@
  * Time: 14:06.
  */
 
-namespace Umbrellac\CoreBundle\Component\Toolbar;
+namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormBuilder;
-use Umbrellac\CoreBundle\Form\AddonTextType;
+use Umbrella\CoreBundle\Form\AddonTextType;
 
 /**
  * Class SearchToolbar.

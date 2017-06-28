@@ -6,7 +6,7 @@
  * Time: 13:47.
  */
 
-namespace Umbrellac\CoreBundle\Utils;
+namespace Umbrella\CoreBundle\Utils;
 
 use Doctrine\ORM\EntityManager;
 

@@ -7,15 +7,15 @@
  * Time: 13:35.
  */
 
-namespace Umbrellac\CoreBundle\Command;
+namespace Umbrella\CoreBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Umbrellac\CoreBundle\Component\Core\BaseCommand;
-use Umbrellac\CoreBundle\Services\SearchHandler;
-use Umbrellac\CoreBundle\Utils\SQLUtils;
+use Umbrella\CoreBundle\Component\Core\BaseCommand;
+use Umbrella\CoreBundle\Services\SearchHandler;
+use Umbrella\CoreBundle\Utils\SQLUtils;
 
 /**
  * Class IndexEntityCommand.

@@ -7,14 +7,14 @@
  * Time: 12:58.
  */
 
-namespace Umbrellac\CoreBundle\Listener;
+namespace Umbrella\CoreBundle\Listener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrellac\CoreBundle\Services\SearchHandler;
+use Umbrella\CoreBundle\Services\SearchHandler;
 
 /**
  * Class EntitySubscriber.

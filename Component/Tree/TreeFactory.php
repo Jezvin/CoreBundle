@@ -6,13 +6,13 @@
  * Date: 03/06/17
  * Time: 14:16
  */
-namespace Umbrellac\CoreBundle\Component\Tree;
+namespace Umbrella\CoreBundle\Component\Tree;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Tree\Model\Tree;
-use Umbrellac\CoreBundle\Component\Tree\Model\TreeQuery;
+use Umbrella\CoreBundle\Component\Tree\Model\Tree;
+use Umbrella\CoreBundle\Component\Tree\Model\TreeQuery;
 
 /**
  * Class TreeFactory

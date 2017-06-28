@@ -6,10 +6,10 @@
  * Time: 21:48
  */
 
-namespace Umbrellac\CoreBundle\Component\Menu;
+namespace Umbrella\CoreBundle\Component\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
 
 /**
  * Class MenuMatcher

@@ -6,7 +6,7 @@
  * Time: 23:36
  */
 
-namespace Umbrellac\CoreBundle\Annotation;
+namespace Umbrella\CoreBundle\Annotation;
 
 use Doctrine\Common\Annotations\Annotation\Target;
 

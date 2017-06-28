@@ -6,7 +6,7 @@
  * Time: 15:03
  */
 
-namespace Umbrellac\CoreBundle\Component\Tree;
+namespace Umbrella\CoreBundle\Component\Tree;
 
 
 use Doctrine\ORM\QueryBuilder;

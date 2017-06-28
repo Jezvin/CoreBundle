@@ -6,16 +6,16 @@
  * Time: 19:10.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrellac\CoreBundle\Component\Routing\EntityRouteCollection;
-use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Routing\EntityRouteCollection;
+use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class ActionColumn.

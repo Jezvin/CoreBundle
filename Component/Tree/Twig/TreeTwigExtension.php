@@ -5,10 +5,10 @@
  * Date: 03/06/17
  * Time: 14:09
  */
-namespace Umbrellac\CoreBundle\Component\Tree\Twig;
+namespace Umbrella\CoreBundle\Component\Tree\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrellac\CoreBundle\Component\Tree\Model\Tree;
+use Umbrella\CoreBundle\Component\Tree\Model\Tree;
 
 /**
  * Class TreeTwigExtension
@@ -73,7 +73,7 @@ class TreeTwigExtension extends \Twig_Extension
         $options['id'] = $tree->id;
         $options['js'] = $this->buildJsOptions($tree);
 
-        return $twig->render("UmbrellacCoreBundle:Tree:tree_js.html.twig", $options);
+        return $twig->render("UmbrellaCoreBundle:Tree:tree_js.html.twig", $options);
     }
 
     /**

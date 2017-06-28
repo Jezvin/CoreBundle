@@ -6,7 +6,7 @@
  * Time: 23:40
  */
 
-namespace Umbrellac\CoreBundle\Annotation;
+namespace Umbrella\CoreBundle\Annotation;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\DependencyInjection\ContainerInterface;

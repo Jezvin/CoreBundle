@@ -7,7 +7,7 @@
  * Time: 23:17.
  */
 
-namespace Umbrellac\CoreBundle\Component\Toolbar;
+namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -18,9 +18,9 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Toolbar.
@@ -140,7 +140,7 @@ class Toolbar implements OptionsAwareInterface
             'label_class' => 'hidden',
             'group_class' => 'col-sm-12',
         ));
-        $resolver->setDefault('template', 'UmbrellacCoreBundle:Toolbar:toolbar.html.twig');
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:toolbar.html.twig');
     }
 
     /* Helper */

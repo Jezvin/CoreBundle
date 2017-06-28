@@ -6,7 +6,7 @@
  * Time: 20:30.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model\Column;
+namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

@@ -6,7 +6,7 @@
  * Time: 12:46.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Model;
+namespace Umbrella\CoreBundle\Component\DataTable\Model;
 
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrellac\CoreBundle\Component\Toolbar\ToolbarFactory;
-use Umbrellac\CoreBundle\Component\Toolbar\Toolbar;
-use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory;
+use Umbrella\CoreBundle\Component\Toolbar\Toolbar;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTable.
@@ -268,13 +268,13 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('length_menu', 'array');
         $resolver->setAllowedTypes('page_length', 'int');
         $resolver->setAllowedTypes('fixed_header', 'bool');
-        $resolver->setAllowedTypes('toolbar', ['Umbrellac\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
+        $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
         $resolver->setAllowedTypes('toolbar_options', 'array');
         $resolver->setAllowedTypes('sortable', 'bool');
         $resolver->setAllowedTypes('query', ['null', 'callable']);
 
         $resolver->setDefault('id', $this->id);
-        $resolver->setDefault('template', 'UmbrellacCoreBundle:DataTable:datatable.html.twig');
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
         $resolver->setDefault('ajax_load_type', 'POST');
         $resolver->setDefault('ajax_sequence_type', 'POST');
         $resolver->setDefault('length_change', false);

@@ -6,9 +6,9 @@
  * Time: 16:59.
  */
 
-namespace Umbrellac\CoreBundle\Component\Breadcrumb\Twig;
+namespace Umbrella\CoreBundle\Component\Breadcrumb\Twig;
 
-use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
 
 /**
  * Class BreadcrumbTwigExtension.

@@ -7,9 +7,9 @@
  * Time: 23:58.
  */
 
-namespace Umbrellac\CoreBundle\Component\DataTable\Renderer;
+namespace Umbrella\CoreBundle\Component\DataTable\Renderer;
 
-use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 
 /**
  * Interface ColumnRendererInterface.
