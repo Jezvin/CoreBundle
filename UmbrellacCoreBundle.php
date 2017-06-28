@@ -10,7 +10,7 @@ use Umbrellac\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
 /**
  * Class UmbrellaCoreBundle.
  */
-class UmbrellaCoreBundle extends Bundle
+class UmbrellacCoreBundle extends Bundle
 {
     /**
      * {@inheritdoc}

@@ -274,7 +274,7 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('query', ['null', 'callable']);
 
         $resolver->setDefault('id', $this->id);
-        $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
+        $resolver->setDefault('template', 'UmbrellacCoreBundle:DataTable:datatable.html.twig');
         $resolver->setDefault('ajax_load_type', 'POST');
         $resolver->setDefault('ajax_sequence_type', 'POST');
         $resolver->setDefault('length_change', false);

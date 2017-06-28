@@ -30,7 +30,7 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
     /**
      * @var string
      */
-    public $template = 'UmbrellaCoreBundle:Breadcrumb:breadcrumb.html.twig';
+    public $template = 'UmbrellacCoreBundle:Breadcrumb:breadcrumb.html.twig';
 
     /**
      * @param $label

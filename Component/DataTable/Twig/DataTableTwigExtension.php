@@ -79,7 +79,7 @@ class DataTableTwigExtension extends \Twig_Extension
         $options['id'] = $dataTable->id;
         $options['js'] = $this->buildJsOptions($dataTable);
 
-        return $twig->render('UmbrellaCoreBundle:DataTable:datatable_js.html.twig', $options);
+        return $twig->render('UmbrellacCoreBundle:DataTable:datatable_js.html.twig', $options);
     }
 
     /**

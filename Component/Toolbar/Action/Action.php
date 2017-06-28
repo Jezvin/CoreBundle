@@ -111,6 +111,6 @@ class Action implements OptionsAwareInterface
         $resolver->setAllowedTypes('xhr', 'boolean');
 
         $resolver->setDefault('xhr', true);
-        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:action.html.twig');
+        $resolver->setDefault('template', 'UmbrellacCoreBundle:Toolbar:action.html.twig');
     }
 }

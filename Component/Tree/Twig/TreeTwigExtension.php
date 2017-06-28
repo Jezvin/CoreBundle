@@ -73,7 +73,7 @@ class TreeTwigExtension extends \Twig_Extension
         $options['id'] = $tree->id;
         $options['js'] = $this->buildJsOptions($tree);
 
-        return $twig->render("UmbrellaCoreBundle:Tree:tree_js.html.twig", $options);
+        return $twig->render("UmbrellacCoreBundle:Tree:tree_js.html.twig", $options);
     }
 
     /**

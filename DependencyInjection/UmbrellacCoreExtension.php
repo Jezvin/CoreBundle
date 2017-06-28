@@ -14,7 +14,7 @@ use Umbrellac\CoreBundle\Services\UmbrellaFileUploader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class UmbrellaCoreExtension extends Extension
+class UmbrellacCoreExtension extends Extension
 {
     /**
      * {@inheritdoc}

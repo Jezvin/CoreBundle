@@ -13,5 +13,5 @@ umbrella_core:
 
 twig:
     form_themes:
-        - 'UmbrellaCoreBundle:Form:layout.html.twig'
-        - 'UmbrellaCoreBundle:Form:widget.html.twig'
+        - 'UmbrellacCoreBundle:Form:layout.html.twig'
+        - 'UmbrellacCoreBundle:Form:widget.html.twig'
