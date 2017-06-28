@@ -12,7 +12,7 @@ namespace Umbrella\CoreBundle\Component\DataTable;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class DataTableFactory.

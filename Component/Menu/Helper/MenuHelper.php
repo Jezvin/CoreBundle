@@ -8,14 +8,14 @@
 
 namespace Umbrella\CoreBundle\Component\Menu\Helper;
 
-use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
-use Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker;
-use Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher;
-use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
-use Umbrella\CoreBundle\Component\Menu\MenuProvider;
-use Umbrella\CoreBundle\Component\Menu\MenuRendererProvider;
-use Umbrella\CoreBundle\Component\Menu\Renderer\MenuRendererInterface;
+use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Umbrellac\CoreBundle\Component\Menu\MenuAuthorizationChecker;
+use Umbrellac\CoreBundle\Component\Menu\MenuRouteMatcher;
+use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
+use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrellac\CoreBundle\Component\Menu\MenuProvider;
+use Umbrellac\CoreBundle\Component\Menu\MenuRendererProvider;
+use Umbrellac\CoreBundle\Component\Menu\Renderer\MenuRendererInterface;
 
 /**
  * Class MenuHelper

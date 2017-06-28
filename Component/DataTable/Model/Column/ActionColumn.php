@@ -13,9 +13,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrella\CoreBundle\Component\Routing\EntityRouteCollection;
-use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Routing\EntityRouteCollection;
+use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class ActionColumn.

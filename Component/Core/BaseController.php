@@ -10,11 +10,11 @@
 namespace Umbrella\CoreBundle\Component\Core;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Umbrella\CoreBundle\Component\AppProxy\AppMessageBuilder;
-use Umbrella\CoreBundle\Component\DataTable\DataTableBuilder;
-use Umbrella\CoreBundle\Component\DataTable\DataTableType;
-use Umbrella\CoreBundle\Component\DataTable\DataTableFactory;
-use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrellac\CoreBundle\Component\AppProxy\AppMessageBuilder;
+use Umbrellac\CoreBundle\Component\DataTable\DataTableBuilder;
+use Umbrellac\CoreBundle\Component\DataTable\DataTableType;
+use Umbrellac\CoreBundle\Component\DataTable\DataTableFactory;
+use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class BaseController.

@@ -9,8 +9,8 @@
 namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
-use Umbrella\CoreBundle\Component\Toolbar\Action\AddAction;
+use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrellac\CoreBundle\Component\Toolbar\Action\AddAction;
 
 /**
  * Class AddSearchToolbar

@@ -10,7 +10,7 @@
 namespace Umbrella\CoreBundle\Component\Menu;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Component\Menu\Model\Menu;
+use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
 
 /**
  * Class MenuProvider.

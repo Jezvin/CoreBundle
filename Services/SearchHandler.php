@@ -10,7 +10,7 @@ namespace Umbrella\CoreBundle\Services;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Umbrella\CoreBundle\Annotation\SearchableAnnotationReader;
+use Umbrellac\CoreBundle\Annotation\SearchableAnnotationReader;
 
 /**
  * Class SearchableHandler

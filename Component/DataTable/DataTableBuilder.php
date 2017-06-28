@@ -11,9 +11,9 @@ namespace Umbrella\CoreBundle\Component\DataTable;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\SequenceColumn;
-use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\SequenceColumn;
+use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class DataTableBuilder.

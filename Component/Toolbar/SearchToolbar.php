@@ -10,7 +10,7 @@ namespace Umbrella\CoreBundle\Component\Toolbar;
 
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Form\FormBuilder;
-use Umbrella\CoreBundle\Form\AddonTextType;
+use Umbrellac\CoreBundle\Form\AddonTextType;
 
 /**
  * Class SearchToolbar.

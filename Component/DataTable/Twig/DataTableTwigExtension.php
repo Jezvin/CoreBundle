@@ -9,8 +9,8 @@
 namespace Umbrella\CoreBundle\Component\DataTable\Twig;
 
 use Symfony\Component\Translation\TranslatorInterface;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
-use Umbrella\CoreBundle\Component\DataTable\Model\DataTable;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrellac\CoreBundle\Component\DataTable\Model\DataTable;
 
 /**
  * Class DataTableTwigExtension.

@@ -11,8 +11,8 @@ namespace Umbrella\CoreBundle\Component\Tree;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Tree\Model\Tree;
-use Umbrella\CoreBundle\Component\Tree\Model\TreeQuery;
+use Umbrellac\CoreBundle\Component\Tree\Model\Tree;
+use Umbrellac\CoreBundle\Component\Tree\Model\TreeQuery;
 
 /**
  * Class TreeFactory

@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory;
-use Umbrella\CoreBundle\Component\Toolbar\Toolbar;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrellac\CoreBundle\Component\Toolbar\ToolbarFactory;
+use Umbrellac\CoreBundle\Component\Toolbar\Toolbar;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTable.

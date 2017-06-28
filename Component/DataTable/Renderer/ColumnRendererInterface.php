@@ -9,7 +9,7 @@
 
 namespace Umbrella\CoreBundle\Component\DataTable\Renderer;
 
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
 
 /**
  * Interface ColumnRendererInterface.

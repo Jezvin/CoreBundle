@@ -13,7 +13,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class JoinColumn.

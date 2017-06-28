@@ -9,7 +9,7 @@
 namespace Umbrella\CoreBundle\Component\Menu;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
 
 /**
  * Class MenuMatcher

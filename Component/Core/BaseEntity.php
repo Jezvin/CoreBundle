@@ -10,7 +10,7 @@
 namespace Umbrella\CoreBundle\Component\Core;
 
 use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Annotation\Searchable;
+use Umbrellac\CoreBundle\Annotation\Searchable;
 
 /**
  * Class BaseEntity.

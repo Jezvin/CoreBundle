@@ -10,8 +10,8 @@
 namespace Umbrella\CoreBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Umbrella\CoreBundle\Component\Core\BaseService;
-use Umbrella\CoreBundle\Entity\UmbrellaFile;
+use Umbrellac\CoreBundle\Component\Core\BaseService;
+use Umbrellac\CoreBundle\Entity\UmbrellaFile;
 
 /**
  * Class UmbrellaFileUploader

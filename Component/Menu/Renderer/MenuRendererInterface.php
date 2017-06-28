@@ -8,7 +8,7 @@
 
 namespace Umbrella\CoreBundle\Component\Menu\Renderer;
 
-use Umbrella\CoreBundle\Component\Menu\Model\Menu;
+use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
 
 /**
  * Interface MenuRendererInterface.

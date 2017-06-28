@@ -10,9 +10,9 @@
 namespace Umbrella\CoreBundle\Component\Menu;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
+use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class MenuBuilder.

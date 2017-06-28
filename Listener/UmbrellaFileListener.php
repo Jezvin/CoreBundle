@@ -10,8 +10,8 @@ namespace Umbrella\CoreBundle\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Umbrella\CoreBundle\Entity\UmbrellaFile;
-use Umbrella\CoreBundle\Services\UmbrellaFileUploader;
+use Umbrellac\CoreBundle\Entity\UmbrellaFile;
+use Umbrellac\CoreBundle\Services\UmbrellaFileUploader;
 
 /**
  * Class UmbrellaFileListener

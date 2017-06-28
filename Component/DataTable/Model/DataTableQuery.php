@@ -13,9 +13,9 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
 
 /**
  * Class DataTableQuery.

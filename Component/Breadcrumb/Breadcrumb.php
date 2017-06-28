@@ -9,8 +9,8 @@
 namespace Umbrella\CoreBundle\Component\Breadcrumb;
 
 use Symfony\Component\HttpFoundation\Request;
-use Umbrella\CoreBundle\Component\Menu\Model\Menu;
-use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
+use Umbrellac\CoreBundle\Component\Menu\Model\Menu;
+use Umbrellac\CoreBundle\Component\Menu\Model\MenuNode;
 
 /**
  * Class Breadcrumb.

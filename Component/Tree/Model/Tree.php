@@ -12,9 +12,9 @@ namespace Umbrella\CoreBundle\Component\Tree\Model;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrellac\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Tree

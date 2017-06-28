@@ -18,9 +18,9 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Toolbar.

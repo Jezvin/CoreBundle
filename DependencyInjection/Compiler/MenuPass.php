@@ -4,7 +4,7 @@ namespace Umbrella\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Umbrella\CoreBundle\Component\Menu\MenuProvider;
+use Umbrellac\CoreBundle\Component\Menu\MenuProvider;
 
 /**
  * Class MenuBuilderPass.

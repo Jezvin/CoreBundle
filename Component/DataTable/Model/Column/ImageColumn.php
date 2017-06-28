@@ -11,9 +11,9 @@ namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Entity\UmbrellaFile;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
-use Umbrella\CoreBundle\Utils\HtmlUtils;
+use Umbrellac\CoreBundle\Entity\UmbrellaFile;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Utils\HtmlUtils;
 
 /**
  * Class ImageColumn

@@ -9,9 +9,9 @@
 namespace Umbrella\CoreBundle\Entity;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Umbrella\CoreBundle\Component\Core\BaseEntity;
+use Umbrellac\CoreBundle\Component\Core\BaseEntity;
 use Doctrine\ORM\Mapping as ORM;
-use Umbrella\CoreBundle\Utils\MathUtils;
+use Umbrellac\CoreBundle\Utils\MathUtils;
 
 /**
  * Class UmbrellaFile.

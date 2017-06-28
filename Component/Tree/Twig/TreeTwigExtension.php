@@ -8,7 +8,7 @@
 namespace Umbrella\CoreBundle\Component\Tree\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Umbrella\CoreBundle\Component\Tree\Model\Tree;
+use Umbrellac\CoreBundle\Component\Tree\Model\Tree;
 
 /**
  * Class TreeTwigExtension

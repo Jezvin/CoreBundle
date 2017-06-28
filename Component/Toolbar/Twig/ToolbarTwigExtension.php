@@ -8,7 +8,7 @@
 
 namespace Umbrella\CoreBundle\Component\Toolbar\Twig;
 
-use Umbrella\CoreBundle\Component\Toolbar\Toolbar;
+use Umbrellac\CoreBundle\Component\Toolbar\Toolbar;
 
 /**
  * Class DataTableTwigExtension.

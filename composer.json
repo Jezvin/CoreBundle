@@ -1,5 +1,5 @@
 {
-    "name": "umbrella/corebundle",
+    "name": "umbrellac/corebundle",
     "type": "symfony-bundle",
     "description": "Umbrella framework",
     "keywords": [],
@@ -11,7 +11,7 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Umbrella\\CoreBundle\\": ""}
+        "psr-4": {"Umbrellac\\CoreBundle\\": ""}
     },
     "require": {
         "symfony/symfony": "~3.3",

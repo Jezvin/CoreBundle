@@ -9,7 +9,7 @@
 namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DateColumn.

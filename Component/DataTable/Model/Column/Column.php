@@ -12,9 +12,9 @@ use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrellac\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Column.

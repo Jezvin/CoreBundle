@@ -4,8 +4,8 @@ namespace Umbrella\CoreBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuPass;
-use Umbrella\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
+use Umbrellac\CoreBundle\DependencyInjection\Compiler\MenuPass;
+use Umbrellac\CoreBundle\DependencyInjection\Compiler\MenuRendererPass;
 
 /**
  * Class UmbrellaCoreBundle.

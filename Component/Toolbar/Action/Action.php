@@ -12,9 +12,9 @@ namespace Umbrella\CoreBundle\Component\Toolbar\Action;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Component\Core\OptionsAwareInterface;
+use Umbrellac\CoreBundle\Component\Routing\UmbrellaRoute;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class Action

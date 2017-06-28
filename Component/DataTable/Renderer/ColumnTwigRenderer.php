@@ -10,7 +10,7 @@ namespace Umbrella\CoreBundle\Component\DataTable\Renderer;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
+use Umbrellac\CoreBundle\Component\DataTable\Model\Column\Column;
 
 /**
  * Class ColumnTwigRenderer.

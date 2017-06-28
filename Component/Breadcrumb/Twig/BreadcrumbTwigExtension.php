@@ -8,7 +8,7 @@
 
 namespace Umbrella\CoreBundle\Component\Breadcrumb\Twig;
 
-use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Umbrellac\CoreBundle\Component\Breadcrumb\Breadcrumb;
 
 /**
  * Class BreadcrumbTwigExtension.

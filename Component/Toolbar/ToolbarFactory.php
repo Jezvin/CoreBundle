@@ -14,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
+use Umbrellac\CoreBundle\Component\Toolbar\Action\ActionsBuilder;
 
 /**
  * Class ToolbarFactory.

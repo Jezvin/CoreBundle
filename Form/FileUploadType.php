@@ -18,9 +18,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Entity\UmbrellaFile;
-use Umbrella\CoreBundle\Services\UmbrellaFileUploader;
-use Umbrella\CoreBundle\Utils\ArrayUtils;
+use Umbrellac\CoreBundle\Entity\UmbrellaFile;
+use Umbrellac\CoreBundle\Services\UmbrellaFileUploader;
+use Umbrellac\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class FileUploadType
