@@ -268,7 +268,7 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('length_menu', 'array');
         $resolver->setAllowedTypes('page_length', 'int');
         $resolver->setAllowedTypes('fixed_header', 'bool');
-        $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
+        $resolver->setAllowedTypes('toolbar', ['Umbrellac\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
         $resolver->setAllowedTypes('toolbar_options', 'array');
         $resolver->setAllowedTypes('sortable', 'bool');
         $resolver->setAllowedTypes('query', ['null', 'callable']);
