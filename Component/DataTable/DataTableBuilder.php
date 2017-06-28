@@ -142,7 +142,7 @@ class DataTableBuilder
      */
     protected function createColumn($class)
     {
-        if (!is_subclass_of($class, Column::class) and !$class == Column::class) {
+        if (!is_subclass_of($class, Column::class) && !$class == Column::class) {
             throw new \InvalidArgumentException("Class '$class' must extends Column class.");
         }
 

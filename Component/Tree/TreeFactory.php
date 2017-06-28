@@ -69,7 +69,7 @@ class TreeFactory
      */
     protected function createType($typeClass)
     {
-        if ($typeClass !== TreeType::class and !is_subclass_of($typeClass, TreeType::class)) {
+        if ($typeClass !== TreeType::class && !is_subclass_of($typeClass, TreeType::class)) {
             throw new \InvalidArgumentException("Class '$typeClass' must extends TreeType class.");
         }
 

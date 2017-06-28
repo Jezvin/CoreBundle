@@ -48,7 +48,7 @@ class UmbrellaFileListener
      */
     public function prePersist(UmbrellaFile $umbrellaFile, LifecycleEventArgs $event)
     {
-        if ($umbrellaFile->file instanceof UploadedFile and $umbrellaFile->file->isValid()) {
+        if ($umbrellaFile->file instanceof UploadedFile && $umbrellaFile->file->isValid()) {
             $umbrellaFile->path = $this->uploader->upload($umbrellaFile->file);
         }
     }

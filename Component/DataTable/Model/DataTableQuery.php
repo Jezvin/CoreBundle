@@ -122,7 +122,7 @@ class DataTableQuery
         // order by
         $orders = $request->get('order', array());
         foreach ($orders as $order) {
-            if (!isset($order['column']) or !isset($order['dir'])) {
+            if (!isset($order['column']) || !isset($order['dir'])) {
                 continue; // request valid ?
             }
 

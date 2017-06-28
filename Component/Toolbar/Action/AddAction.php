@@ -23,7 +23,7 @@ class AddAction extends Action
     {
         parent::configureOptions($resolver);
         $resolver->setDefault('icon_class', 'fa fa-plus');
-        $resolver->setDefault('class', 'btn btn-primary');
+        $resolver->setDefault('class', 'btn btn-primary btn-flat');
     }
 
 }

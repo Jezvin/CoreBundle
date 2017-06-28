@@ -37,7 +37,7 @@ class BaseController extends Controller
      *
      * @return DataTable
      */
-    public function createTable($type, array $options = array())
+    protected function createTable($type, array $options = array())
     {
         return $this->get(DataTableFactory::class)->create($type, $options);
     }
@@ -48,7 +48,7 @@ class BaseController extends Controller
      *
      * @return DataTableBuilder
      */
-    public function createTableBuilder(array $options = array(), $type = DataTableType::class)
+    protected function createTableBuilder(array $options = array(), $type = DataTableType::class)
     {
         return $this->get(DataTableFactory::class)->createBuilder($type, $options);
     }

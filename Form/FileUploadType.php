@@ -168,12 +168,12 @@ class FileUploadTransformer implements DataTransformerInterface
             return $this->manager->createUmbrellaFile($uploadedFile);
         }
 
-        if ($umbrellaFile && $uploadedFile == null && $delete) { // delete
+        if ($umbrellaFile && $uploadedFile === null && $delete) { // delete
             $this->em->remove($umbrellaFile);
             return null;
         }
 
-        if ($umbrellaFile == null && $uploadedFile) { // create
+        if ($umbrellaFile === null && $uploadedFile) { // create
             return $this->manager->createUmbrellaFile($uploadedFile);
         }
 

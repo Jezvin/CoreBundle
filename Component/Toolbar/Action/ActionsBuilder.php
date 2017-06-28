@@ -96,7 +96,7 @@ class ActionsBuilder
      */
     private function createAction($class)
     {
-        if (!is_subclass_of($class, Action::class) and !$class == Action::class) {
+        if (!is_subclass_of($class, Action::class) && !$class == Action::class) {
             throw new \InvalidArgumentException("Class '$class' must extends Action class.");
         }
         return new $class($this->container);

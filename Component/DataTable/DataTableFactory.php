@@ -74,7 +74,7 @@ class DataTableFactory
      */
     private function createType($typeClass)
     {
-        if ($typeClass !== DataTableType::class and !is_subclass_of($typeClass, DataTableType::class)) {
+        if ($typeClass !== DataTableType::class && !is_subclass_of($typeClass, DataTableType::class)) {
             throw new \InvalidArgumentException("Class '$typeClass' must extends DataTableType class.");
         }
 
