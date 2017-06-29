@@ -23,7 +23,7 @@ class AddSearchToolbar extends SearchToolbar
     public function buildActions(ActionsBuilder $builder, array $options)
     {
         $builder->add('add', AddAction::class, array(
-            'title' => $options['add_title'],
+            'label' => $options['add_label'],
             'action' => $options['add_action']
         ));
     }
@@ -35,8 +35,10 @@ class AddSearchToolbar extends SearchToolbar
     {
         parent::configureOptions($resolver);
         $resolver->setRequired(array(
-            'add_title',
+            'add_label',
             'add_action'
         ));
+
+        $resolver->setDefault('add_label', 'add');
     }
 }

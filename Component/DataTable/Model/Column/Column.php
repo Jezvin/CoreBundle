@@ -140,7 +140,7 @@ class Column implements OptionsAwareInterface
         $resolver->setAllowedTypes('orderable', 'bool');
         $resolver->setAllowedTypes('renderer', array(
             'null',
-            'Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface',
+            ColumnRendererInterface::class,
             'callable',
         ));
 

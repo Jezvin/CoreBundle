@@ -11,11 +11,10 @@ namespace Umbrella\CoreBundle\Component\Toolbar\Action;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ButtonAction
+ * Class AddAction
  */
 class AddAction extends Action
 {
-
     /**
      * @param OptionsResolver $resolver
      */
@@ -25,5 +24,4 @@ class AddAction extends Action
         $resolver->setDefault('icon_class', 'fa fa-plus');
         $resolver->setDefault('class', 'btn btn-primary btn-flat');
     }
-
 }

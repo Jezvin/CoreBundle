@@ -1,8 +1,13 @@
 .umbrella-toolbar {
   @extend .row;
 
-  .umbrella-actions {
+  ul.umbrella-actions {
     float: left;
+    @extend .list-unstyled;
+
+    li {
+      display: inline-block;
+    }
   }
   
   form {

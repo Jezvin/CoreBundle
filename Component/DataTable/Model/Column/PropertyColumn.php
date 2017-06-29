@@ -24,6 +24,11 @@ class PropertyColumn extends Column
     public $propertyPath;
 
     /**
+     * @var boolean
+     */
+    public $safeHtml;
+
+    /**
      * @var PropertyAccess
      */
     protected $accessor;
@@ -45,12 +50,12 @@ class PropertyColumn extends Column
      */
     public function defaultRender($entity)
     {
-        return (string) $this->getPropertyValue($entity);
+        $value = (string) $this->getPropertyValue($entity);
+        return $this->safeHtml ? $value : htmlspecialchars($value);
     }
 
     /**
      * @param $entity
-     *
      * @return mixed
      */
     public function getPropertyValue($entity)
@@ -65,6 +70,7 @@ class PropertyColumn extends Column
     {
         parent::setOptions($options);
         $this->propertyPath = ArrayUtils::get($options, 'property_path', $options['id']);
+        $this->safeHtml = ArrayUtils::get($options, 'safe_html');
     }
 
     /**
@@ -76,6 +82,10 @@ class PropertyColumn extends Column
 
         $resolver->setDefined(array(
             'property_path',
+            'safe_html'
         ));
+
+        $resolver->setAllowedTypes('safe_html', 'boolean');
+        $resolver->setDefault('safe_html', false);
     }
 }

@@ -79,6 +79,8 @@ class ActionsBuilder
             $this->resolvedActions = array();
 
             foreach ($this->actions as $id => $row) {
+                $row['options']['id'] = $id;
+
                 $action = $this->createAction($row['class']);
 
                 $resolver = new OptionsResolver();

@@ -2,5 +2,5 @@
     {% if action.iconClass %}
         <i class="{{ action.iconClass }}"></i>
     {% endif %}
-    {{ action.title | trans }}
+    {{ (action.translationPrefix ~ action.label) | trans }}
 </a>

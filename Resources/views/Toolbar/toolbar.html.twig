@@ -2,11 +2,13 @@
     <div class="col-md-12">
         {% block actions %}
             {% if actions %}
-                <div class="umbrella-actions">
+                <ul class="umbrella-actions">
                     {% for action in actions %}
-                        {% include action.template %}
+                        <li>
+                            {% include action.template %}
+                        </li>
                     {% endfor %}
-                </div>
+                </ul>
             {% endif %}
         {% endblock %}
 

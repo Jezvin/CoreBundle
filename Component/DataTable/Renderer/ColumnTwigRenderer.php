@@ -15,7 +15,7 @@ use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 /**
  * Class ColumnTwigRenderer.
  */
-class ColumnTwigRenderer implements ColumnRendererInterface, ContainerAwareInterface
+class ColumnTwigRenderer implements ColumnRendererInterface
 {
     use ContainerAwareTrait;
 

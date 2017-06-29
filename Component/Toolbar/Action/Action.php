@@ -25,14 +25,19 @@ class Action implements OptionsAwareInterface
     /**
      * @var ContainerInterface
      */
-    private $container;
+    protected $container;
 
     /**
      * @var RouterInterface
      */
-    private $router;
+    protected $router;
 
     // options
+
+    /**
+     * @var string
+     */
+    public $id;
 
     /**
      * @var string
@@ -42,7 +47,7 @@ class Action implements OptionsAwareInterface
     /**
      * @var string
      */
-    public $title;
+    public $label;
 
     /**
      * @var string
@@ -65,6 +70,11 @@ class Action implements OptionsAwareInterface
     public $iconClass;
 
     /**
+     * @var string
+     */
+    public $translationPrefix;
+
+    /**
      * Action constructor.
      * @param ContainerInterface $container
      */
@@ -79,13 +89,18 @@ class Action implements OptionsAwareInterface
      */
     public function setOptions(array $options = array())
     {
-        $this->url = UmbrellaRoute::createFromOptions($options['action'])->generateUrl($this->router);
+        $this->id = $options['id'];
+
+        if (isset($options['action'])) {
+            $this->url = UmbrellaRoute::createFromOptions($options['action'])->generateUrl($this->router);
+        }
+
         $this->xhr = ArrayUtils::get($options, 'xhr');
         $this->template = ArrayUtils::get($options, 'template');
         $this->class = ArrayUtils::get($options, 'class');
         $this->iconClass = ArrayUtils::get($options, 'icon_class');
-        $this->title = ArrayUtils::get($options, 'title');
-
+        $this->label = ArrayUtils::get($options, 'label', $this->id);
+        $this->translationPrefix = ArrayUtils::get($options, 'translation_prefix');
     }
 
     /**
@@ -94,17 +109,18 @@ class Action implements OptionsAwareInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setRequired(array(
-            'action',
-            'title',
+            'id',
         ));
 
         $resolver->setDefined(array(
+            'label',
+            'action',
             'template',
             'action',
             'xhr',
             'class',
             'icon_class',
-            'title'
+            'translation_prefix',
         ));
 
         $resolver->setAllowedTypes('action', ['array', 'string']);
@@ -112,5 +128,6 @@ class Action implements OptionsAwareInterface
 
         $resolver->setDefault('xhr', true);
         $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:action.html.twig');
+        $resolver->setDefault('translation_prefix', 'action.');
     }
 }

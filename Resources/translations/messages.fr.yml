@@ -9,6 +9,7 @@ common:
     browser: Browse
 
 action:
+    add: Ajouter
     signout: Se déconnecter
     add_group: Ajouter un groupe
     edit_group: Editer un groupe
