@@ -32,5 +32,6 @@ class CheckBoxColumn extends Column
     {
         parent::configureOptions($resolver);
         $resolver->setDefault('orderable', false);
+        $resolver->setDefault('class', 'text-center disable-row-click propagate-cell-click');
     }
 }

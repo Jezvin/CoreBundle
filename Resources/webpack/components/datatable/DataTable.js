@@ -32,6 +32,7 @@ class DataTable {
             })
         }
 
+        // row re-order
         if (this.options['rowReorder']) {
             this.table.on('row-reorder', (e, diff, edit) => {
                 let changeSet = [];
@@ -53,6 +54,7 @@ class DataTable {
             });
         }
 
+        // row select
         if (this.options['rowClick']) {
             this.table.on('click', 'tbody tr td:not(.disable-row-click)', (e) => {
                 let $tr = $(e.currentTarget).closest('tr');
@@ -62,6 +64,11 @@ class DataTable {
                 }
             });
         }
+
+        // cell propagate
+        this.table.on('click', 'tbody tr td.propagate-cell-click', (e) => {
+            $(e.currentTarget).find('input[type=checkbox]').click();
+        });
     }
 
     configureOptions() {
