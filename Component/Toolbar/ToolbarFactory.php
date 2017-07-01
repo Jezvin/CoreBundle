@@ -56,7 +56,7 @@ class ToolbarFactory
         $toolbar->setOptions($resolvedOptions);
 
         // build Actions
-        $actionsBuilder = $this->container->get(ActionsBuilder::class);
+        $actionsBuilder = new ActionsBuilder($this->container);
         $toolbar->buildActions($actionsBuilder, $resolvedOptions);
         $toolbar->actions = $actionsBuilder->getActions();
 

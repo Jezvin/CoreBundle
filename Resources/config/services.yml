@@ -47,7 +47,6 @@ services:
     # Toolbar
     Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory:
     Umbrella\CoreBundle\Component\Toolbar\Twig\ToolbarTwigExtension:
-    Umbrella\CoreBundle\Component\Toolbar\Action\ActionsBuilder:
 
     # Webpack
     Umbrella\CoreBundle\Component\Webpack\Twig\WebpackTwigExtension:
