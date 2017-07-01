@@ -1,0 +1,24 @@
+{%- block simple_action -%}
+    <a {{ block('url_action') }} class="{{ action.class }} js-umbrella-action" {{ block('attr_action') }}>
+        {% if action.iconClass %}
+            <i class="{{ action.iconClass }}"></i>
+        {% endif %}
+        {{ block('label_action') }}
+    </a>
+{%- endblock -%}
+
+{%- block url_action -%}
+    {% if action.xhr %}data-xhr-href="{{ action.url }}"{% else %}href="{{ action.url }}"{% endif %}
+{%- endblock -%}
+
+{%- block attr_action -%}
+    {% for key,value in action.attributes %}
+        {{ key }}="{{ value }}"
+    {% endfor %}
+{%- endblock -%}
+
+{%- block label_action -%}
+    {% if action.label is not empty %}
+        {{ (action.translationPrefix ~ action.label) | trans }}
+    {% endif %}
+{%- endblock -%}

@@ -5,7 +5,7 @@
     float: left;
     @extend .list-unstyled;
 
-    li {
+    & > li {
       display: inline-block;
     }
   }

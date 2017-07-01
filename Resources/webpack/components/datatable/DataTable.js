@@ -5,7 +5,8 @@ class DataTable {
     constructor($elt, options) {
         this.$view = $elt;
         this.$table = this.$view.find('.js-umbrella-datatable');
-        this.$toolbar = this.$view.find('.js-umbrella-toolbar');
+        this.$toolbarAction = this.$view.find('.js-umbrella-toolbar .umbrella-actions')
+        this.$toolbarForm = this.$view.find('.js-umbrella-toolbar form');
 
         this.table = null;
 
@@ -22,14 +23,49 @@ class DataTable {
 
     bind() {
 
-        if (this.$toolbar.length) {
-            this.$toolbar.on('change', 'select, input[type=checkbox], input[type=radio]', () => {
+        // toolbar => filter form
+        if (this.$toolbarForm.length) {
+            this.$toolbarForm.on('change', 'select, input[type=checkbox], input[type=radio]', () => {
                 this.reload();
             });
 
-            this.$toolbar.on('keyup', 'input[type=text]', () => {
+            this.$toolbarForm.on('keyup', 'input[type=text]', () => {
                 this.reload();
             })
+        }
+
+        // toolbar => action form
+        if (this.$toolbarAction.length) {
+            this.$toolbarAction.on('click', '.js-umbrella-action[data-send=table_data]', (e) => {
+                let $target = $(e.currentTarget);
+
+                // avoid default action
+                e.preventDefault();
+                e.stopPropagation();
+
+                // do ajax call and send extra params
+                if ($target.data('xhr-href')) {
+                    Api.GET($target.data('xhr-href'), this.table.ajax.params());
+                } else {
+                    window.location.href = $target.attr('href') + '?' + $.param(this.table.ajax.params());
+                }
+            });
+
+            this.$toolbarAction.on('click', '.js-umbrella-action[data-send=table_select]', (e) => {
+                let $target = $(e.currentTarget);
+
+                // avoid default action
+                e.preventDefault();
+                e.stopPropagation();
+
+                // do ajax call and send extra params
+                if ($target.data('xhr-href')) {
+                    Api.GET($target.data('xhr-href'), this.selectedRowsId());
+                } else {
+                    console.log(this.selectedRowsId());
+                    //window.location.href = $target.attr('href') + '?' + $.param(this.selectedRowsId());
+                }
+            });
         }
 
         // row re-order
@@ -54,7 +90,7 @@ class DataTable {
             });
         }
 
-        // row select
+        // row click
         if (this.options['rowClick']) {
             this.table.on('click', 'tbody tr td:not(.disable-row-click)', (e) => {
                 let $tr = $(e.currentTarget).closest('tr');
@@ -65,26 +101,35 @@ class DataTable {
             });
         }
 
-        // cell propagate
-        this.table.on('click', 'tbody tr td.propagate-cell-click', (e) => {
-            $(e.currentTarget).find('input[type=checkbox]').click();
-        });
+        // row select
+
     }
 
     configureOptions() {
         this.options['ajax']['data'] = (d) => {
+            // avoid sending unused params
+            delete d['columns'];
+            delete d['search'];
+
             return {...d, ...this.toolbarData()};
         };
     }
 
     toolbarData() {
-        return this.$toolbar.length
-            ? this.$toolbar.find('form').serializeObject()
+        return this.$toolbarForm.length
+            ? this.$toolbarForm.serializeObject()
             : [];
     }
 
     reload() {
         this.$table.DataTable().ajax.reload();
+    }
+
+    selectedRowsId() {
+        let ids = [];
+        this.$table.find('body tr').each((e) => {
+        });
+        return { 'a':2 };
     }
 }
 

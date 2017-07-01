@@ -10,7 +10,6 @@ namespace Umbrella\CoreBundle\Component\Toolbar\Action;
 
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -18,13 +17,10 @@ use Umbrella\CoreBundle\Utils\ArrayUtils;
  */
 class DropdownAction extends Action
 {
-    const URL_TYPE = 'URL';
-    const SEPARATOR_TYPE = 'SEPARATOR';
-
     /**
      * @var array
      */
-    public $actions;
+    public $children;
 
     /**
      * @param array $options
@@ -32,20 +28,7 @@ class DropdownAction extends Action
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-
-        $this->actions = array();
-        foreach ($options['actions'] as $action) {
-            $resolvedAction = array();
-
-            if (isset($action['action'])) {
-                $resolvedAction['url'] = UmbrellaRoute::createFromOptions($action['action'])->generateUrl($this->router);
-            }
-
-            $resolvedAction['xhr'] = ArrayUtils::get($action, 'xhr', true);
-            $resolvedAction['label'] = ArrayUtils::get($action, 'label');
-            $resolvedAction['type'] = ArrayUtils::get($action, 'type', self::URL_TYPE);
-            $this->actions[] = $resolvedAction;
-        }
+        $this->children = ArrayUtils::get($options, 'children');
     }
 
     /**
@@ -56,12 +39,20 @@ class DropdownAction extends Action
         parent::configureOptions($resolver);
 
         $resolver->setDefined(array(
-            'actions'
+            'children'
         ));
-        $resolver->setAllowedTypes('actions', 'array');
+        $resolver->setAllowedTypes('children', 'array');
 
         $resolver->setDefault('class', 'btn btn-default btn-flat');
-        $resolver->setDefault('actions', array());
-        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:action_dropdown.html.twig');
+        $resolver->setDefault('children', array());
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar\Action:action_dropdown.html.twig');
+
+        $childBuilder = new ActionsBuilder($this->container);
+        $resolver->setNormalizer('children', function($options, $value) use ($childBuilder) {
+            foreach ($value as $id => $params) {
+               $childBuilder->add($id, $params['type'], $params['options']);
+           }
+           return $childBuilder->getActions();
+        });
     }
 }

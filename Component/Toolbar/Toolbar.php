@@ -137,6 +137,7 @@ class Toolbar implements OptionsAwareInterface
 
         $resolver->setDefault('form_options', array(
             'validation_groups' => false,
+            'csrf_protection' => false,
             'label_class' => 'hidden',
             'group_class' => 'col-sm-12',
         ));

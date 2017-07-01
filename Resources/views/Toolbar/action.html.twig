@@ -1,6 +1,0 @@
-<a {% if action.xhr %}data-xhr-href="{{ action.url }}"{% else %}href="{{ action.url }}"{% endif %} class="{{ action.class }}">
-    {% if action.iconClass %}
-        <i class="{{ action.iconClass }}"></i>
-    {% endif %}
-    {{ (action.translationPrefix ~ action.label) | trans }}
-</a>

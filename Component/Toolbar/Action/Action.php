@@ -75,6 +75,11 @@ class Action implements OptionsAwareInterface
     public $translationPrefix;
 
     /**
+     * @var null|array
+     */
+    public $attributes;
+
+    /**
      * Action constructor.
      * @param ContainerInterface $container
      */
@@ -101,6 +106,7 @@ class Action implements OptionsAwareInterface
         $this->iconClass = ArrayUtils::get($options, 'icon_class');
         $this->label = ArrayUtils::get($options, 'label', $this->id);
         $this->translationPrefix = ArrayUtils::get($options, 'translation_prefix');
+        $this->attributes = ArrayUtils::get($options, 'attr');
     }
 
     /**
@@ -121,13 +127,16 @@ class Action implements OptionsAwareInterface
             'class',
             'icon_class',
             'translation_prefix',
+            'attr',
         ));
 
         $resolver->setAllowedTypes('action', ['array', 'string']);
         $resolver->setAllowedTypes('xhr', 'boolean');
+        $resolver->setAllowedTypes('attr', 'array');
 
         $resolver->setDefault('xhr', true);
-        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:action.html.twig');
+        $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar\Action:action.html.twig');
         $resolver->setDefault('translation_prefix', 'action.');
+        $resolver->setDefault('attr', array());
     }
 }
