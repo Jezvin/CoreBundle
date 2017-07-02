@@ -41,16 +41,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->integerNode('dev_server_port')
                 ->defaultValue(9000)
-                ->end()
-            ->scalarNode('asset_path')
-            ->defaultValue('/build/')
-                ->end()
-            ->scalarNode('asset_pattern_dev')
-                ->defaultValue('[name].dev')
-                ->end()
-            ->scalarNode('asset_pattern_prod')
-                ->defaultValue('[name]_[hash].prod');
-
+                ->end();
         return $webpackNode;
     }
 
