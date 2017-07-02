@@ -94,7 +94,7 @@ class DataTableTwigExtension extends \Twig_Extension
         $options['bFilter'] = false;
         $options['ajax'] = array(
             'url' => $dataTable->loadUrl,
-            'type' => $dataTable->loadType,
+            'type' => $dataTable->loadMethod,
         );
         $options['lengthChange'] = $dataTable->lengthChange;
         $options['pageLength'] = $dataTable->pageLength;
@@ -105,13 +105,14 @@ class DataTableTwigExtension extends \Twig_Extension
             $options['rowReorder'] = array(
                 'update' => false,
                 'url' => $dataTable->sequenceUrl,
-                'type' => $dataTable->sequenceType,
+                'type' => $dataTable->sequenceMethod,
             );
         }
 
         if ($dataTable->rowUrl) {
             $options['rowClick'] = array(
-                'url' => $dataTable->rowUrl
+                'url' => $dataTable->rowUrl,
+                'type' => $dataTable->rowMethod
             );
         }
 

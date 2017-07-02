@@ -16,7 +16,7 @@
             {% if form %}
                 <form class="js-umbrella-form form-inline"
                       enctype="multipart/form-data"
-                      method="POST">
+                      method="{{ form.vars.method }}">
                     {{ form_rest(form) }}
                 </form>
             {% endif %}

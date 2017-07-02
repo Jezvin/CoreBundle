@@ -22,7 +22,7 @@ class CheckBoxColumn extends Column
      */
     public function defaultRender($entity)
     {
-        return '<input type="checkbox" class="js-select-row">';
+        return '<input type="checkbox">';
     }
 
     /**
@@ -32,6 +32,9 @@ class CheckBoxColumn extends Column
     {
         parent::configureOptions($resolver);
         $resolver->setDefault('orderable', false);
-        $resolver->setDefault('class', 'text-center disable-row-click');
+        $resolver->setDefault('class', 'text-center disable-row-click js-select');
+        $resolver->setDefault('label_renderer', function(CheckBoxColumn $column, $translationPrefix) {
+           return '<input type="checkbox">';
+        });
     }
 }

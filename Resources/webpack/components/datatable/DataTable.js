@@ -94,14 +94,25 @@ class DataTable {
             this.table.on('click', 'tbody tr td:not(.disable-row-click)', (e) => {
                 let $tr = $(e.currentTarget).closest('tr');
                 let id = $tr.attr('id');
+
+                let ajax_url = this.options['rowClick']['url'].replace('123456789', id);
+                let ajax_method = this.options['rowClick']['type'];
+
                 if (id) {
-                    Api.GET(this.options['rowClick']['url'].replace('123456789', id));
+                    Api.ajax(ajax_method, ajax_url);
                 }
             });
         }
 
         // row select
-        this.table.on('change', 'tbody tr td .js-select-row', (e) => {
+        this.table.on('change', 'thead tr th.js-select input[type=checkbox]', (e) => {
+            let $target = $(e.currentTarget);
+            let $checkboxes = this.$table.find('tbody tr td.js-select input[type=checkbox]');
+            $checkboxes.prop('checked', $target.prop('checked'));
+            $checkboxes.trigger('change');
+        });
+
+        this.table.on('change', 'tbody tr td.js-select input[type=checkbox]', (e) => {
             let $target = $(e.currentTarget);
             let $tr = $target.closest('tr');
             if ($target.prop('checked')) {

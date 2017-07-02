@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\Column;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\JoinColumn;
 use Umbrella\CoreBundle\Component\DataTable\Model\Column\PropertyColumn;
+use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
  * Class DataTableQuery.
@@ -105,10 +106,17 @@ class DataTableQuery
      */
     public function handleRequest(Request $request, DataTable $table)
     {
-        // pagination
-        $start = $request->get('start', 0);
-        $length = $request->get('length');
+        if ('GET' === $table->loadMethod || 'HEAD' === $table->loadMethod  || 'TRACE' === $table->loadMethod ) {
+            $data = $request->query->all();
+        } else {
+            $data = $request->request->all();
+        }
 
+        $start = ArrayUtils::get($data, 'start', 0);
+        $length = ArrayUtils::get($data,'length');
+        $orders = ArrayUtils::get($data,'order', array());
+
+        // pagination
         $this->qb->setFirstResult($start);
         if ($length !== null) {
             $this->qb->setMaxResults($length);
@@ -120,7 +128,7 @@ class DataTableQuery
         }
 
         // order by
-        $orders = $request->get('order', array());
+
         foreach ($orders as $order) {
             if (!isset($order['column']) || !isset($order['dir'])) {
                 continue; // request valid ?

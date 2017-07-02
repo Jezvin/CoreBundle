@@ -140,6 +140,7 @@ class Toolbar implements OptionsAwareInterface
             'csrf_protection' => false,
             'label_class' => 'hidden',
             'group_class' => 'col-sm-12',
+            'method' => 'GET'
         ));
         $resolver->setDefault('template', 'UmbrellaCoreBundle:Toolbar:toolbar.html.twig');
     }

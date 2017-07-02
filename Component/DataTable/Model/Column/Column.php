@@ -9,11 +9,9 @@
 namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
-use Umbrella\CoreBundle\Component\DataTable\Renderer\ColumnRendererInterface;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
@@ -53,9 +51,14 @@ class Column implements OptionsAwareInterface
     public $width;
 
     /**
-     * @var mixed
+     * @var null|\Closure
      */
     public $renderer;
+
+    /**
+     * @var null|\Closure
+     */
+    public $labelRenderer;
 
     /**
      * @var Container
@@ -81,18 +84,19 @@ class Column implements OptionsAwareInterface
         if ($this->renderer instanceof \Closure) {
             return call_user_func($this->renderer, $this, $entity);
         }
-
-        if ($this->renderer instanceof ColumnRendererInterface) {
-
-            // FIXME
-            if ($this->renderer instanceof ContainerAwareInterface) {
-                $this->renderer->setContainer($this->container);
-            }
-
-            return $this->renderer->render($this, $entity);
-        }
-
         return $this->defaultRender($entity);
+    }
+
+    /**
+     * @param $translationPrefix
+     * @return string
+     */
+    public function renderLabel($translationPrefix)
+    {
+        if ($this->labelRenderer instanceof \Closure) {
+            return call_user_func($this->labelRenderer, $this, $translationPrefix);
+        }
+        return empty($this->label) ? '' : $this->container->get('translator')->trans($translationPrefix . $this->label);
     }
 
     /**
@@ -117,6 +121,7 @@ class Column implements OptionsAwareInterface
         $this->class = ArrayUtils::get($options, 'class');
         $this->width = ArrayUtils::get($options, 'width');
         $this->renderer = ArrayUtils::get($options, 'renderer');
+        $this->labelRenderer = ArrayUtils::get($options, 'label_renderer');
     }
 
     /**
@@ -135,16 +140,14 @@ class Column implements OptionsAwareInterface
             'class',
             'width',
             'renderer',
+            'label_renderer'
         ));
 
         $resolver->setAllowedTypes('orderable', 'bool');
-        $resolver->setAllowedTypes('renderer', array(
-            'null',
-            ColumnRendererInterface::class,
-            'callable',
-        ));
-
+        $resolver->setAllowedTypes('renderer', array('null', 'callable'));
+        $resolver->setAllowedTypes('label_renderer', array('null', 'callable'));
         $resolver->setAllowedValues('order', ['ASC', 'DESC']);
+
         $resolver->setDefault('orderable', true);
     }
 }
