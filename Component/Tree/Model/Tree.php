@@ -8,9 +8,7 @@
  */
 namespace Umbrella\CoreBundle\Component\Tree\Model;
 
-
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Component\Core\OptionsAwareInterface;
 use Umbrella\CoreBundle\Component\Tree\Entity\BaseTreeEntity;
@@ -19,8 +17,12 @@ use Umbrella\CoreBundle\Utils\ArrayUtils;
 /**
  * Class Tree
  */
-class Tree implements OptionsAwareInterface, ContainerAwareInterface
+class Tree implements OptionsAwareInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
 
     /**
      * @var string
@@ -79,14 +81,17 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
      */
     public $relocateType;
 
-    use ContainerAwareTrait;
+    /**
+     * @var null|\Closure
+     */
+    public $queryClosure;
 
     // Model
 
     /**
      * @var TreeQuery
      */
-    public $query;
+    private $query;
 
     /**
      * @var BaseTreeEntity|null
@@ -95,10 +100,13 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
 
     /**
      * Tree constructor.
+     * @param ContainerInterface $container
      */
-    public function __construct()
+    public function __construct(ContainerInterface $container)
     {
+        $this->container = $container;
         $this->id = 'tree_'.substr(md5(uniqid('', true)), 0, 12);
+        $this->query = new TreeQuery($container->get('doctrine.orm.entity_manager'));
     }
 
     /**
@@ -131,6 +139,7 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
         $this->entityName = ArrayUtils::get($options, 'entity');
         $this->entityRootAlias = ArrayUtils::get($options, 'root_alias');
         $this->translationPrefix = ArrayUtils::get($options, 'translationPrefix');
+        $this->queryClosure = ArrayUtils::get($options, 'query');
     }
 
     /**
@@ -157,12 +166,14 @@ class Tree implements OptionsAwareInterface, ContainerAwareInterface
             'template_row',
 
             'translation_prefix',
+            'query',
         ));
 
 
 
         $resolver->setAllowedTypes('collapsable', array('bool'));
         $resolver->setAllowedTypes('start_expanded', array('bool'));
+        $resolver->setAllowedTypes('query', array('null', 'callable'));
 
         $resolver->setDefault('id', $this->id);
         $resolver->setDefault('ajax_relocate_type', 'POST');

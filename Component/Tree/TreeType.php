@@ -8,8 +8,6 @@
 
 namespace Umbrella\CoreBundle\Component\Tree;
 
-
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -17,14 +15,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class TreeType
 {
-    /**
-     * @param QueryBuilder $qb
-     * @param array        $options
-     */
-    public function buildQuery(QueryBuilder $qb, array $options = array())
-    {
-    }
-
     /**
      * @param OptionsResolver $resolver
      */

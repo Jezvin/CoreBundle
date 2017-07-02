@@ -33,13 +33,13 @@ class TreeQuery
 
     /**
      * TreeQuery constructor.
-     * @param QueryBuilder $qb
+     * @param EntityManager $em
      * @param string $entityAlias
      */
-    public function __construct(QueryBuilder $qb, $entityAlias = 'e')
+    public function __construct(EntityManager $em, $entityAlias = 'e')
     {
-        $this->qb = $qb;
-        $this->em = $qb->getEntityManager();
+        $this->em = $em;
+        $this->qb = $em->createQueryBuilder();
         $this->entityAlias = $entityAlias;
     }
 
@@ -68,6 +68,10 @@ class TreeQuery
         } else {
             $this->qb->andWhere($this->entityAlias . '.alias = :alias');
             $this->qb->setParameter('alias', $tree->entityRootAlias);
+        }
+
+        if ($tree->queryClosure) {
+            call_user_func($tree->queryClosure, $this->qb);
         }
     }
 

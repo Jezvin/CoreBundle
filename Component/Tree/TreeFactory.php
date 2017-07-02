@@ -43,19 +43,12 @@ class TreeFactory
     {
         $type = $this->createType($typeClass);
 
-        $tree = new Tree();
+        $tree = new Tree($this->container);
         $resolver = new OptionsResolver();
         $type->configureOptions($resolver);
 
-
-        // create query
-        $query = new TreeQuery($this->container->get('doctrine.orm.entity_manager')->createQueryBuilder());
-        $type->buildQuery($query->getQueryBuilder());
-
         // create tree
         $tree->configureOptions($resolver);
-        $tree->setContainer($this->container);
-        $tree->query = $query;
         $options = $resolver->resolve($options);
         $tree->setOptions($options);
 
