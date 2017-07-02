@@ -60,10 +60,9 @@ class DataTable {
 
                 // do ajax call and send extra params
                 if ($target.data('xhr-href')) {
-                    Api.GET($target.data('xhr-href'), this.selectedRowsId());
+                    Api.GET($target.data('xhr-href'), this.selectedRowsIdParams());
                 } else {
-                    console.log(this.selectedRowsId());
-                    //window.location.href = $target.attr('href') + '?' + $.param(this.selectedRowsId());
+                    window.location.href = $target.attr('href') + '?' + $.param(this.selectedRowsIdParams());
                 }
             });
         }
@@ -102,6 +101,15 @@ class DataTable {
         }
 
         // row select
+        this.table.on('change', 'tbody tr td .js-select-row', (e) => {
+            let $target = $(e.currentTarget);
+            let $tr = $target.closest('tr');
+            if ($target.prop('checked')) {
+                $tr.addClass('selected');
+            } else {
+                $tr.removeClass('selected');
+            }
+        });
 
     }
 
@@ -125,11 +133,12 @@ class DataTable {
         this.$table.DataTable().ajax.reload();
     }
 
-    selectedRowsId() {
+    selectedRowsIdParams() {
         let ids = [];
-        this.$table.find('body tr').each((e) => {
+        this.$table.find('tbody tr.selected').each((e, elt) => {
+            ids.push($(elt).attr('id'));
         });
-        return { 'a':2 };
+        return {'ids': ids};
     }
 }
 

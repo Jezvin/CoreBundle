@@ -22,7 +22,7 @@ class CheckBoxColumn extends Column
      */
     public function defaultRender($entity)
     {
-        return '<input type="checkbox">';
+        return '<input type="checkbox" class="js-select-row">';
     }
 
     /**
