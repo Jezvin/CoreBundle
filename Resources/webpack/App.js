@@ -39,6 +39,12 @@ class App {
 
     static init() {
         $.fn.dataTable.ext.errMode = 'throw';
+
+        // toastr
+        $('[data-toggle="toastr"]').each((i, elt) => {
+            toastr[$(elt).data('type')]($(elt).html());
+        });
+
         App.bind();
     }
 
