@@ -23,9 +23,9 @@ use Umbrella\CoreBundle\Services\UmbrellaFileUploader;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class FileUploadType
+ * Class UmbrellaFileType
  */
-class FileUploadType extends AbstractType
+class UmbrellaFileType extends AbstractType
 {
 
     /**
@@ -105,7 +105,7 @@ class FileUploadType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'fileupload';
+        return 'umbrellafile';
     }
 }
 
