@@ -14,6 +14,8 @@ class Form {
         });
         this.$view.find('.js-datepicker').datepicker();
 
+        this.$view.find('.js-umbrella-tag').tagsinput();
+
 
         this.$view.find('.js-select2').each((i, e) => {
             new Select2($(e));

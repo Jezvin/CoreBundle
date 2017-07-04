@@ -15,7 +15,10 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import "~datatables.net-rowreorder-bs/css/rowReorder.bootstrap.css";
 @import "~datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.css";
 
+@import "~bootstrap-tagsinput/src/bootstrap-tagsinput.css";
+
 @import "./components/_toolbar.scss";
+@import "./components/_tags_input.scss";
 
 // layout
 

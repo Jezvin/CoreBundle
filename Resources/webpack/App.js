@@ -19,6 +19,8 @@ require('datatables.net-bs');
 require('datatables.net-rowreorder');
 require('datatables.net-fixedheader');
 
+require('bootstrap-tagsinput');
+
 // scss
 require('./scss/app.scss');
 
