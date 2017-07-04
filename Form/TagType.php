@@ -77,6 +77,6 @@ class TagTransformer implements DataTransformerInterface
      */
     public function reverseTransform($data)
     {
-        return explode(self::SEP, $data);
+        return array_filter(explode(self::SEP, $data));
     }
 }
