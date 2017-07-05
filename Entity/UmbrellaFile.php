@@ -69,6 +69,14 @@ class UmbrellaFile extends BaseEntity
     /**
      * @return string
      */
+    public function getAbsolutePath()
+    {
+        return __DIR__ . '/../../../../web' . $this->path;
+    }
+
+    /**
+     * @return string
+     */
     public function getHumanSize()
     {
         return MathUtils::bytes_to_size($this->size);
