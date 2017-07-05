@@ -5,5 +5,12 @@
       background-color: rgba(246, 246, 246, 0.43);
       cursor: pointer;
     }
+
+    &.selectable tbody tr{
+      cursor: pointer;
+      &.selected {
+        background-color: rgba(246, 246, 246, 0.80);
+      }
+    }
   }
 }

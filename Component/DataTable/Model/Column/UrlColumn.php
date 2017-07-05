@@ -2,24 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: acantepie
- * Date: 21/05/17
- * Time: 10:44.
+ * Date: 05/07/17
+ * Time: 23:49
  */
 
 namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
-
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
 /**
- * Class DateColumn.
+ * Class UrlColumn
  */
-class DateColumn extends PropertyColumn
+class UrlColumn extends PropertyColumn
 {
+    const TARGET_SELF = '_self';
+    const TARGET_BLANK = '_blank';
+
     /**
      * @var string
      */
-    public $format;
+    public $target;
 
     /**
      * @param $entity
@@ -28,12 +30,8 @@ class DateColumn extends PropertyColumn
      */
     public function defaultRender($entity)
     {
-        $value = $this->getPropertyValue($entity);
-        if ($value instanceof \DateTime) {
-            return $value->format($this->format);
-        } else {
-            return $value;
-        }
+        $value = htmlspecialchars($this->getPropertyValue($entity));
+        return '<a href="' . $value . '" target="' . $this->target . '">' . $value . '</a>';
     }
 
     /**
@@ -42,7 +40,7 @@ class DateColumn extends PropertyColumn
     public function setOptions(array $options = array())
     {
         parent::setOptions($options);
-        $this->format = ArrayUtils::get($options, 'format');
+        $this->target = ArrayUtils::get($options, 'target');
     }
 
     /**
@@ -53,9 +51,9 @@ class DateColumn extends PropertyColumn
         parent::configureOptions($resolver);
 
         $resolver->setDefined(array(
-            'format',
+            'target',
         ));
 
-        $resolver->setDefault('format', 'd/m/Y H:i');
+        $resolver->setDefault('target', self::TARGET_SELF);
     }
 }

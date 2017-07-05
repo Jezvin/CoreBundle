@@ -46,6 +46,7 @@ class DataTableTwigExtension extends \Twig_Extension
                 'is_safe' => array('html'),
                 'needs_environment' => true,
             )),
+            new \Twig_SimpleFunction('datatable_js_options', array($this, 'getJsOptions')),
         );
     }
 
@@ -74,12 +75,20 @@ class DataTableTwigExtension extends \Twig_Extension
      */
     public function renderJs(\Twig_Environment $twig, DataTable $dataTable)
     {
+        return $twig->render('UmbrellaCoreBundle:DataTable:datatable_js.html.twig', $this->getJsOptions($dataTable));
+    }
+
+    /**
+     * @param DataTable $dataTable
+     * @return array
+     */
+    public function getJsOptions(DataTable $dataTable)
+    {
         $options = array();
         $options['datatable'] = $dataTable;
         $options['id'] = $dataTable->id;
         $options['js'] = $this->buildJsOptions($dataTable);
-
-        return $twig->render('UmbrellaCoreBundle:DataTable:datatable_js.html.twig', $options);
+        return $options;
     }
 
     /**
@@ -87,7 +96,7 @@ class DataTableTwigExtension extends \Twig_Extension
      *
      * @return array
      */
-    protected function buildJsOptions(DataTable $dataTable)
+    private function buildJsOptions(DataTable $dataTable)
     {
         $options = array();
         $options['serverSide'] = true;
@@ -148,7 +157,7 @@ class DataTableTwigExtension extends \Twig_Extension
     /**
      * @return array
      */
-    protected function buildTranslationOptions()
+    private function buildTranslationOptions()
     {
         return array(
             'processing' => $this->transDt('processing'),
@@ -179,7 +188,7 @@ class DataTableTwigExtension extends \Twig_Extension
      *
      * @return string
      */
-    protected function transDt($key)
+    private function transDt($key)
     {
         return $this->translator->trans('datatable.'.$key, [], 'datatable');
     }

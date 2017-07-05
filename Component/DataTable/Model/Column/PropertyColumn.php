@@ -58,7 +58,7 @@ class PropertyColumn extends Column
      * @param $entity
      * @return mixed
      */
-    public function getPropertyValue($entity)
+    public final function getPropertyValue($entity)
     {
         return $this->accessor->getValue($entity, $this->propertyPath);
     }
