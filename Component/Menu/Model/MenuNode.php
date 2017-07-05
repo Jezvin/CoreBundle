@@ -48,6 +48,11 @@ class MenuNode implements \IteratorAggregate, \Countable
     public $label;
 
     /**
+     * @var boolean
+     */
+    public $translateLabel = true;
+
+    /**
      * @var string
      */
     public $url = self::DFT_URL;

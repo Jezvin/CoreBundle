@@ -1,14 +1,13 @@
 services:
     _defaults:
         autowire: true
+        public: false
 
     _instanceof:
         Twig_ExtensionInterface:
-            public: false
             tags:
                 - {name: twig.extension}
         Symfony\Component\Form\FormTypeInterface:
-            public: false
             tags:
                 - {name: form.type}
 
@@ -16,36 +15,40 @@ services:
     # Menu
     Umbrella\CoreBundle\Component\Menu\MenuProvider:
         arguments: ["@service_container", '@Umbrella\CoreBundle\Component\Menu\MenuBuilder', []]
+        public: true
 
     Umbrella\CoreBundle\Component\Menu\MenuRendererProvider:
         arguments: ["@service_container", []]
+        public: true
 
     Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher:
-        public: false
     Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker:
-        public: false
     Umbrella\CoreBundle\Component\Menu\MenuBuilder:
     Umbrella\CoreBundle\Component\Menu\Helper\MenuHelper:
     Umbrella\CoreBundle\Component\Menu\Twig\MenuTwigExtension:
 
-
     # Breadcrumb
     Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb:
+        public: true
     Umbrella\CoreBundle\Component\Breadcrumb\Twig\BreadcrumbTwigExtension:
 
     # App proxy
     Umbrella\CoreBundle\Component\AppProxy\AppMessageBuilder:
+        public: true
 
     # DataTable
     Umbrella\CoreBundle\Component\DataTable\DataTableFactory:
+        public: true
     Umbrella\CoreBundle\Component\DataTable\Twig\DataTableTwigExtension:
 
     # Tree
     Umbrella\CoreBundle\Component\Tree\TreeFactory:
+        public: true
     Umbrella\CoreBundle\Component\Tree\Twig\TreeTwigExtension:
 
     # Toolbar
     Umbrella\CoreBundle\Component\Toolbar\ToolbarFactory:
+        public: true
     Umbrella\CoreBundle\Component\Toolbar\Twig\ToolbarTwigExtension:
 
     # Webpack
@@ -60,18 +63,17 @@ services:
 
     # Services
     Umbrella\CoreBundle\Services\UmbrellaFileUploader:
+        public: true
     Umbrella\CoreBundle\Services\SearchHandler:
+        public: true
 
     # Annotation
     Umbrella\CoreBundle\Annotation\SearchableAnnotationReader:
-        public: false
 
     # Listener
     Umbrella\CoreBundle\Listener\EntitySubscriber:
-        public: false
         tags:
             - {name: doctrine.event_subscriber}
     Umbrella\CoreBundle\Listener\UmbrellaFileListener:
-        public: false
         tags:
             - { name: doctrine.orm.entity_listener }

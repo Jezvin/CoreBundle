@@ -5,7 +5,11 @@
                 {% if loop.first %}
                     <i class="fa fa-dashboard"></i>&nbsp;
                 {% endif %}
-                {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
+                {% if item.translateLabel %}
+                    {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
+                {% else %}
+                    {{ item.label }}
+                {% endif %}
             </li>
         {% else %}
             <li>
@@ -13,7 +17,11 @@
                     {% if loop.first %}
                         <i class="fa fa-dashboard"></i>
                     {% endif %}
-                    {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
+                    {% if item.translateLabel %}
+                        {{ (breadcrumb.translationPrefix ~ item.label) | trans }}
+                    {% else %}
+                        {{ item.label }}
+                    {% endif %}
                 </a>
             </li>
         {% endif %}

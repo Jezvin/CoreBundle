@@ -120,7 +120,7 @@ class MenuHelper
 
         while ($node !== null) {
             if ($node->type == MenuNode::TYPE_PAGE) {
-                $bc->prependItem($node->label, $node->url);
+                $bc->prependItem($node->label, $node->url, $node->translateLabel);
             }
             $node = $node->parent;
         }

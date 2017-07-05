@@ -36,11 +36,12 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
      * @param $label
      * @param string $url
      *
+     * @param bool $translateLabel
      * @return $this
      */
-    public function addItem($label, $url = '')
+    public function addItem($label, $url = '', $translateLabel = true)
     {
-        $b = new BreadcrumbItem($label, $url);
+        $b = new BreadcrumbItem($label, $url, $translateLabel);
         $this->items[] = $b;
 
         return $this;
@@ -50,11 +51,12 @@ class Breadcrumb implements \IteratorAggregate, \ArrayAccess, \Countable
      * @param $label
      * @param string $url
      *
+     * @param bool $translateLabel
      * @return $this
      */
-    public function prependItem($label, $url = '')
+    public function prependItem($label, $url = '', $translateLabel = true)
     {
-        $b = new BreadcrumbItem($label, $url);
+        $b = new BreadcrumbItem($label, $url, $translateLabel);
         array_unshift($this->items, $b);
 
         return $this;

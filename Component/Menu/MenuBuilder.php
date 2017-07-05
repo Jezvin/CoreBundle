@@ -65,6 +65,10 @@ class MenuBuilder
             $node->label = $options['label'];
         }
 
+        if (isset($options['translate_label'])) {
+            $node->translateLabel = $options['translate_label'];
+        }
+
         if (isset($options['roles'])) {
             $node->roles = ArrayUtils::to_array($options['roles']);
         }
@@ -84,6 +88,10 @@ class MenuBuilder
 
         if (isset($options['label'])) {
             $node->label = $options['label'];
+        }
+
+        if (isset($options['translate_label'])) {
+            $node->translateLabel = $options['translate_label'];
         }
 
         if (isset($options['icon'])) {

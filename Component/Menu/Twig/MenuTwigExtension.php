@@ -8,14 +8,10 @@
 
 namespace Umbrella\CoreBundle\Component\Menu\Twig;
 
-use Umbrella\CoreBundle\Component\Breadcrumb\Breadcrumb;
+use Symfony\Component\Translation\TranslatorInterface;
 use Umbrella\CoreBundle\Component\Menu\Helper\MenuHelper;
-use Umbrella\CoreBundle\Component\Menu\MenuAuthorizationChecker;
-use Umbrella\CoreBundle\Component\Menu\MenuRouteMatcher;
 use Umbrella\CoreBundle\Component\Menu\Model\Menu;
 use Umbrella\CoreBundle\Component\Menu\Model\MenuNode;
-use Umbrella\CoreBundle\Component\Menu\MenuProvider;
-use Umbrella\CoreBundle\Component\Menu\MenuRendererProvider;
 
 /**
  * Class MenuTwigExtension.
@@ -28,12 +24,19 @@ class MenuTwigExtension extends \Twig_Extension
     private $helper;
 
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
      * MenuTwigExtension constructor.
      * @param MenuHelper $helper
+     * @param TranslatorInterface $translator
      */
-    public function __construct(MenuHelper $helper)
+    public function __construct(MenuHelper $helper, TranslatorInterface $translator)
     {
         $this->helper = $helper;
+        $this->translator = $translator;
     }
 
     /**
@@ -114,7 +117,14 @@ class MenuTwigExtension extends \Twig_Extension
     {
         $menu = $this->helper->get($name);
         $currentNode = $this->helper->getCurrentNode($menu);
-        return $currentNode ? ($menu->translationPrefix . $currentNode->label) : $default;
+
+        if ($currentNode) {
+            return $currentNode->translateLabel
+                ? $this->translator->trans($menu->translationPrefix .$currentNode->label)
+                : $currentNode->label;
+        } else {
+            return $default;
+        }
     }
 
     /**
