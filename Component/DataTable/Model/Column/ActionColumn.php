@@ -10,10 +10,7 @@ namespace Umbrella\CoreBundle\Component\DataTable\Model\Column;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouterInterface;
-use Umbrella\CoreBundle\Component\Routing\EntityRouteCollection;
 use Umbrella\CoreBundle\Component\Routing\UmbrellaRoute;
 use Umbrella\CoreBundle\Utils\ArrayUtils;
 
@@ -84,7 +81,7 @@ class ActionColumn extends Column
                     $route->generateEntityUrl($this->router, $entity),
                     $id,
                 ),
-                $template).'&nbsp;';
+                $template).'&nbsp;&nbsp;';
         }
         return $html;
     }
@@ -114,6 +111,8 @@ class ActionColumn extends Column
 
         $resolver->setDefault('actions', array());
         $resolver->setDefault('orderable', false);
-        $resolver->setDefault('class', 'disable-row-click');
+        $resolver->setDefault('class', 'disable-row-click text-center');
+        $resolver->setDefault('width', '50px');
+        $resolver->setDefault('label', '');
     }
 }

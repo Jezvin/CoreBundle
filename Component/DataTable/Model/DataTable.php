@@ -80,7 +80,7 @@ class DataTable implements OptionsAwareInterface
     /**
      * @var string
      */
-    public $loadMethod;
+    public $loadMethod = 'GET';
 
     /**
      * @var string
@@ -90,7 +90,7 @@ class DataTable implements OptionsAwareInterface
     /**
      * @var string
      */
-    public $sequenceMethod;
+    public $sequenceMethod = 'GET';
 
     /**
      * @var string
@@ -100,7 +100,7 @@ class DataTable implements OptionsAwareInterface
     /**
      * @var string
      */
-    public $rowMethod;
+    public $rowMethod = 'GET';
 
     /**
      * @var string
@@ -239,20 +239,12 @@ class DataTable implements OptionsAwareInterface
     {
         $resolver->setRequired(array(
             'entity',
-            'ajax_load_route',
         ));
 
         $resolver->setDefined(array(
             'id',
 
-            'method',
-
-            'ajax_load_route',
-            'ajax_sequence_route',
-            'ajax_row_route',
-
             'entity',
-            'query',
 
             'class',
             'template',
@@ -274,11 +266,9 @@ class DataTable implements OptionsAwareInterface
         $resolver->setAllowedTypes('toolbar', ['Umbrella\CoreBundle\Component\Toolbar\AbstractToolbar', 'string']);
         $resolver->setAllowedTypes('toolbar_options', 'array');
         $resolver->setAllowedTypes('sortable', 'bool');
-        $resolver->setAllowedTypes('query', ['null', 'callable']);
 
         $resolver->setDefault('id', $this->id);
         $resolver->setDefault('template', 'UmbrellaCoreBundle:DataTable:datatable.html.twig');
-        $resolver->setDefault('method', 'GET');
         $resolver->setDefault('length_change', false);
         $resolver->setDefault('length_menu', array(25, 50, 100));
         $resolver->setDefault('page_length', 25);
@@ -297,22 +287,7 @@ class DataTable implements OptionsAwareInterface
         $this->class = ArrayUtils::get($options, 'class');
         $this->template = ArrayUtils::get($options, 'template');
 
-        $this->loadUrl = UmbrellaRoute::createFromOptions($options['ajax_load_route'])->generateUrl($this->router);
-        $this->loadMethod = ArrayUtils::get($options, 'method');
-
-        if (isset($options['ajax_sequence_route'])) {
-            $this->sequenceUrl = UmbrellaRoute::createFromOptions($options['ajax_sequence_route'])->generateUrl($this->router);
-        }
-        $this->sequenceMethod = ArrayUtils::get($options, 'method');
-
-        if (isset($options['ajax_row_route'])) {
-            // set an random id to replace it on view
-            $this->rowUrl = UmbrellaRoute::createFromOptions($options['ajax_row_route'])->generateUrl($this->router, ['id' => 123456789]);
-        }
-        $this->rowMethod = ArrayUtils::get($options, 'method');
-
         $this->entityName = ArrayUtils::get($options, 'entity');
-        $this->queryClosure = ArrayUtils::get($options, 'query');
 
         $this->lengthChange = ArrayUtils::get($options, 'length_change');
         $this->lengthMenu = ArrayUtils::get($options, 'length_menu');
