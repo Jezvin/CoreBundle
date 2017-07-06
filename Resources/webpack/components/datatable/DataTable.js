@@ -5,7 +5,7 @@ class DataTable {
     constructor($elt, options) {
         this.$view = $elt;
         this.$table = this.$view.find('.js-umbrella-datatable');
-        this.$toolbarAction = this.$view.find('.js-umbrella-toolbar .umbrella-actions')
+        this.$toolbarAction = this.$view.find('.js-umbrella-toolbar .umbrella-actions');
         this.$toolbarForm = this.$view.find('.js-umbrella-toolbar form');
 
         this.table = null;

@@ -15,9 +15,9 @@ require('jquery-ui-sortable-npm');
 require('nestedSortable');
 
 require('datatables.net');
-require('datatables.net-bs');
 require('datatables.net-rowreorder');
 require('datatables.net-fixedheader');
+require('datatables.net-bs');
 
 require('bootstrap-tagsinput');
 
